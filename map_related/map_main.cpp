@@ -1,16 +1,31 @@
 #include <ncurses.h>
 #include <bits/stdc++.h>
+#include "map_head.h"
 using namespace std;
-void clearnear(int x,int y){
-    mvprintw(x,y," ");
-    mvprintw(x+1,y," ");
-    mvprintw(x-1,y," ");
-    mvprintw(x,y+1," ");
-    mvprintw(x,y-1," ");
-    mvprintw(x+1,y+1," ");
-    mvprintw(x+1,y-1," ");
-    mvprintw(x-1,y+1," ");
-    mvprintw(x-1,y-1," ");
+
+
+
+
+
+void clearnear(int x, int y, vector<vector<char>> map) {
+    
+    int newX = x;
+    int newY = y ;
+    if (newX >= 0 && newX < map.size() && newY >= 0 && newY < map[0].size()) {
+        mvprintw(newX, newY, "%c",map[newX][newY]);
+    }
+    else{
+        mvprintw(newX, newY, "+");
+    }
+
+}
+void drawmap(vector<vector<char>> map){
+    for(int i=0;i<map.size();i++){
+        for(int j=0;j<map[i].size();j++){
+            mvprintw(i,j,"%c",map[i][j]);
+            
+        }
+    }
 }
 int main() {
     // Initialize ncurses
@@ -18,15 +33,18 @@ int main() {
     noecho();
     curs_set(FALSE);
     keypad(stdscr, TRUE); // Enable function keys and arrow keys
-
+    nodelay(stdscr, TRUE); // Make getch() non-blocking
     // Get the size of the window
     int height, width;
     getmaxyx(stdscr, height, width);
-
+    vector<vector<char>> map = string_to_vector(map1);
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");
+    drawmap(map);
+    mvprintw(3,0,"map size: %d %d",map.size(),map[0].size());
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
+        clearnear(charactorpos[0],charactorpos[1],map);
         switch (ch) {
             case KEY_UP:
                 mvprintw(0, 0, "Up arrow key pressed");
@@ -44,13 +62,16 @@ int main() {
                 mvprintw(0, 0, "Right arrow key pressed");
                 charactorpos[1] += 1;
                 break;
+            case ERR:
+                break;
             default:
                 mvprintw(0, 0, "Key pressed: %c       ", ch);
                 break;
         }
-        clearnear(charactorpos[0],charactorpos[1]);
+        
         mvprintw(charactorpos[0], charactorpos[1], "X");
-        mvprintw(1, 0, "Position: %d, %d", charactorpos[0], charactorpos[1]);
+        mvprintw(1, 0, "Position: %d, %d      ", charactorpos[0], charactorpos[1]);
+        mvprintw(2, 0, "Window size: %d, %d", height, width);
         refresh();
     }
 
