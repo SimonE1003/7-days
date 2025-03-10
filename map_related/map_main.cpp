@@ -6,36 +6,36 @@ int main() {
     initscr();
     noecho();
     curs_set(FALSE);
+    keypad(stdscr, TRUE); // Enable function keys and arrow keys
 
     // Get the size of the window
     int height, width;
     getmaxyx(stdscr, height, width);
 
-    // Draw the axes
-    for (int i = 0; i < width; ++i) {
-        mvprintw(height / 2, i, "-");
-    }
-    for (int i = 0; i < height; ++i) {
-        mvprintw(i, width / 2, "|");
-    }
-
-    // Draw a simple graph (y = x^2)
-    for (int x = -width / 2; x < width / 2; ++x) {
-        int y = (x * x) / 10; // Scale down for visibility
-        if (height / 2 - y >= 0 && height / 2 - y < height) {
-            mvprintw(height / 2 - y, width / 2 + x, "*");
+    int ch;
+    while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
+        switch (ch) {
+            case KEY_UP:
+                mvprintw(0, 0, "Up arrow key pressed");
+                break;
+            case KEY_DOWN:
+                mvprintw(0, 0, "Down arrow key pressed");
+                break;
+            case KEY_LEFT:
+                mvprintw(0, 0, "Left arrow key pressed");
+                break;
+            case KEY_RIGHT:
+                mvprintw(0, 0, "Right arrow key pressed");
+                break;
+            default:
+                mvprintw(0, 0, "Key pressed: %c", ch);
+                break;
         }
+        refresh();
     }
-
-    // Refresh the screen to show the graph
-    refresh();
-
-    // Wait for user input
-    getch();
 
     // End ncurses mode
     endwin();
 
     return 0;
 }
-//cd /mnt/c/Users/User/Onedrive/1340/Project-Repo/map_related
