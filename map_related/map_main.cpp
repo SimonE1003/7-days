@@ -20,7 +20,7 @@ void clearnear(int x, int y, vector<vector<char>> map, int height, int width) {
     }
 
 }
-void drawmap(vector<vector<char>> map,int height , int width){
+void drawmap(vector<vector<char>> map, int height, int width){
     int map_height = map.size();
     int map_width = map[0].size();
     for(int i=0;i<map.size();i++){
@@ -40,30 +40,52 @@ int main() {
     // Get the size of the window
     int height, width;
     getmaxyx(stdscr, height, width);
+
     vector<vector<char>> map = string_to_vector(hospital);
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");
     drawmap(map , height , width);
-    mvprintw(3,0,"map size: %d %d",map.size(),map[0].size());
+    mvprintw(3,0,"map size: %zu %zu",map.size(),map[0].size());
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
         clearnear(charactorpos[0],charactorpos[1],map , height , width);
-        switch (ch) {
+	int checkX, checkY;
+	switch (ch) {
             case KEY_UP:
                 mvprintw(0, 0, "Up arrow key pressed");
-                charactorpos[0] -= 1;
+		checkY = charactorpos[0] - 1 - (height - map.size())/2;
+		checkX = charactorpos[1] - (width - map[0].size())/2;
+		mvprintw(4,0,"checkX: %d", checkX);
+		mvprintw(4,11,"checkY: %d", checkY);
+		if (map[checkY][checkX] != '#'){
+		  charactorpos[0] -= 1;}
                 break;
             case KEY_DOWN:
                 mvprintw(0, 0, "Down arrow key pressed");
-                charactorpos[0] += 1;
+		checkY = charactorpos[0] + 1 - (height - map.size())/2;
+                checkX = charactorpos[1] - (width - map[0].size())/2;
+                mvprintw(4,0,"checkX: %d", checkX);
+                mvprintw(4,11,"checkY: %d", checkY);
+                if (map[checkY][checkX] != '#'){
+                  charactorpos[0] += 1;}
                 break;
-            case KEY_LEFT:
+		case KEY_LEFT:
                 mvprintw(0, 0, "Left arrow key pressed");
-                charactorpos[1] -= 1;
+                checkY = charactorpos[0] - (height - map.size())/2;
+                checkX = charactorpos[1] - 1 -(width - map[0].size())/2;
+                mvprintw(4,0,"checkX: %d", checkX);
+                mvprintw(4,11,"checkY: %d", checkY);
+                if (map[checkY][checkX] != '#'){
+                  charactorpos[1] -= 1;}
                 break;
             case KEY_RIGHT:
                 mvprintw(0, 0, "Right arrow key pressed");
-                charactorpos[1] += 1;
+		checkY = charactorpos[0] - (height - map.size())/2;
+                checkX = charactorpos[1] + 1 -(width - map[0].size())/2;
+                mvprintw(4,0,"checkX: %d", checkX);
+                mvprintw(4,11,"checkY: %d", checkY);
+                if (map[checkY][checkX] != '#'){
+                  charactorpos[1] += 1;}
                 break;
             case ERR:
                 break;
