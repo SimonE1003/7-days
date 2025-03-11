@@ -8,15 +8,36 @@ string map1 =
     "#                                                                                                  #\n"
     "#                                                                                                  #\n"
     "#                                                                                                  #";
-vector<vector<char>> string_to_vector(string s){
+vector<string> hospital = {
+"#####################################################",
+		"#                                                   #",
+		"#############                          ##############",
+		"#           #                          #            #",
+		"#           #                          #            #",
+		"#           #                          #            #",
+		"#           #                          ##########   #",
+		"########    #                                       #",
+		"#           #                                       #",
+		"#           #                                       #",
+		"#           #                                       #",
+		"#           #                                       #",
+		"########    #                                       #",
+		"#           #                                       #",
+		"#           #                                       #",
+		"#           #                                       #",
+		"#           #                                       #",
+		"########    #                                       #",
+                "#                                                   #",
+                "#####################################################"};
+vector<vector<char>> string_to_vector(vector<string> s){
     vector<vector<char>> v;
-    v.push_back(vector<char>());
+    //v.push_back(vector<char>());
     
     for(int i=0;i<s.size();i++){
-        if (s[i]=='\n'){
             v.push_back(vector<char>());
-        }else{
-            v.back().push_back(s[i]);
+        for (int j=0;j<s[i].size();j++){
+            v.back().push_back(s[i][j]);
+            
         }
     }
     return v;

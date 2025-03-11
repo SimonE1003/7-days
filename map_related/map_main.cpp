@@ -7,22 +7,25 @@ using namespace std;
 
 
 
-void clearnear(int x, int y, vector<vector<char>> map) {
-    
-    int newX = x;
-    int newY = y ;
+void clearnear(int x, int y, vector<vector<char>> map, int height, int width) {
+    int map_height = map.size();
+    int map_width = map[0].size();
+    int newX = x - (height - map_height)/2;
+    int newY = y - (width - map_width)/2;
     if (newX >= 0 && newX < map.size() && newY >= 0 && newY < map[0].size()) {
-        mvprintw(newX, newY, "%c",map[newX][newY]);
+        mvprintw(x, y, "%c",map[newX][newY]);
     }
     else{
-        mvprintw(newX, newY, "+");
+        mvprintw(x , y, "+");
     }
 
 }
-void drawmap(vector<vector<char>> map){
+void drawmap(vector<vector<char>> map,int height , int width){
+    int map_height = map.size();
+    int map_width = map[0].size();
     for(int i=0;i<map.size();i++){
         for(int j=0;j<map[i].size();j++){
-            mvprintw(i,j,"%c",map[i][j]);
+            mvprintw(i+(height - map_height)/2,j+(width - map_width)/2,"%c",map[i][j]);
             
         }
     }
@@ -37,14 +40,14 @@ int main() {
     // Get the size of the window
     int height, width;
     getmaxyx(stdscr, height, width);
-    vector<vector<char>> map = string_to_vector(map1);
+    vector<vector<char>> map = string_to_vector(hospital);
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");
-    drawmap(map);
+    drawmap(map , height , width);
     mvprintw(3,0,"map size: %d %d",map.size(),map[0].size());
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
-        clearnear(charactorpos[0],charactorpos[1],map);
+        clearnear(charactorpos[0],charactorpos[1],map , height , width);
         switch (ch) {
             case KEY_UP:
                 mvprintw(0, 0, "Up arrow key pressed");
