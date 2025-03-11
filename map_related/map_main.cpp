@@ -7,7 +7,7 @@ using namespace std;
 
 
 
-void clearnear(int x, int y, vector<vector<char>> map, int height, int width) {
+void clearnear(int x, int y, vector<vector<char> > map, int height, int width) {
     int map_height = map.size();
     int map_width = map[0].size();
     int newX = x - (height - map_height)/2;
@@ -20,7 +20,7 @@ void clearnear(int x, int y, vector<vector<char>> map, int height, int width) {
     }
 
 }
-void drawmap(vector<vector<char>> map, int height, int width){
+void drawmap(vector<vector<char> > map, int height, int width){
     int map_height = map.size();
     int map_width = map[0].size();
     for(int i=0;i<map.size();i++){
@@ -41,7 +41,7 @@ int main() {
     int height, width;
     getmaxyx(stdscr, height, width);
 
-    vector<vector<char>> map = string_to_vector(hospital);
+    vector<vector<char> > map = string_to_vector(hospital);
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");

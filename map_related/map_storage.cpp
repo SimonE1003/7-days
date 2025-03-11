@@ -27,10 +27,10 @@ vector<string> hospital = {
 		"#           #                                       #",
 		"#           #                                       #",
 		"########    #                                       #",
-                "#                                                   #",
-                "#####################################################"};
-vector<vector<char>> string_to_vector(vector<string> s){
-    vector<vector<char>> v;
+        "#                                                   #",
+        "#####################################################"};
+vector<vector<char> > string_to_vector(vector<string> s){
+    vector<vector<char> > v;
     //v.push_back(vector<char>());
     
     for(int i=0;i<s.size();i++){

@@ -1,10 +1,10 @@
 map_storage.o: map_storage.cpp map_head.h
-	g++ -c $^
+	g++ -std=c++11 -c $^
 map_main.o: map_main.cpp map_head.h
-	g++ -c $^
+	g++ -std=c++11 -c $^
 
 map_main: map_main.o map_storage.o
-	g++ $^ -o $@ -lncurses
+	g++ -std=c++11 $^ -o $@ -lncurses
 
 run: map_main
 	./map_main
