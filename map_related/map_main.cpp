@@ -40,7 +40,7 @@ int main() {
     // Get the size of the window
     int height, width;
     getmaxyx(stdscr, height, width);
-
+    initialize_stories();
     vector<vector<char> > map = string_to_vector(hospital);
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
@@ -88,6 +88,9 @@ int main() {
                   charactorpos[1] += 1;}
                 break;
             case ERR:
+                break;
+            case 'p'://just for testing the story
+                play_story(hospital_story[0],height,width);
                 break;
             default:
                 mvprintw(0, 0, "Key pressed: %c       ", ch);
