@@ -91,6 +91,7 @@ int main() {
                 break;
             case 'p'://just for testing the story
                 play_story(hospital_story[0],height,width);
+                drawmap(map , height , width);
                 break;
             default:
                 mvprintw(0, 0, "Key pressed: %c       ", ch);

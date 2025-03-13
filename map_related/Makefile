@@ -12,6 +12,6 @@ run: map_main
 	./map_main
 
 clean:
-	rm -f *.o map_main
+	rm -f *.o map_main *.gch
 
 .PHONY: run clean
