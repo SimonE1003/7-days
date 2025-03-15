@@ -1,5 +1,6 @@
 #include <ncurses.h>
-#include <bits/stdc++.h>
+#include <vector>  // For vector
+#include <string>  // For string
 #include "map_head.h"
 using namespace std;
 

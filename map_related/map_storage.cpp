@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <vector>  // For std::vector
+#include <string>  // For std::string
 #include "map_head.h"
 using namespace std;
 

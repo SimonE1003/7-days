@@ -1,7 +1,8 @@
 #ifndef MAP_HEAD_H
 #define MAP_HEAD_H
 
-#include <bits/stdc++.h>
+#include <string>       // For string
+#include <vector>       // For std::vector
 #include <ncurses.h>
 using namespace std;
 

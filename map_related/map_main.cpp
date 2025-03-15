@@ -1,5 +1,7 @@
-#include <ncurses.h>
-#include <bits/stdc++.h>
+#include <ncurses.h>   // For ncurses functions
+#include <vector>      // For std::vector
+#include <string>      // For std::string
+#include <cstdio>      // For printf-style formatting in mvprintw
 #include "map_head.h"
 using namespace std;
 
