@@ -2,38 +2,25 @@
 #include <vector>  // For vector
 #include <string>  // For string
 #include "map_head.h"
+#include <iostream>
 using namespace std;
 
-struct story {
-    string text;
-    vector<string> options;
-    vector<story*> next;
-    string reward="";
-};
+
 
 vector<story*> hospital_story;
+vector<story_spot> story_spots;
 
-void initialize_stories() {
-    hospital_story.push_back(new story);
-    hospital_story[0]->text = "You are in a hospital. You see a nurse.";
-    hospital_story[0]->options.push_back("Talk to the nurse");
-    hospital_story[0]->options.push_back("Ignore the nurse");
+void create_story_spot(int num , int original_x , int original_y, int height , int width  ){//map height and width
     
-    //hospital_story[0]->reward = "bandage";
-
-    hospital_story.push_back(new story);
-    hospital_story[1]->text = "The nurse tells you that you are in a hospital. She asks you if you are feeling better.";
-    hospital_story[1]->options.push_back("End conversation");
-    hospital_story[1]->next.push_back(nullptr);
-    hospital_story[1]->reward = "health";
-
-    hospital_story.push_back(new story);
-    hospital_story[2]->text = "nothing happened then";
-    hospital_story[2]->options.push_back("End conversation");
-    hospital_story[2]->next.push_back(nullptr);
-    hospital_story[2]->reward = "no reward";
-
-    hospital_story[0]->next = vector<story*>{hospital_story[1], hospital_story[2]};
+    for (int i = 0; i< num ;i ++){
+        story_spot ST;
+        ST.target_story = hospital_story[i];
+        ST.x = rand() % height + original_x;
+        ST.y = rand() % width + original_y;
+        cout<<ST.x<<" "<<ST.y<<endl;
+        story_spots.push_back(ST);
+        mvprintw(5 , 0,"created %i %i",ST.x,ST.y);
+    }
 
 }
 
@@ -51,7 +38,6 @@ void play_story(story* current_story, int height, int width) {
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
         
         if (play_pos < current_story->text.size()) {
-            
             mvprintw(original_point[0], original_point[1] + play_pos, "%c", current_story->text[play_pos]);
             play_pos++;
             refresh();

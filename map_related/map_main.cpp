@@ -3,6 +3,7 @@
 #include <string>      // For std::string
 #include <cstdio>      // For printf-style formatting in mvprintw
 #include "map_head.h"
+#include <iostream>
 using namespace std;
 
 
@@ -18,21 +19,37 @@ void clearnear(int x, int y, vector<vector<char> > map, int height, int width) {
         mvprintw(x, y, "%c",map[newX][newY]);
     }
     else{
-        mvprintw(x , y, "+");
+        cout<<"out of bound\n";;
     }
+    for (auto k : story_spots){
+        if (newX == k.x && newY == k.y){
+            mvprintw(k.x , k.y,"S");
+        }
+    }
+    
+    
 
 }
 void drawmap(vector<vector<char> > map, int height, int width){
     int map_height = map.size();
     int map_width = map[0].size();
+    //mvprintw(6,0,"len of story_spots: %zu",story_spots.size());
     for(int i=0;i<map.size();i++){
         for(int j=0;j<map[i].size();j++){
             mvprintw(i+(height - map_height)/2,j+(width - map_width)/2,"%c",map[i][j]);
+            for (auto k : story_spots){
+                
+                if (i+(height - map_height)/2 == k.x && j+(width - map_width)/2 == k.y){
+                    mvprintw(k.x , k.y,"S");
+                }
+            }
+            
             
         }
     }
 }
 int main() {
+    //cout<<"start\n";
     // Initialize ncurses
     initscr();
     noecho();
@@ -47,7 +64,9 @@ int main() {
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");
+    create_story_spot(2, (height - map.size())/2, (width - map[0].size())/2, map.size(), map[0].size());
     drawmap(map , height , width);
+    
     mvprintw(3,0,"map size: %zu %zu",map.size(),map[0].size());
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
         clearnear(charactorpos[0],charactorpos[1],map , height , width);
