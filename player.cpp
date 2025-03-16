@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <conio.h>
+
 using namespace std;
 int difficulty=0;
 struct Player{
