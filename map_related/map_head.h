@@ -8,7 +8,7 @@ using namespace std;
 
 extern string map1; // Declare the external variable
 extern vector<string> hospital; // Declare the external variable
-extern vector<int> head_story;
+extern vector<int> hospital_head_story;
 struct story {
     string text;
     vector<string> options;

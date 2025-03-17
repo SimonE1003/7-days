@@ -3,7 +3,7 @@
 #include "map_head.h"
 using namespace std;
 
-vector<int> head_story = {0,3};
+vector<int> hospital_head_story = {0,3};
 
 void initialize_hospital_story(){
     hospital_story.push_back(new story);

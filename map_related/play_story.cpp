@@ -14,9 +14,9 @@ vector<story_spot> story_spots;
 vector<story*> sample(vector<story*> story_list, int num) {
     vector<story*> selected_stories;
     srand(time(0));
-    random_shuffle(story_list.begin(), story_list.end());
+    random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
     for (int i = 0; i < num; i++) {
-        selected_stories.push_back(story_list[i]);
+        selected_stories.push_back(hospital_story[hospital_head_story[i]]);
     }
     return selected_stories;
 }
