@@ -1,6 +1,6 @@
 #include <ncurses.h>   // For ncurses functions
-#include <vector>      // For std::vector
-#include <string>      // For std::string
+#include <vector>      // For ector
+#include <string>      // For string
 #include <cstdio>      // For printf-style formatting in mvprintw
 #include "map_head.h"
 #include <iostream>
@@ -111,9 +111,10 @@ int main() {
             case ERR:
                 break;
             case 'p'://just for testing the story
-                play_story(hospital_story[0],height,width);
+                play_story(glass_breaking_noise_cockroach[0],height,width);
                 drawmap(map , height , width);
                 break;
+            
             default:
                 mvprintw(0, 0, "Key pressed: %c       ", ch);
                 break;

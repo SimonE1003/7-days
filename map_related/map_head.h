@@ -2,7 +2,7 @@
 #define MAP_HEAD_H
 
 #include <string>       // For string
-#include <vector>       // For std::vector
+#include <vector>       // For vector
 #include <ncurses.h>
 using namespace std;
 
@@ -22,6 +22,9 @@ struct story_spot{
 };
 
 extern vector<story*> hospital_story;
+extern vector<story*> knocking_door;
+extern vector<story*> glass_breaking_noise_cockroach;
+
 extern vector<story_spot> story_spots;
 
 vector<vector<char> > string_to_vector(vector<string> s); // Declare the function
@@ -31,6 +34,9 @@ void clearnear(int x,int y,vector<vector<char> > map, int , int);
 void drawmap(vector<vector<char> > map , int , int);
 
 void initialize_stories();
+void initialize_hospital_story();
+void initialize_knocking_door();
+void initialize_glass_breanking_noise_cockroach();
 
 void play_story(story* current_story, int height , int width);
 

@@ -1,5 +1,5 @@
-#include <vector>  // For std::vector
-#include <string>  // For std::string
+#include <vector>  // For vector
+#include <string>  // For string
 #include "map_head.h"
 using namespace std;
 
