@@ -3,25 +3,41 @@
 #include <string>  // For string
 #include "map_head.h"
 #include <iostream>
+#include <ctime>
+#include <cstdlib> // For srand and rand
+#include <algorithm> // For sample
+#include <random> // For default_random_engine
 using namespace std;
-
-
 
 vector<story*> hospital_story;
 vector<story_spot> story_spots;
-
-void create_story_spot(int num , int original_x , int original_y, int height , int width  ){//map height and width
+vector<story*> sample(vector<story*> story_list, int num) {
+    vector<story*> selected_stories;
+    srand(time(0));
+    random_shuffle(story_list.begin(), story_list.end());
+    for (int i = 0; i < num; i++) {
+        selected_stories.push_back(story_list[i]);
+    }
+    return selected_stories;
+}
+void create_story_spot(int num, int original_x, int original_y, int height, int width, vector<vector<char>> map) {
+    srand(time(0));
     
-    for (int i = 0; i< num ;i ++){
+    vector<story*> selected_stories = sample(hospital_story, num);
+
+    for (int i = 0; i < num; i++) {
         story_spot ST;
-        ST.target_story = hospital_story[i];
+        ST.target_story = selected_stories[i];
         ST.x = rand() % height + original_x;
         ST.y = rand() % width + original_y;
-        cout<<ST.x<<" "<<ST.y<<endl;
+        while (map[ST.x][ST.y] == '#') {
+            ST.x = rand() % height + original_x;
+            ST.y = rand() % width + original_y;
+        }
+        cout << ST.x << " " << ST.y << endl;
         story_spots.push_back(ST);
-        mvprintw(5 , 0,"created %i %i",ST.x,ST.y);
+        mvprintw(5, 0, "created %i %i", ST.x, ST.y);
     }
-
 }
 
 void play_story(story* current_story, int height, int width) {
