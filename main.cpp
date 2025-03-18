@@ -1,4 +1,4 @@
-#include <ncurses>
+#include <ncurses.h>
 #include <bits/stdc++.h>//To be updated(when needed head files are clear)
 
 using namespace std;
