@@ -8,6 +8,7 @@ using namespace std;
 
 extern string map1; // Declare the external variable
 extern vector<string> hospital; // Declare the external variable
+extern vector<string> shelter; // Declare the external variable
 extern vector<int> hospital_head_story;
 struct story {
     string text;
@@ -40,7 +41,7 @@ void initialize_glass_breanking_noise_cockroach();
 
 void play_story(story* current_story, int height , int width);
 
-void create_story_spot(int num , int original_x , int original_y, int height , int width ,vector<vector<char>>map);
+void create_story_spot(int num , int original_x , int original_y, int height , int width ,vector<vector<char>>map , string current_map);
 
 
 #endif
