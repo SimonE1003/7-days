@@ -1,14 +1,16 @@
-#include <bits/stdc++.h>
+#include <vector>  // For vector
+#include <string>  // For string
 #include "map_head.h"
 using namespace std;
 
-
+//make sure the map is rectangular
 string map1 =    
     "####################################################################################################\n"
     "#                                                                                                  #\n"
     "#                                                                                                  #\n"
     "#                                                                                                  #";
 vector<string> hospital = {
+		"Hospital                                             ",
 		"#####################################################",
 		"#                                                   #",
 		"#############                          ##############",
@@ -29,6 +31,27 @@ vector<string> hospital = {
 		"########    #                                       #",
         "#                                                   #",
         "#####################################################"};
+vector<string> shelter = {
+	"Shelter                                             ",
+	"####################################################",
+	"# ####   ######                                    #",
+	"# #  #   #    #                                    #",
+	"# #  #   #    #                                    #",
+	"#                                                  #",
+	"#          #####################                   #",
+	"#                                                  #",
+	"#                                                  #",
+	"#                                                  #",
+	"#      ######          ###                         #",
+	"#                      # #                         #",
+	"#          ######      # #                         #",
+	"#                      ###                         #",
+	"#                                                  #",
+	"#                                                  #",
+	"#                                                  #",
+	"#                                                  #",
+	"#                                             Door #",
+	"####################################################"};
 vector<vector<char> > string_to_vector(vector<string> s){
     vector<vector<char> > v;
     //v.push_back(vector<char>());
