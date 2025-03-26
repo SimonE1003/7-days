@@ -5,8 +5,18 @@
 #include "../include/map_head.h"
 #include <iostream>
 #include <set>
+#include "../include/game_state.h"
 using namespace std;
 
+void cleanwholescreen(int height,int width){
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            mvprintw(i, j, " ");
+        }
+    }
+}
 void clearnear(int x, int y, vector<vector<char>> map, int height, int width)
 {
     int map_height = map.size();
@@ -120,15 +130,24 @@ void run_shelter()
         
         if (current_map == "shelter"){
             set<char> valid={'D','o','r'};
-            if ( valid.find(map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2]) != valid.end())
-            {
-                mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "Press A to start daytime");
-            }
-            else{
-                mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "                    ");
+            char current_char = map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2];
+            mvprintw(4, 0, "current_char: %c", current_char);
+            if (valid.find(current_char) != valid.end()) {
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to start daytime");
+            } else if (current_char == 'M') {
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to check status");
+                if (ch == 'a' || ch == 'A') {
+                    cleanwholescreen(height, width);
+                    display_status(gs);
+                    cleanwholescreen(height, width);
+                    drawmap(map, height, width);
+                    refresh();
+                }
+            } else {
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "                             ");
             }
         }
-        if (current_map == "weaponshop" or current_map == "shelter"){
+        if (current_map == "weaponshop" or current_map == "hospital"){
             set<char> valid={'D','o','r'};
             if ( valid.find(map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2]) != valid.end())
             {
@@ -155,8 +174,8 @@ void run_shelter()
             mvprintw(0, 0, "Down arrow key pressed");
             checkY = charactorpos[0] + 1 - (height - map.size()) / 2;
             checkX = charactorpos[1] - (width - map[0].size()) / 2;
-            mvprintw(4, 0, "checkX: %d", checkX);
-            mvprintw(4, 11, "checkY: %d", checkY);
+            //mvprintw(4, 0, "checkX: %d", checkX);
+            //mvprintw(4, 11, "checkY: %d", checkY);
             if (map[checkY][checkX] != '#')
             {
                 charactorpos[0] += 1;
@@ -166,8 +185,8 @@ void run_shelter()
             mvprintw(0, 0, "Left arrow key pressed");
             checkY = charactorpos[0] - (height - map.size()) / 2;
             checkX = charactorpos[1] - 1 - (width - map[0].size()) / 2;
-            mvprintw(4, 0, "checkX: %d", checkX);
-            mvprintw(4, 11, "checkY: %d", checkY);
+            //mvprintw(4, 0, "checkX: %d", checkX);
+            //mvprintw(4, 11, "checkY: %d", checkY);
             if (map[checkY][checkX] != '#')
             {
                 charactorpos[1] -= 1;
@@ -177,8 +196,8 @@ void run_shelter()
             mvprintw(0, 0, "Right arrow key pressed");
             checkY = charactorpos[0] - (height - map.size()) / 2;
             checkX = charactorpos[1] + 1 - (width - map[0].size()) / 2;
-            mvprintw(4, 0, "checkX: %d", checkX);
-            mvprintw(4, 11, "checkY: %d", checkY);
+            //mvprintw(4, 0, "checkX: %d", checkX);
+            //mvprintw(4, 11, "checkY: %d", checkY);
             if (map[checkY][checkX] != '#')
             {
                 charactorpos[1] += 1;
@@ -203,6 +222,7 @@ void run_shelter()
         mvprintw(charactorpos[0], charactorpos[1], "X");
         mvprintw(1, 0, "Position: %d, %d      ", charactorpos[0], charactorpos[1]);
         mvprintw(2, 0, "Window size: %d, %d", height, width);
+        
         refresh();
     }
 
