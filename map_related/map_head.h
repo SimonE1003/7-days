@@ -9,6 +9,7 @@ using namespace std;
 extern string map1; // Declare the external variable
 extern vector<string> hospital; // Declare the external variable
 extern vector<string> shelter; // Declare the external variable
+extern vector<string> weaponshop; // Declare the external variable
 extern vector<int> hospital_head_story;
 struct story {
     string text;

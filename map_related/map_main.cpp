@@ -56,7 +56,7 @@ int main()
 {
     string current_map;
     vector<vector<char>> map;
-    cout<<"choose a map\n0 : hospital\n1 : shelter\n"; string input; cin>>input;
+    cout<<"choose a map\n0 : hospital\n1 : shelter\n2 : weaponshop"; string input; cin>>input;
     if (input == "0"){
         map = string_to_vector(hospital);
         current_map = "hospital";
@@ -64,6 +64,10 @@ int main()
     else if (input == "1"){
         map = string_to_vector(shelter);
         current_map = "shelter";
+        }
+    else if (input == "2"){
+        map = string_to_vector(weaponshop);
+        current_map = "weaponshop";
         }
     else{
         cout<<"invalid input\n";
@@ -122,6 +126,16 @@ int main()
             }
             else{
                 mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "                    ");
+            }
+        }
+        if (current_map == "weaponshop" or current_map == "shelter"){
+            set<char> valid={'D','o','r'};
+            if ( valid.find(map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2]) != valid.end())
+            {
+                mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "Press A to leave %s", current_map.c_str());
+            }
+            else{
+                mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "                                    ");
             }
         } 
         switch (ch)

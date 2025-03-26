@@ -7,6 +7,7 @@
 #include <cstdlib> // For srand and rand
 #include <algorithm> // For sample
 #include <random> // For default_random_engine
+#include <set>
 using namespace std;
 
 vector<story*> hospital_story;
@@ -36,7 +37,8 @@ void create_story_spot(int num, int original_x, int original_y, int height, int 
             ST.target_story = selected_stories[i];
             ST.x = rand() % (height-1) + original_x + 1;
             ST.y = rand() % width + original_y;
-            while (map[ST.x-original_x][ST.y-original_y] == '#') {
+            set <char> valid = { 'D', 'o', 'r'};
+            while (map[ST.x-original_x][ST.y-original_y] == '#' or valid.find(map[ST.x-original_x][ST.y-original_y]) != valid.end()) {
                 ST.x = rand() % (height-1) + original_x + 1;
                 ST.y = rand() % width + original_y;
             }
