@@ -24,45 +24,26 @@ bool checkgs();//adjust and check the gamestate to determine whether to end the 
 void start_a_day();
 void start_explore();//explore in the daytime
 
+#include "init.h"
+#include "game_logic.h"
+#include "save_load.h"
+#include "game_state.h"
+
+
 int main() {
     init();
+
     start();
-    while (1){
-        start_a_day()
-        checkgs();
+    
+    while (true) {
+        start_a_day();
+        if (!checkgs()) {
+            end();
+            break;
+        }
         gs.day++;
+        if (ask_for_saving()) break;
     }
+    
     return 0;
-}
-
-void init(){
-    
-}
-
-void start(){
-    
-}
-
-void load(string file){
-    
-}
-
-void save(string file){
-    
-}
-
-void sixty_sec(){
-    
-}
-
-bool checkgs(){
-
-}
-
-void start_a_day(){
-
-}
-
-void start_explore(){
-    
 }
