@@ -173,7 +173,7 @@ int main()
         case ERR:
             break;
         case 'p': // just for testing the story
-            play_story(glass_breaking_noise_cockroach[0], height, width);
+            play_story(knocking_door[0], height, width);
             drawmap(map, height, width);
             break;
         case 'k'://reset the current map just for testing

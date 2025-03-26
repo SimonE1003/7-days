@@ -1,7 +1,15 @@
 #include <vector>  // For vector
 #include <string>  // For string
+#include <ctime>
+#include <cstdlib> // For rand() and srand()
 #include "map_head.h"
 using namespace std;
+
+int generate_random_num(int min, int max) {
+    srand(time(0));
+    int random_num = rand() % (max - min + 1) + min;
+    return random_num;
+}
 
 vector<int> hospital_head_story = {0,3,7,15};
 
@@ -156,28 +164,80 @@ vector<story*> knocking_door;
 
 void initialize_knocking_door(){ 
     
-    knocking_door.push_back(new story);
+    for (int i = 0; i <= 13; i++) {
+        knocking_door.push_back(new story);
+    }
+
     knocking_door[0]->text = "You hear someone knocking the door";
-    knocking_door[0]->options.push_back("Go to check the peekhole");
-    knocking_door[0]->options.push_back("Quietly move to the door and wait beside it");
-    knocking_door[0]->options.push_back("Ignore the noise");
-    
-    //knocking_door[0]->reward = "bandage";
+    knocking_door[0]->options.push_back("Go to check the peekhole"); // Random: 1. Nothing Outside 2.A weird guy 3.A giant cockroach 
 
-    knocking_door.push_back(new story);
-    knocking_door[1]->text = "You see nothing outside";
-    knocking_door[1]->options.push_back("End conversation");
-    knocking_door[1]->next.push_back(nullptr);
-    knocking_door[1]->reward = "";
+    //1. Nothing Outside story
+    knocking_door[1]->text = "You see nothing outside, you wonder who knocked the door";
+    knocking_door[1]->options.push_back("Go out and check");
+    knocking_door[1]->options.push_back("Lock the door and go back to the bedroom");
+    knocking_door[2]->text = "After walking a few steps in the dark, you hear a scream and suddenly got scrached by a woman covered in blood.";
+    knocking_door[2]->options.push_back("Fight the woman");
+    knocking_door[2]->options.push_back("Run back home");
+    knocking_door[3]->text = "The woman killed you before you can draw your weapon, you should've never come outside at night";
+    knocking_door[3]->options.push_back("End game");
+    knocking_door[3]->next.push_back(nullptr);
+    knocking_door[3]->reward = "death"; //game ends here
+    knocking_door[4]->text = "You rushed back home and slamed the door behind you";
+    knocking_door[4]->options.push_back("End conversation");
+    knocking_door[4]->next.push_back(nullptr);
+    knocking_door[5]->text = "The knocking started again and continued for a while, but ended eventually";
+    knocking_door[5]->options.push_back("End conversation");
+    knocking_door[5]->next.push_back(nullptr);
+    knocking_door[5]->reward = "no reward";
 
-    knocking_door.push_back(new story);
-    knocking_door[2]->text = "The knocking continued for a while, but ended eventually";
-    knocking_door[2]->options.push_back("End conversation");
-    knocking_door[2]->next.push_back(nullptr);
-    knocking_door[2]->reward = "";
+    //2. A weird guy story
+    knocking_door[6]->text = "You see a weird guy standing outside";
+    knocking_door[6]->options.push_back("Go out and talk to him");
+    knocking_door[6]->options.push_back("Lock the door and go back to the bedroom");
+    knocking_door[7]->text = "The guy asks you if you have any food";
+    knocking_door[7]->options.push_back("Give him some food"); 
+    knocking_door[7]->options.push_back("Refuse");
+    knocking_door[7]->options.push_back("Suprise attack him");
+    knocking_door[8]->text = "He takes the food and give you a small knife for return";
+    knocking_door[8]->options.push_back("End conversation");
+    knocking_door[8]->next.push_back(nullptr);
+    knocking_door[8]->reward = "minus food, gained small knife";
+    knocking_door[9]->text = "You pushed him away and locked the door again";
+    knocking_door[9]->options.push_back("End conversation");
+    knocking_door[9]->next.push_back(nullptr);
+    knocking_door[8]->reward = "no reward";
+    knocking_door[10]->text = "You poke him in the eye, but got stabbed by him; you killed him with his own knife";
+    knocking_door[10]->options.push_back("Search his body");
+    knocking_door[11]->text = "You found a silver key inside his pocket";
+    knocking_door[11]->next.push_back(nullptr);
+    knocking_door[11]->reward = "silver key";
 
-    
-    knocking_door[0]->next = vector<story*>{knocking_door[1], knocking_door[2], knocking_door[2]};
+    //3. A giant cockroach story
+    knocking_door[12]->text = "To be continued...";
+    knocking_door[12]->options.push_back("...");
+    knocking_door[12]->next.push_back(nullptr);
+    knocking_door[13]->text = "To be continued...";
+    knocking_door[13]->options.push_back("...");
+    knocking_door[13]->next.push_back(nullptr);
+
+    int random_branch = generate_random_num(0, 2); 
+
+    if (random_branch == 0) {
+        //1. Nothing Outside branch
+        knocking_door[0]->next = vector<story*>{knocking_door[1]};
+        knocking_door[1]->next = vector<story*>{knocking_door[2], knocking_door[5]};
+        knocking_door[2]->next = vector<story*>{knocking_door[3], knocking_door[4]};
+    } else if (random_branch == 1) {
+        //2. A weird guy branch
+        knocking_door[0]->next = vector<story*>{knocking_door[6]};
+        knocking_door[6]->next = vector<story*>{knocking_door[7], knocking_door[5]};
+        knocking_door[7]->next = vector<story*>{knocking_door[8], knocking_door[9], knocking_door[10]};
+        knocking_door[10]->next = vector<story*>{knocking_door[11]};
+    } else {
+        //3. Giant cockroach story
+        knocking_door[0]->next = vector<story*>{knocking_door[12]};
+        knocking_door[12]->next = vector<story*>{knocking_door[13]};
+    }
 }
 
 vector<story*> glass_breaking_noise_cockroach;
