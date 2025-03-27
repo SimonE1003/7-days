@@ -168,18 +168,19 @@ void run_shelter()
 		    int choice;
                     cleanwholescreen(height, width);
                     choice = menu();
+		    charactorpos[0] = height / 2;
+		    charactorpos[1] = width / 2;
                     cleanwholescreen(height, width);
                     switch (choice)
 		    {
                        case 0:
 			       map = string_to_vector(shelter);
 			       current_map = "shelter";
-			       charactorpos[0] -= 1;
 			       break;
                        case 1:
                                map = string_to_vector(hospital);
 			       current_map = "hospital";
-                               break;
+			       break;
                        case 2:
                                map = string_to_vector(weaponshop);
 			       current_map = "weaponshop";
