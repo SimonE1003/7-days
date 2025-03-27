@@ -165,10 +165,27 @@ void run_shelter()
                 mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "Press Enter to leave %s", current_map.c_str());
                 if (ch == '\n')
                 {
+		    int choice;
                     cleanwholescreen(height, width);
-                    menu();
+                    choice = menu();
                     cleanwholescreen(height, width);
-                    drawmap(map, height, width);
+                    switch (choice)
+		    {
+                       case 0:
+			       map = string_to_vector(shelter);
+			       current_map = "shelter";
+			       charactorpos[0] -= 1;
+			       break;
+                       case 1:
+                               map = string_to_vector(hospital);
+			       current_map = "hospital";
+                               break;
+                       case 2:
+                               map = string_to_vector(weaponshop);
+			       current_map = "weaponshop";
+                               break;
+	            }
+		    drawmap(map, height, width);
                     refresh();
                 }
             }
