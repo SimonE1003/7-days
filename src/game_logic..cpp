@@ -1,5 +1,5 @@
-#include "game_logic.h"
-#include "game_state.h"
+#include "../include/game_logic.h"
+#include "../include/game_state.h"
 
 bool checkgs(){
 	int x=5,y=10;

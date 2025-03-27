@@ -1,4 +1,4 @@
-#include "ui_utils.h"
+#include "../include/ui_utils.h"
 #include <ncurses.h>
 
 bool ask_for_saving() { 

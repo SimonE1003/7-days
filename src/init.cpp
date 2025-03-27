@@ -1,5 +1,5 @@
-#include "init.h"
-#include "game_state.h"
+#include "../include/init.h"
+#include "../include/game_state.h"
 #include <ncurses.h>
 #include <iostream>
 
