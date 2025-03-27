@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <cstdio>
+#include "../include/map_head.h"
 using namespace std;
 
 vector<string> menuMap = {
@@ -24,7 +25,7 @@ vector<string> menuMap = {
 		R"(#                                             #)",
 		R"(###############################################)" };
 
-vector<vector<char>> string_to_vector(vector<string> s)
+/*vector<vector<char>> string_to_vector(vector<string> s)
 {
 	vector<vector<char>> v;
 	for (int i = 0; i < s.size(); i++){
@@ -34,9 +35,9 @@ vector<vector<char>> string_to_vector(vector<string> s)
 		}
 	}
 	return v;
-}
+}*/
 
-void clearnear(int x, int y, vector<vector<char>> map, int height, int width)
+/*void clearnear(int x, int y, vector<vector<char>> map, int height, int width)
 {
 	int map_height = map.size();
 	int map_width = map[0].size();
@@ -51,9 +52,9 @@ void clearnear(int x, int y, vector<vector<char>> map, int height, int width)
 	{
 		cout << "out of bound\n";
 	}
-}
+}*/
 
-void drawmap (vector<vector<char>> map, int height, int width)
+/*void drawmap (vector<vector<char>> map, int height, int width)
 {
 	int map_height = map.size();
         int map_width = map[0].size();
@@ -64,7 +65,7 @@ void drawmap (vector<vector<char>> map, int height, int width)
 			mvprintw(i + (height - map_height) / 2, j + (width - map_width) / 2, "%c", map[i][j]);
 		}
 	}
-}
+}*/
 
 int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 for weapon store, 3 for exit
 {
@@ -86,6 +87,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
 	while ((ch = getch()) != 'q')
 	{
 		clearnear(characterpos[0], characterpos[1], map, height, width);
+		clearnear(characterpos[0], characterpos[1]+1, map, height, width);
 		mvprintw(1,0,"X %d Y %d", characterpos[0], characterpos[1]);
 		int checkX, checkY, refX, refY;
 		refX = characterpos[0] - (height - map.size()) / 2;
@@ -157,9 +159,9 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
 	}
 	return 0;
 }
-int main()
+/*int main()
 {
 	menu();
 	endwin();
 	return 0;
-}
+}*/

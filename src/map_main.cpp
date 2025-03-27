@@ -66,7 +66,7 @@ void run_shelter()
 {
     string current_map;
     vector<vector<char>> map;
-    cout<<"choose a map\n0 : hospital\n1 : shelter\n2 : weaponshop"; string input; cin>>input;
+    cout<<"choose a map\n0 : hospital\n1 : shelter\n2 : weaponshop\n3 : supermarket\n"; string input; cin>>input;
     if (input == "0"){
         map = string_to_vector(hospital);
         current_map = "hospital";
@@ -78,6 +78,10 @@ void run_shelter()
     else if (input == "2"){
         map = string_to_vector(weaponshop);
         current_map = "weaponshop";
+        }
+    else if (input == "3"){
+        map = string_to_vector(supermarket);
+        current_map = "supermarket";
         }
     else{
         cout<<"invalid input\n";
@@ -133,7 +137,14 @@ void run_shelter()
             char current_char = map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2];
             mvprintw(4, 0, "current_char: %c", current_char);
             if (valid.find(current_char) != valid.end()) {
-                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to start daytime");
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press Enter to start daytime");
+                if (ch == '\n') {
+                    cleanwholescreen(height, width);
+                    menu();
+                    cleanwholescreen(height, width);
+                    drawmap(map, height, width);
+                    refresh();
+                }
             } else if (current_char == 'M') {
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to check status");
                 if (ch == 'a' || ch == 'A') {
@@ -147,11 +158,19 @@ void run_shelter()
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "                             ");
             }
         }
-        if (current_map == "weaponshop" or current_map == "hospital"){
+        if (current_map == "weaponshop" or current_map == "hospital" or current_map == "supermarket"){
             set<char> valid={'D','o','r'};
             if ( valid.find(map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2]) != valid.end())
             {
-                mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "Press A to leave %s", current_map.c_str());
+                mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "Press Enter to leave %s", current_map.c_str());
+                if (ch == '\n')
+                {
+                    cleanwholescreen(height, width);
+                    menu();
+                    cleanwholescreen(height, width);
+                    drawmap(map, height, width);
+                    refresh();
+                }
             }
             else{
                 mvprintw(map.size()/2+height/2-1, map[0].size()/2+width/2+1, "                                    ");
