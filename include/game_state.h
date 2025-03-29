@@ -7,7 +7,8 @@ using namespace std;
 
 // Game state structure
 struct GameState {
-    int day, food, water, difficulty, hunger, thirst, health,sanity;
+    double day;
+    int food, water, difficulty, hunger, thirst, health,sanity;
     bool ill;
     int story_progress;
     int items[100];

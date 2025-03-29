@@ -19,6 +19,7 @@ vector<string> menuMap = {
 		R"(#                                             #)",
 		R"(#            Choose your destination          #)",
 		R"(#               Shelter                       #)",
+		R"(#               Supermarket                   #)",
 		R"(#               Hospital                      #)",
 		R"(#               Weapon Shop                   #)",
 		R"(#               Exit                          #)",
@@ -116,7 +117,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
             		checkY = characterpos[1] - (width - map[0].size()) / 2;
             		//mvprintw(4, 0, "checkX: %d", checkX);
             		//mvprintw(4, 11, "checkY: %d", checkY);
-            		if (checkX != 14)
+            		if (checkX != 15)
             		{
                 		characterpos[0] += 1;
             		}
@@ -130,6 +131,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
 			else if (refX == 11) return 1;
 			else if (refX == 12) return 2;
 			else if (refX == 13) return 3;
+			else if (refX == 14) return 4;
         	/*case KEY_LEFT:
            		mvprintw(0, 0, "Left arrow key pressed");
             		checkY = characterpos[0] - (height - map.size()) / 2;

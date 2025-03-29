@@ -9,7 +9,9 @@ void display_status(GameState gs)
 {
     mvprintw(5, 10, "Game Status\n");
     mvprintw(6, 10, "Difficulty: %d\n", gs.difficulty);
-    mvprintw(7, 10, "Day: %d\n", gs.day);
+    char day_buffer[20];
+    snprintf(day_buffer, sizeof(day_buffer), "%.1f", gs.day);
+    mvprintw(7, 10, "Day: %s\n", day_buffer);
     mvprintw(8, 10, "Food: %d\n", gs.food);
     mvprintw(9, 10, "Water: %d\n", gs.water);
     mvprintw(10, 10, "Health: %d\n", gs.health);

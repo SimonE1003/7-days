@@ -3,6 +3,9 @@
 #include <ctime>
 #include <cstdlib> // For rand() and srand()
 #include "../include/map_head.h"
+#include "../include/game_state.h"
+#include <climits>
+
 using namespace std;
 
 int generate_random_num(int min, int max) {
@@ -14,6 +17,7 @@ int generate_random_num(int min, int max) {
 vector<int> hospital_head_story = {0,3,7,15};
 
 void initialize_hospital_story(){
+    srand(time(0));
     hospital_story.push_back(new story);
     hospital_story[0]->text = "You see a zombie nurse walking like a zombie.";
     hospital_story[0]->options.push_back("Talk to the nurse");
@@ -126,8 +130,7 @@ void initialize_hospital_story(){
     hospital_story.push_back(new story);
     hospital_story[15]->text = "You find a journal with cryptic notes.";
     hospital_story[15]->options.push_back("Read the journal");
-    hospital_story[15]->options.push_back("Leave it alone");
-    hospital_story[15]->next = vector<story*>{nullptr, nullptr};
+    hospital_story[15]->next = vector<story*>{nullptr};
 
     // Story 16
     hospital_story.push_back(new story);
@@ -144,6 +147,80 @@ void initialize_hospital_story(){
     hospital_story[17]->next.push_back(nullptr);
     hospital_story[17]->reward = "bullet - 1";
 
+    // Story 18 after 16
+    // Story 18: Finding the hidden exit
+    hospital_story.push_back(new story);
+    hospital_story[18]->text = "You find a hidden exit in the hospital. The door is locked, but there's a keypad next to it.";
+    hospital_story[18]->options.push_back("Try to guess the code");
+    hospital_story[18]->options.push_back("Look around for clues");
+    hospital_story[18]->next = vector<story*>{nullptr, nullptr};
+
+    // Story 19: Guessing the code
+    hospital_story.push_back(new story);
+    hospital_story[19]->text = "The keypad locks after three failed attempts.";
+    hospital_story[19]->options.push_back("Leave");
+    hospital_story[19]->next.push_back(nullptr);
+    hospital_story[19]->reward = "none";
+
+    // Story 20: Searching for clues
+    hospital_story.push_back(new story);
+    hospital_story[20]->text = "You find a note nearby with the numbers '651149114' scribbled on it.";
+    hospital_story[20]->options.push_back("Try the code on the keypad");
+    hospital_story[20]->next = vector<story*>{nullptr};
+
+    // Story 21: Unlocking the exit
+    hospital_story.push_back(new story);
+    hospital_story[21]->text = "The keypad beeps, and the door unlocks. You step outside into a dark alley.";
+    hospital_story[21]->options.push_back("Explore the alley");
+    hospital_story[21]->options.push_back("Go back inside");
+    hospital_story[21]->next = vector<story*>{nullptr, nullptr};
+    hospital_story[21]->reward = "freedom";
+
+    // Story 22: Exploring the alley
+    hospital_story.push_back(new story);
+    hospital_story[22]->text = "You walk down the alley and find a backpack with supplies.";
+    hospital_story[22]->options.push_back("Take the supplies and leave");
+    hospital_story[22]->options.push_back("Leave the backpack and return to the hospital");
+    hospital_story[22]->next = vector<story*>{nullptr, nullptr};
+    hospital_story[22]->reward = "supplies";
+
+    // Story 23: Returning to the hospital
+    hospital_story.push_back(new story);
+    hospital_story[23]->text = "You decide to return to the hospital, leaving the hidden exit behind.";
+    hospital_story[23]->options.push_back("End conversation");
+    hospital_story[23]->next.push_back(nullptr);
+    hospital_story[23]->reward = "none";
+
+    hospital_story.push_back(new story);
+    hospital_story[24]->text = "You try to guess the code, successfully open the door";
+    hospital_story[24]->options.push_back("open the door");
+    hospital_story[24]->next.push_back(hospital_story[21]);
+    hospital_story[24]->reward = "none";
+
+    // Linking the new stories
+    hospital_story[16]->next[0] = hospital_story[18]; // Search for the exit
+    hospital_story[16]->next[1] = hospital_story[6]; // Ignore the journal
+    if(rand()>INT_MAX/2 - gs.difficulty*1000){//successfully open the door
+        //mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
+        hospital_story[18]->next[0] = hospital_story[24];
+    }else{
+        hospital_story[18]->next[0] = hospital_story[19]; // Guess the code wrong
+    }
+    hospital_story[18]->next[1] = hospital_story[20]; // Look for clues
+    srand(time(0));
+    if(rand()>INT_MAX/2 - gs.difficulty*1000){//successfully open the door
+        //mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
+        hospital_story[20]->next[0] = hospital_story[21];
+    }else{
+        hospital_story[20]->next[0] = hospital_story[19]; // fail to open
+    }
+
+    hospital_story[21]->next[0] = hospital_story[22]; // Explore the alley
+    hospital_story[21]->next[1] = hospital_story[23]; // Go back inside
+
+    hospital_story[22]->next[0] = hospital_story[6];  // Take supplies and leave (link to an existing story)
+    hospital_story[22]->next[1] = hospital_story[23]; // Leave the backpack and return
+
 
     hospital_story[7]->next[0] = hospital_story[8]; 
 
@@ -158,6 +235,8 @@ void initialize_hospital_story(){
 
     hospital_story[13]->next[0] = hospital_story[14];
     hospital_story[13]->next[1] = hospital_story[6]; 
+
+    hospital_story[15]->next[0] = hospital_story[16];
 }
 
 vector<story*> knocking_door;
