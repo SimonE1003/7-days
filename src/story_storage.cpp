@@ -243,7 +243,7 @@ vector<story*> knocking_door;
 
 void initialize_knocking_door(){ 
     
-    for (int i = 0; i <= 13; i++) {
+    for (int i = 0; i <= 16; i++) {
         knocking_door.push_back(new story);
     }
 
@@ -258,7 +258,7 @@ void initialize_knocking_door(){
     knocking_door[2]->options.push_back("Fight the woman");
     knocking_door[2]->options.push_back("Run back home");
     knocking_door[3]->text = "The woman killed you before you can draw your weapon, you should've never come outside at night";
-    knocking_door[3]->options.push_back("End game");
+    knocking_door[3]->options.push_back("End Game");
     knocking_door[3]->next.push_back(nullptr);
     knocking_door[3]->reward = "death"; //game ends here
     knocking_door[4]->text = "You rushed back home and slamed the door behind you";
@@ -277,10 +277,10 @@ void initialize_knocking_door(){
     knocking_door[7]->options.push_back("Give him some food"); 
     knocking_door[7]->options.push_back("Refuse");
     knocking_door[7]->options.push_back("Suprise attack him");
-    knocking_door[8]->text = "He takes the food and give you a small knife for return";
+    knocking_door[8]->text = "He takes the food and give you a bullet for return";
     knocking_door[8]->options.push_back("End conversation");
     knocking_door[8]->next.push_back(nullptr);
-    knocking_door[8]->reward = "minus food, gained small knife";
+    knocking_door[8]->reward = "minus food, gained a bullet";
     knocking_door[9]->text = "You pushed him away and locked the door again";
     knocking_door[9]->options.push_back("End conversation");
     knocking_door[9]->next.push_back(nullptr);
@@ -288,16 +288,29 @@ void initialize_knocking_door(){
     knocking_door[10]->text = "You poke him in the eye, but got stabbed by him; you killed him with his own knife";
     knocking_door[10]->options.push_back("Search his body");
     knocking_door[11]->text = "You found a silver key inside his pocket";
+    knocking_door[11]->options.push_back("End conversation");
     knocking_door[11]->next.push_back(nullptr);
     knocking_door[11]->reward = "silver key";
 
     //3. A giant cockroach story
-    knocking_door[12]->text = "To be continued...";
-    knocking_door[12]->options.push_back("...");
-    knocking_door[12]->next.push_back(nullptr);
-    knocking_door[13]->text = "To be continued...";
-    knocking_door[13]->options.push_back("...");
-    knocking_door[13]->next.push_back(nullptr);
+    knocking_door[12]->text = "You see a giant cockroach standing outside";
+    knocking_door[12]->options.push_back("Go out to check the cockroach");
+    knocking_door[12]->options.push_back("Lock the door and go back to the bedroom");
+    knocking_door[13]->text = "The cockroach saw you, and quickly runs away";
+    knocking_door[13]->options.push_back("Chase it"); //14
+    knocking_door[13]->options.push_back("Shoot it with a bullet"); //15
+    knocking_door[13]->options.push_back("Go back home"); //16
+    knocking_door[14]->text = "You chase the cockroach for a while, and suddenly fall in to a pit; you got eaten alive by a number of cockroaches";
+    knocking_door[14]->options.push_back("End Game");
+    knocking_door[14]->next.push_back(nullptr);
+    knocking_door[14]->reward = "death"; //game ends here
+    knocking_door[15]->text = "You shot a bullet at the cockroach, but you missed since it's too dark outside";
+    knocking_door[15]->options.push_back("Chase the cockroach");
+    knocking_door[15]->options.push_back("Go back home");
+    knocking_door[15]->reward = "bullet - 1"; 
+    knocking_door[16]->text = "You got back home safely";
+    knocking_door[16]->options.push_back("End conversation");
+    knocking_door[16]->next.push_back(nullptr);
 
     int random_branch = generate_random_num(0, 2); 
 
@@ -315,57 +328,90 @@ void initialize_knocking_door(){
     } else {
         //3. Giant cockroach story
         knocking_door[0]->next = vector<story*>{knocking_door[12]};
-        knocking_door[12]->next = vector<story*>{knocking_door[13]};
+        knocking_door[12]->next = vector<story*>{knocking_door[13], knocking_door[5]};
+        knocking_door[13]->next = vector<story*>{knocking_door[14], knocking_door[15], knocking_door[16]};
+        knocking_door[15]->next = vector<story*>{knocking_door[14], knocking_door[16]};
     }
 }
 
-vector<story*> glass_breaking_noise_cockroach;
+vector<story*> glass_breaking_noise;
 
-void initialize_glass_breanking_noise_cockroach(){ //add random events for branches later
+void initialize_glass_breanking_noise(){ 
     
-    glass_breaking_noise_cockroach.push_back(new story);
-    glass_breaking_noise_cockroach[0]->text = "You hear the sound of glass breaking, it's likely from the kitchen";
-    glass_breaking_noise_cockroach[0]->options.push_back("Go to kitchen to check");
-    glass_breaking_noise_cockroach[0]->options.push_back("Ignore the noise");
+    for (int i = 0; i <= 8; i++) {
+        glass_breaking_noise.push_back(new story);
+    }
+
+    glass_breaking_noise[0]->text = "You hear the sound of glass breaking, it's likely from the kitchen";
+    glass_breaking_noise[0]->options.push_back("Go to kitchen to check");
+    glass_breaking_noise[0]->options.push_back("Ignore the noise");
+
+    //1. cockroach story
+    glass_breaking_noise[1]->text = "You see a giant cockroach with a broken leg, and some shattered glasses on the ground";
+    glass_breaking_noise[1]->options.push_back("Go to help the cockroach and fix its leg"); //2
+    glass_breaking_noise[1]->options.push_back("Kill the cockroach"); //3
+    glass_breaking_noise[1]->options.push_back("Leave the cockroach bleeding on the ground");//4
+    glass_breaking_noise[2]->text = "The cockroach spits a bottle, there is a paper slip inside";
+    glass_breaking_noise[2]->options.push_back("End conversation");
+    glass_breaking_noise[2]->next.push_back(nullptr);
+    glass_breaking_noise[2]->reward = "paper slip"; //might link to main story
+    glass_breaking_noise[3]->text = "Green blood exploded from the cockroach and corroded your skin";
+    glass_breaking_noise[3]->options.push_back("End conversation");
+    glass_breaking_noise[3]->next.push_back(nullptr);
+    glass_breaking_noise[3]->reward = "health - 1"; 
+    glass_breaking_noise[4]->text = "You went back to the bedroom";
+    glass_breaking_noise[4]->options.push_back("End conversation");
+    glass_breaking_noise[4]->next.push_back(nullptr);
+
+    //2. intruder story
+    glass_breaking_noise[5]->text = "You see a guy in the kitchen, acting like a thief";
+    glass_breaking_noise[5]->options.push_back("Go talk to him"); //6
+    glass_breaking_noise[5]->options.push_back("Quitely aim at him and shoot him"); //9
+    glass_breaking_noise[5]->options.push_back("Quitely go back to the bedroom and lock the door");//4
+    glass_breaking_noise[6]->text = "He got suprised by you, he said he thought this is a ruined place and he is only looking for food";
+    glass_breaking_noise[6]->options.push_back("Give hime some food"); 
+    glass_breaking_noise[6]->options.push_back("Quickly shoot at him"); 
+    glass_breaking_noise[7]->text = "He thanked you and give you two bullets for return";
+    glass_breaking_noise[7]->options.push_back("End conversation"); 
+    glass_breaking_noise[7]->next.push_back(nullptr);
+    glass_breaking_noise[7]->reward = "bullet + 1, food - 1";
+    glass_breaking_noise[8]->text = "The gun shot killed him instently, you searched him and found a water bottle";
+    glass_breaking_noise[8]->options.push_back("End conversation"); 
+    glass_breaking_noise[8]->next.push_back(nullptr);
+    glass_breaking_noise[8]->reward = "water + 1";
+
+
+    //3. ...story
+    glass_breaking_noise[8]->text = "...";
+    glass_breaking_noise[8]->options.push_back("..."); 
+    glass_breaking_noise[8]->next.push_back(nullptr);
+
+    int random_branch = generate_random_num(0, 2);
+
+    if (random_branch == 0){
+        //cockroach branch
+        glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[1], glass_breaking_noise[4]};
+        glass_breaking_noise[1]->next = vector<story*>{glass_breaking_noise[2], glass_breaking_noise[3], glass_breaking_noise[4]}; 
+    }
+    else if (random_branch == 1){
+        //intruder branch
+        glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[5], glass_breaking_noise[4]};
+        glass_breaking_noise[5]->next = vector<story*>{glass_breaking_noise[6], glass_breaking_noise[7], glass_breaking_noise[4]};
+        glass_breaking_noise[6]->next = vector<story*>{glass_breaking_noise[7], glass_breaking_noise[8]};
+
+    }
+    else{
+        //...
+        glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[8], glass_breaking_noise[4]};
+    }
+
+
     
-
-    glass_breaking_noise_cockroach.push_back(new story);
-    glass_breaking_noise_cockroach[1]->text = "You see a giant cockroach with a broken leg, and some shattered glasses on the ground";
-    glass_breaking_noise_cockroach[1]->options.push_back("Go to help the cockroach and fix its leg"); //3
-    glass_breaking_noise_cockroach[1]->options.push_back("Kill the cockroach"); //4
-    glass_breaking_noise_cockroach[1]->options.push_back("Leave the cockroach bleeding on the ground");//5
-
-    glass_breaking_noise_cockroach.push_back(new story);
-    glass_breaking_noise_cockroach[2]->text = "There are still some weird noise comming from the kitchen";
-    glass_breaking_noise_cockroach[2]->options.push_back("Go to kitchen to check");
-    glass_breaking_noise_cockroach[2]->options.push_back("Ignor the noise and lock the bedroom door");
-
-    glass_breaking_noise_cockroach.push_back(new story);
-    glass_breaking_noise_cockroach[3]->text = "The cockroach spits a bottle, there is a paper slip inside";
-    glass_breaking_noise_cockroach[3]->options.push_back("End conversation");
-    glass_breaking_noise_cockroach[3]->next.push_back(nullptr);
-    glass_breaking_noise_cockroach[3]->reward = "paper slip"; //might link to main story
-
-    glass_breaking_noise_cockroach.push_back(new story);
-    glass_breaking_noise_cockroach[4]->text = "Green blood exploded from the cockroach and corroded your skin";
-    glass_breaking_noise_cockroach[4]->options.push_back("End conversation");
-    glass_breaking_noise_cockroach[4]->next.push_back(nullptr);
-    glass_breaking_noise_cockroach[4]->reward = "minus health"; 
-
-    glass_breaking_noise_cockroach.push_back(new story);
-    glass_breaking_noise_cockroach[5]->text = "You went back to the bedroom";
-    glass_breaking_noise_cockroach[5]->options.push_back("End conversation");
-    glass_breaking_noise_cockroach[5]->next.push_back(nullptr);
-    glass_breaking_noise_cockroach[5]->reward = "";
-    
-    glass_breaking_noise_cockroach[0]->next = vector<story*>{glass_breaking_noise_cockroach[1], glass_breaking_noise_cockroach[2]};
-    glass_breaking_noise_cockroach[2]->next = vector<story*>{glass_breaking_noise_cockroach[1]};
-    glass_breaking_noise_cockroach[1]->next = vector<story*>{glass_breaking_noise_cockroach[3], glass_breaking_noise_cockroach[4]}, glass_breaking_noise_cockroach[5];    
 }
 
 
 void initialize_stories() {
     initialize_hospital_story();
     initialize_knocking_door();
-    initialize_glass_breanking_noise_cockroach();
+    initialize_glass_breanking_noise();
 }
