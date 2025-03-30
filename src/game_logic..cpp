@@ -55,4 +55,39 @@ bool checkgs(){
 }
 void start_a_day() { /* Implementation */ }
 void sixty_sec() { /* Implementation */ }
+void end_a_day()
+{
+	if (gs.food>=1)
+	{
+		gs.food-=1;
+	}
+	else if (gs.food<1 && gs.hunger>0)
+	{
+		gs.hunger-=1;
+	}
+	else if (gs.food<1 && gs.hunger<1)
+	{
+		gs.health-=1;
+	}
+	if (gs.water>=1)
+	{
+		gs.water-=1;
+	}
+	else if (gs.water<1 && gs.thirst>0)
+	{
+		gs.thirst-=1;
+	}
+	else if (gs.water<1 && gs.thirst<1)
+	{
+		gs.health-=1;
+	}
+	if (gs.sanity>0)
+	{
+		gs.sanity-=1;
+	}
+	else
+	{
+		gs.health-=1;
+	}	
+}
 void end() { /* Implementation */ }
