@@ -4,7 +4,7 @@
 using namespace std;
 
 struct GameState{
-    int day, food, water, difficulty, hunger, thirst, health;
+    int day, food, water, difficulty, hunger, thirst, health,bullet;
     bool ill;//whether the player is ill
     int story_progress;//an integer to track where the player are on the main story line.
     int items[100];//numbers of items that the player owns
