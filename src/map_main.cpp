@@ -160,7 +160,7 @@ void run_shelter()
                         charactorpos[0] = height / 2;
                         charactorpos[1] = width / 2;
                         cleanwholescreen(height, width);
-                        switch (choice)
+			switch (choice)
                         {
                         case 0:
                             map = string_to_vector(shelter);
@@ -216,11 +216,12 @@ void run_shelter()
                 if (ch == '\n')
                 {
                     int choice;
+		    story_spots.clear();
                     cleanwholescreen(height, width);
                     choice = menu();
                     charactorpos[0] = height / 2;
                     charactorpos[1] = width / 2;
-                    cleanwholescreen(height, width);
+		    cleanwholescreen(height, width);
                     switch (choice)
                     {
                     case 0:

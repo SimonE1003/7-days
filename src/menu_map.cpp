@@ -82,7 +82,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
 	getmaxyx(stdscr, height, width);
 
 	int ch;
-	int characterpos[2] = {height / 2 + 2, width / 2 - 11};
+	int characterpos[2] = {height / 2 + 1, width / 2 - 11};
 	mvprintw(characterpos[0], characterpos[1], "->");
 	drawmap(map, height, width);
 	while ((ch = getch()) != 'q')
@@ -108,7 +108,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
             		}
 			else
 			{
-				characterpos[0] += 3;
+				characterpos[0] += 4;
 			}
             		break;
         	case KEY_DOWN:
@@ -123,7 +123,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
             		}
 			else
 			{
-				characterpos[0] -= 3;
+				characterpos[0] -= 4;
 			}
             		break;
 		case '\n':
