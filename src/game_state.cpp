@@ -2,7 +2,7 @@
 #include <ncurses.h>
 
 // Define global variables
-GameState gs={0,0,0,0,10,10,10,10,false,0,{}};
+GameState gs={0,0,0,0,10,10,10,10,0,false,0,{}};
 Item item_list[100];
 
 void display_status(GameState gs)

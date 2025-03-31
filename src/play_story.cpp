@@ -2,13 +2,58 @@
 #include <vector>  // For vector
 #include <string>  // For string
 #include "../include/map_head.h"
+#include "../include/game_state.h"
 #include <iostream>
 #include <ctime>
+#include <sstream>
+#include <utility>
 #include <cstdlib> // For srand and rand
 #include <algorithm> // For sample
 #include <random> // For default_random_engine
 #include <set>
 using namespace std;
+
+/*example usage of the function
+stats effect: story_effect("health", 10)
+inventory effect: story_effect("inventory", "item")*/
+
+void story_effect(const string& type, const int&value){
+    if (type == "health"){ // Update health point
+        gs.health += value;
+        if (gs.health < 0) gs.health = 0; // Prevent negative health
+    } else if (type == "food") {
+        gs.food += value; // Update food count
+        if (gs.food < 0) gs.food = 0; // Prevent negative food
+    } else if (type == "water") {
+        gs.water += value; // Update water count
+        if (gs.water < 0) gs.water = 0; // Prevent negative water
+    } else if (type == "bullet") {
+        gs.bullet += value;
+        if (gs.bullet < 0) gs.bullet =0;
+    }
+}
+
+void story_effect(const string&type, const string& item){
+    if (type == "inventory"){
+        gs.items.push_back(item);
+    }
+}
+
+pair<string, string> interpret_reward(const string& reward){
+    string type;
+    string value;
+
+    // use stringstream to split the string
+    stringstream ss(reward);
+    ss >> type; // extract the type like health or inventory
+    getline(ss, value); // extract the rest of the string, which is the value
+
+    // remove the spaces infront of the value
+    if (!value.empty() && value[0]==' '){
+        value = value.substr(1);
+    }
+    return {type, value};
+}
 
 vector<story*> hospital_story;
 vector<story_spot> story_spots;
@@ -102,15 +147,42 @@ void play_story(story* current_story, int height, int width) {
                     hospital_head_story.push_back(11);
                     
                 }
-                /*if (current_story -> reward != ""){
-                    mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", current_story->reward.c_str());
-                    mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                if (current_story->reward != "") {
+                    pair<string,string> result = interpret_reward(current_story->reward);
+                    string type = result.first;
+                    string value = result.second;
+
+                    if (type == "inventory") {
+                        story_effect(type, value); // Inventory rewards
+                        clear();
+                        mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Added %s into your inventory", value.c_str());
+                        mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                    } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
+                        try {
+                            story_effect(type, stoi(value)); // Numeric rewards
+                            clear();
+                            mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", current_story->reward.c_str());
+                            mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                        } catch (const invalid_argument& e) {
+                            mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Invalid numeric reward: %s", value.c_str()); //for debugging purposes
+                        }
+                    } else {
+                        // Display the message
+                        clear();
+                        mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", current_story->reward.c_str());
+                        mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                    }
+
                     refresh();
-                    while(getch() != '\n' and getch() != 'q'){
+                    while (getch() != '\n' && getch() != 'q') {
                         continue;
                     }
-                }*/
-                play_story(current_story->next[choice], height, width);
+                }
+
+                // Ensure choice is within bounds before proceeding
+                if (choice >= 0 && choice < current_story->next.size()) {
+                    play_story(current_story->next[choice], height, width);
+                }
                 return;
                 break;
         }

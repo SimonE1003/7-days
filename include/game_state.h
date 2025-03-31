@@ -9,7 +9,7 @@ using namespace std;
 // Game state structure
 struct GameState {
     double day;
-    int food, water, difficulty, hunger, thirst, health,sanity;
+    int food, water, difficulty, hunger, thirst, health, sanity, bullet;
     bool ill;
     int story_progress;
     vector <string> items;
