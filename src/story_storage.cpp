@@ -8,6 +8,29 @@
 
 using namespace std;
 
+/*example usage of the function
+stats effect: story_effect("hp", 10)
+inventory effect: story_effect("inventory", "item")*/
+
+void story_effect(const string& type, const int&value){
+    if (type == "hp"){ // Update health point
+        gs.health += value;
+        if (gs.health < 0) gs.health = 0; // Prevent negative health
+    } else if (type == "food") {
+        gs.food += value; // Update food count
+        if (gs.food < 0) gs.food = 0; // Prevent negative food
+    } else if (type == "water") {
+        gs.water += value; // Update water count
+        if (gs.water < 0) gs.water = 0; // Prevent negative water
+    }
+}
+
+void story_effect(const string&type, const string& item){
+    if (type == "inventory"){
+        gs.items.push_back(item);
+    }
+}
+
 int generate_random_num(int min, int max) {
     srand(time(0));
     int random_num = rand() % (max - min + 1) + min;

@@ -2,6 +2,7 @@
 #define GAME_STATE_H
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -11,7 +12,7 @@ struct GameState {
     int food, water, difficulty, hunger, thirst, health,sanity;
     bool ill;
     int story_progress;
-    int items[100];
+    vector <string> items;
 };
 
 // Item definition structure
