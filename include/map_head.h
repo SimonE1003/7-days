@@ -16,7 +16,7 @@ struct story {
     string text;
     vector<string> options;
     vector<story*> next;
-    string reward="";
+    vector <string> reward;
 };
 struct story_spot{
     story* target_story;
@@ -50,5 +50,7 @@ void run_shelter();
 int menu();
 
 void clearnear(int x, int y, vector<vector<char>> map, int height, int width);
+
+void cleanwholescreen(int height, int width);
 
 #endif

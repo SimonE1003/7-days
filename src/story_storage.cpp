@@ -22,19 +22,19 @@ void initialize_hospital_story(){
     hospital_story[0]->text = "You see a zombie nurse walking like a zombie.";
     hospital_story[0]->options.push_back("Talk to the nurse");
     hospital_story[0]->options.push_back("Ignore the nurse");
-    hospital_story[0]->reward = "inventory bandage";
+    hospital_story[0]->reward = {"inventory bandage"};
 
     hospital_story.push_back(new story);
     hospital_story[1]->text = "The nurse tells you that you are in a hospital. She asks you if you are feeling better.";
     hospital_story[1]->options.push_back("Why zombies can talk?");
     
-    hospital_story[1]->reward = "health -1";
+    hospital_story[1]->reward = {"health -1"};
 
     hospital_story.push_back(new story);
     hospital_story[2]->text = "You're bitten, so that's why";
     hospital_story[2]->options.push_back("End conversation");
     hospital_story[2]->next.push_back(nullptr);
-    hospital_story[2]->reward = "health -1";
+    hospital_story[2]->reward = {"health -1"};
 
     
     hospital_story[1]->next.push_back(hospital_story[2]);
@@ -50,13 +50,12 @@ void initialize_hospital_story(){
     hospital_story[4]->text = "Why are you talking to a gown?";
     hospital_story[4]->options.push_back("End conversation");
     hospital_story[4]->next.push_back(nullptr);
-    hospital_story[4]->reward = "";
 
     hospital_story.push_back(new story);
     hospital_story[5]->text = "you got a pancake";
     hospital_story[5]->options.push_back("End");
     hospital_story[5]->next.push_back(nullptr);
-    hospital_story[5]->reward = "inventory pancake";
+    hospital_story[5]->reward = {"inventory pancake"};
 
     hospital_story[3]->next = vector<story*>{hospital_story[4], hospital_story[5]};
 
@@ -64,7 +63,6 @@ void initialize_hospital_story(){
     hospital_story[6]->text = "nothing happened then";
     hospital_story[6]->options.push_back("End conversation");
     hospital_story[6]->next.push_back(nullptr);
-    hospital_story[6]->reward = "";
 
     hospital_story[0]->next = vector<story*>{hospital_story[1], hospital_story[6]};
 
@@ -80,14 +78,13 @@ void initialize_hospital_story(){
     hospital_story[8]->options.push_back("Take the syringe");
     hospital_story[8]->options.push_back("Look at it closer");
     hospital_story[8]->next = vector<story*>{nullptr, nullptr};
-    hospital_story[8]->reward = "";
 
     // Story 9
     hospital_story.push_back(new story);
     hospital_story[9]->text = "You feel a surge of energy after using the syringe.";
     hospital_story[9]->options.push_back("End conversation");
     hospital_story[9]->next.push_back(nullptr);
-    hospital_story[9]->reward = "health +2";
+    hospital_story[9]->reward = {"health +2"};
 
     // Story 10
     hospital_story.push_back(new story);
@@ -122,7 +119,7 @@ void initialize_hospital_story(){
     hospital_story[14]->text = "The patient reveals a series of number 651149114, no idea what it means.";
     hospital_story[14]->options.push_back("Leave him alone");
     hospital_story[14]->next.push_back(nullptr);
-    hospital_story[14]->reward = "start story 11";
+    hospital_story[14]->reward = {"start story 11"};
     
 
     // Story 15
@@ -137,14 +134,14 @@ void initialize_hospital_story(){
     hospital_story[16]->options.push_back("Search for the exit");
     hospital_story[16]->options.push_back("Ignore the journal");
     hospital_story[16]->next = vector<story*>{nullptr, nullptr};
-    hospital_story[16]->reward = "inventory clue";
+    hospital_story[16]->reward = {"inventory clue"};
 
     // Story 17
     hospital_story.push_back(new story);
     hospital_story[17]->text = "the patient is dead";
     hospital_story[17]->options.push_back("Feel sorry for him");
     hospital_story[17]->next.push_back(nullptr);
-    hospital_story[17]->reward = "bullet -1";
+    hospital_story[17]->reward = {"bullet -1"};
 
     // Story 18 after 16
     // Story 18: Finding the hidden exit
@@ -159,7 +156,6 @@ void initialize_hospital_story(){
     hospital_story[19]->text = "The keypad locks after three failed attempts.";
     hospital_story[19]->options.push_back("Leave");
     hospital_story[19]->next.push_back(nullptr);
-    hospital_story[19]->reward = "";
 
     // Story 20: Searching for clues
     hospital_story.push_back(new story);
@@ -173,7 +169,7 @@ void initialize_hospital_story(){
     hospital_story[21]->options.push_back("Explore the alley");
     hospital_story[21]->options.push_back("Go back inside");
     hospital_story[21]->next = vector<story*>{nullptr, nullptr};
-    hospital_story[21]->reward = " inventory freedom";
+    hospital_story[21]->reward = {"inventory freedom"};
 
     // Story 22: Exploring the alley
     hospital_story.push_back(new story);
@@ -181,20 +177,18 @@ void initialize_hospital_story(){
     hospital_story[22]->options.push_back("Take the supplies and leave");
     hospital_story[22]->options.push_back("Leave the backpack and return to the hospital");
     hospital_story[22]->next = vector<story*>{nullptr, nullptr};
-    hospital_story[22]->reward = "inventory supplies";
+    hospital_story[22]->reward = {"inventory supplies"};
 
     // Story 23: Returning to the hospital
     hospital_story.push_back(new story);
     hospital_story[23]->text = "You decide to return to the hospital, leaving the hidden exit behind.";
     hospital_story[23]->options.push_back("End conversation");
     hospital_story[23]->next.push_back(nullptr);
-    hospital_story[23]->reward = "";
 
     hospital_story.push_back(new story);
     hospital_story[24]->text = "You try to guess the code, successfully open the door";
     hospital_story[24]->options.push_back("open the door");
     hospital_story[24]->next.push_back(hospital_story[21]);
-    hospital_story[24]->reward = "";
 
     // Linking the new stories
     hospital_story[16]->next[0] = hospital_story[18]; // Search for the exit
@@ -259,14 +253,13 @@ void initialize_knocking_door(){
     knocking_door[3]->text = "The woman killed you before you can draw your weapon, you should've never come outside at night";
     knocking_door[3]->options.push_back("End Game");
     knocking_door[3]->next.push_back(nullptr);
-    knocking_door[3]->reward = "death"; //game ends here
+    knocking_door[3]->reward = {"death"}; //game ends here
     knocking_door[4]->text = "You rushed back home and slamed the door behind you";
     knocking_door[4]->options.push_back("End conversation");
     knocking_door[4]->next.push_back(nullptr);
     knocking_door[5]->text = "The knocking started again and continued for a while, but ended eventually";
     knocking_door[5]->options.push_back("End conversation");
     knocking_door[5]->next.push_back(nullptr);
-    knocking_door[5]->reward = "";
 
     //2. A weird guy story
     knocking_door[6]->text = "You see a weird guy standing outside";
@@ -279,17 +272,17 @@ void initialize_knocking_door(){
     knocking_door[8]->text = "He takes the food and give you a bullet for return";
     knocking_door[8]->options.push_back("End conversation");
     knocking_door[8]->next.push_back(nullptr);
-    knocking_door[8]->reward = "minus food, gained a bullet";
+    knocking_door[8]->reward = {"food -1", "bullet +1"};
     knocking_door[9]->text = "You pushed him away and locked the door again";
     knocking_door[9]->options.push_back("End conversation");
     knocking_door[9]->next.push_back(nullptr);
-    knocking_door[8]->reward = "no reward";
+    knocking_door[8]->reward = {"no reward"};
     knocking_door[10]->text = "You poke him in the eye, but got stabbed by him; you killed him with his own knife";
     knocking_door[10]->options.push_back("Search his body");
     knocking_door[11]->text = "You found a silver key inside his pocket";
     knocking_door[11]->options.push_back("End conversation");
     knocking_door[11]->next.push_back(nullptr);
-    knocking_door[11]->reward = "inventory silver key";
+    knocking_door[11]->reward = {"inventory silver key"};
 
     //3. A giant cockroach story
     knocking_door[12]->text = "You see a giant cockroach standing outside";
@@ -302,11 +295,11 @@ void initialize_knocking_door(){
     knocking_door[14]->text = "You chase the cockroach for a while, and suddenly fall in to a pit; you got eaten alive by a number of cockroaches";
     knocking_door[14]->options.push_back("End Game");
     knocking_door[14]->next.push_back(nullptr);
-    knocking_door[14]->reward = "death"; //game ends here
+    knocking_door[14]->reward = {"death"}; //game ends here
     knocking_door[15]->text = "You shot a bullet at the cockroach, but you missed since it's too dark outside";
     knocking_door[15]->options.push_back("Chase the cockroach");
     knocking_door[15]->options.push_back("Go back home");
-    knocking_door[15]->reward = "bullet -1"; 
+    knocking_door[15]->reward = {"bullet -1"}; 
     knocking_door[16]->text = "You got back home safely";
     knocking_door[16]->options.push_back("End conversation");
     knocking_door[16]->next.push_back(nullptr);
@@ -353,11 +346,11 @@ void initialize_glass_breanking_noise(){
     glass_breaking_noise[2]->text = "The cockroach spits a bottle, there is a paper slip inside";
     glass_breaking_noise[2]->options.push_back("End conversation");
     glass_breaking_noise[2]->next.push_back(nullptr);
-    glass_breaking_noise[2]->reward = "inventory paper slip"; //might link to main story
+    glass_breaking_noise[2]->reward = {"inventory paper slip"}; //might link to main story
     glass_breaking_noise[3]->text = "Green blood exploded from the cockroach and corroded your skin";
     glass_breaking_noise[3]->options.push_back("End conversation");
     glass_breaking_noise[3]->next.push_back(nullptr);
-    glass_breaking_noise[3]->reward = "health -1"; 
+    glass_breaking_noise[3]->reward = {"health -1"}; 
     glass_breaking_noise[4]->text = "You went back to the bedroom";
     glass_breaking_noise[4]->options.push_back("End conversation");
     glass_breaking_noise[4]->next.push_back(nullptr);
@@ -373,11 +366,11 @@ void initialize_glass_breanking_noise(){
     glass_breaking_noise[7]->text = "He thanked you and give you two bullets for return";
     glass_breaking_noise[7]->options.push_back("End conversation"); 
     glass_breaking_noise[7]->next.push_back(nullptr);
-    glass_breaking_noise[7]->reward = "bullet + 1, food - 1";
+    glass_breaking_noise[7]->reward = {"bullet + 1", "food - 1"};
     glass_breaking_noise[8]->text = "The gun shot killed him instently, you searched him and found a water bottle";
     glass_breaking_noise[8]->options.push_back("End conversation"); 
     glass_breaking_noise[8]->next.push_back(nullptr);
-    glass_breaking_noise[8]->reward = "water +1";
+    glass_breaking_noise[8]->reward = {"water +1"};
 
 
     //3. ...story

@@ -142,37 +142,38 @@ void play_story(story* current_story, int height, int width) {
                 }
                 break;
             case '\n':
-                
-                if (current_story -> reward == "start story 11"){
-                    hospital_head_story.push_back(11);
-                    
-                }
-                if (current_story->reward != "") {
-                    pair<string,string> result = interpret_reward(current_story->reward);
-                    string type = result.first;
-                    string value = result.second;
-
-                    if (type == "inventory") {
-                        story_effect(type, value); // Inventory rewards
-                        clear();
-                        mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Added %s into your inventory", value.c_str());
-                        mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
-                    } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
-                        try {
-                            story_effect(type, stoi(value)); // Numeric rewards
-                            clear();
-                            mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", current_story->reward.c_str());
-                            mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
-                        } catch (const invalid_argument& e) {
-                            mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Invalid numeric reward: %s", value.c_str()); //for debugging purposes
-                        }
-                    } else {
-                        // Display the message
-                        clear();
-                        mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", current_story->reward.c_str());
-                        mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                if (!current_story->reward.empty()) {
+                    if (current_story->reward[0] == "start story 11"){
+                        hospital_head_story.push_back(11);
                     }
+                    else{
+                        for (const string& reward: current_story->reward){
+                            pair<string,string> result = interpret_reward(reward);
+                            string type = result.first;
+                            string value = result.second;
 
+                            if (type == "inventory") {
+                                story_effect(type, value); // Inventory rewards
+                                cleanwholescreen(height, width);
+                                mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Added %s into your inventory", value.c_str());
+                                mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                            } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
+                                try {
+                                    story_effect(type, stoi(value)); // Numeric rewards
+                                    cleanwholescreen(height,width);
+                                    mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s %s", type.c_str(), value.c_str());
+                                    mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                                } catch (const invalid_argument& e) {
+                                    mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Invalid numeric reward: %s", value.c_str()); //for debugging purposes
+                                }
+                            } else {
+                                // Display the message
+                                cleanwholescreen(height, width);
+                                mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", reward.c_str());
+                                mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
+                            }
+                        }
+                    }
                     refresh();
                     while (getch() != '\n' && getch() != 'q') {
                         continue;
