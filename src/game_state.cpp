@@ -3,17 +3,16 @@
 
 // Define global variables
 
-=======
-GameState gs={0.0,0,0,0,10,10,10,10,0,false,0,{0}};
 
->>>>>>> 645e503 (update game_state.cpp and game_state.h,add color to some texts)
+GameState gs={0,0,0,0,10,10,10,10,0,false,0,{0}};
+
+
 Item item_list[100];
 
 void display_status(GameState gs)
 {
-	start_color();
-	init_pair(1,COLOR_RED,COLOR_BLACK);
-
+	//start_color();
+	//init_pair(1,COLOR_RED,COLOR_BLACK);
 	mvprintw(5, 10, "Game Status\n");
     	mvprintw(6, 10, "Difficulty: %d\n", gs.difficulty);
     	char day_buffer[20];
@@ -28,9 +27,9 @@ void display_status(GameState gs)
     	mvprintw(14,10,"Bullet: %d\n", gs.bullet);
     	if (gs.ill)
     	{
-		attron(COLOR_PAIR(1));
+		//attron(COLOR_PAIR(1));
         	mvprintw(15, 10, "You are ill!!!");
-		attroff(COLOR_PAIR(1));
+		//attroff(COLOR_PAIR(1));
    	}	
     	mvprintw(16, 10, "Press 'q' to quit\n");
     	refresh();
