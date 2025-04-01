@@ -11,6 +11,10 @@ Item item_list[100];
 
 void display_status(GameState gs)
 {
+	initscr();
+	start_color();
+	init_pair(1,COLOR_RED,COLOR_BLACK);
+
     mvprintw(5, 10, "Game Status\n");
     mvprintw(6, 10, "Difficulty: %d\n", gs.difficulty);
     char day_buffer[20];
@@ -23,7 +27,10 @@ void display_status(GameState gs)
     mvprintw(13, 10, "Sanity: %d\n", gs.sanity);
     if (gs.ill)
     {
+	attron(COLOR_PAIR(1));
         mvprintw(14, 10, "You are ill!!!");
+	attroff(COLOR_PAIR(1));
+
     }
     mvprintw(15, 10, "Press 'q' to quit\n");
     refresh();
