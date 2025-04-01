@@ -17,6 +17,7 @@ void init() {
 	noecho();
 	keypad(stdscr, true);
 	nodelay(stdscr, true);
+
 }
 
 void start() {
