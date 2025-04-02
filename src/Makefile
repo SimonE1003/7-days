@@ -19,6 +19,6 @@ run: game_file
 	./game_file
 
 clean:
-	rm -f *.o game_file *.gch
+	rm -f *.o game_file *.gch ../include/*.gch
 
 .PHONY: run clean

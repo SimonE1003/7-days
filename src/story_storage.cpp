@@ -330,7 +330,7 @@ vector<story*> glass_breaking_noise;
 
 void initialize_glass_breanking_noise(){ 
     
-    for (int i = 0; i <= 8; i++) {
+    for (int i = 0; i <= 14; i++) {
         glass_breaking_noise.push_back(new story);
     }
 
@@ -370,13 +370,32 @@ void initialize_glass_breanking_noise(){
     glass_breaking_noise[8]->text = "The gun shot killed him instently, you searched him and found a water bottle";
     glass_breaking_noise[8]->options.push_back("End conversation"); 
     glass_breaking_noise[8]->next.push_back(nullptr);
-    glass_breaking_noise[8]->reward = {"water +1"};
+    glass_breaking_noise[8]->reward = {"bullet -1, water +1"};
+    glass_breaking_noise[9]->text = "You missed, he run away through the window"; 
+    glass_breaking_noise[9]->options.push_back("End conversation"); 
+    glass_breaking_noise[9]->next.push_back(nullptr);
+    glass_breaking_noise[9]->reward = {"bullet - 1"};
 
+    //3. cat story
+    glass_breaking_noise[10]->text = "You see a cute cat";
+    glass_breaking_noise[10]->options.push_back("Shoot it"); //11
+    glass_breaking_noise[10]->options.push_back("Get close to examin it"); //12
+    glass_breaking_noise[10]->options.push_back("Go back to the bedroom"); //4
+    glass_breaking_noise[11]->text = "Congrats, you kill a cat, your sanity drops because of the shame";
+    glass_breaking_noise[11]->options.push_back("End conversation"); 
+    glass_breaking_noise[11]->next.push_back(nullptr);
+    glass_breaking_noise[11]->reward = {"Sanity - 1"};
+    glass_breaking_noise[12]->text = "The cat got scared, it run out of the window";
+    glass_breaking_noise[12]->options.push_back("Chase it"); //13
+    glass_breaking_noise[12]->options.push_back("Go back to the bedroom"); //4
+    glass_breaking_noise[13]->text = "You chased it for a while, but you lost track and the cat disappreared";
+    glass_breaking_noise[13]->options.push_back("Go find the cat"); //14
+    glass_breaking_noise[13]->options.push_back("Go back home"); //4
+    glass_breaking_noise[14]->text = "You suddently run into a pit, and you got eaten by a bunch of cockroaches";
+    glass_breaking_noise[14]->options.push_back("End game"); 
+    glass_breaking_noise[14]->next.push_back(nullptr);
+    glass_breaking_noise[14]->reward = {"death"};
 
-    //3. ...story
-    glass_breaking_noise[8]->text = "...";
-    glass_breaking_noise[8]->options.push_back("..."); 
-    glass_breaking_noise[8]->next.push_back(nullptr);
 
     int random_branch = generate_random_num(0, 2);
 
@@ -388,13 +407,17 @@ void initialize_glass_breanking_noise(){
     else if (random_branch == 1){
         //intruder branch
         glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[5], glass_breaking_noise[4]};
-        glass_breaking_noise[5]->next = vector<story*>{glass_breaking_noise[6], glass_breaking_noise[7], glass_breaking_noise[4]};
+        glass_breaking_noise[5]->next = vector<story*>{glass_breaking_noise[6], glass_breaking_noise[9], glass_breaking_noise[4]};
         glass_breaking_noise[6]->next = vector<story*>{glass_breaking_noise[7], glass_breaking_noise[8]};
 
     }
     else{
-        //...
-        glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[8], glass_breaking_noise[4]};
+        //cat branch
+        glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[10], glass_breaking_noise[4]};
+        glass_breaking_noise[10]->next = vector<story*>{glass_breaking_noise[11], glass_breaking_noise[12], glass_breaking_noise[4]};
+        glass_breaking_noise[12]->next = vector<story*>{glass_breaking_noise[13], glass_breaking_noise[4]};
+        glass_breaking_noise[13]->next = vector<story*>{glass_breaking_noise[14], glass_breaking_noise[4]};
+
     }
 
 
