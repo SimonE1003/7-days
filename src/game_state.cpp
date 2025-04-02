@@ -32,7 +32,17 @@ void display_status(GameState gs)
 	attroff(COLOR_PAIR(1));
 
     }
-    mvprintw(15, 10, "Press 'q' to quit\n");
+    int prtcnt = 0;
+    mvprintw(15, 10+prtcnt, "Items: ");
+    prtcnt += 7;
+    for (string item : gs.items)
+    {
+        
+        mvprintw(15, 10+prtcnt, "%s", item.c_str());
+        prtcnt += item.size() + 2;
+
+    }
+    mvprintw(17, 10, "Press 'q' to quit\n");
     refresh();
 
     // Wait for the user to press 'q'
