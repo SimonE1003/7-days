@@ -190,6 +190,28 @@ void initialize_hospital_story(){
     hospital_story[24]->options.push_back("open the door");
     hospital_story[24]->next.push_back(hospital_story[21]);
 
+    //story 25: meeting a crazy man
+    hospital_story.push_back(new story);
+    hospital_story[25]->text = "You saw a strange man";
+    hospital_story[25]->options.push_back("talk to him");
+    hospital_story[25]->options.push_back("ignore him");
+
+    hospital_story.push_back(new story);
+    hospital_story[26]->text = "Turns out he's a crazy man, talking to him makes you question your existence";
+    hospital_story[26]->options.push_back("End conversation");
+    hospital_story[26]->next = vector<story*> {nullptr, nullptr};
+    hospital_story[26]->reward = {"sanity -1"};
+
+    hospital_story.push_back(new story);
+    hospital_story[27]->text = "Turns out he's a crazy man and suddenly he attacked you because you ignored him";
+    hospital_story[26]->options.push_back("End conversation");
+    hospital_story[26]->next = vector<story*> {nullptr, nullptr};
+    hospital_story[26]->reward = {"health -1"};
+
+    hospital_story[25]->next = vector<story*>{hospital_story[26],hospital_story[27]};
+
+    
+
     // Linking the new stories
     hospital_story[16]->next[0] = hospital_story[18]; // Search for the exit
     hospital_story[16]->next[1] = hospital_story[6]; // Ignore the journal
