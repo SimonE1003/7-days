@@ -144,77 +144,62 @@ void play_story(story* current_story, int height, int width) {
     int play_pos = 0;
     int original_point[2] = {height / 3, int((width - current_story->text.size()) / 2)};
     int choice = 0;
+    string rewardPrint = "";
+
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
-        
         if (play_pos < current_story->text.size()) {
             mvprintw(original_point[0], original_point[1] + play_pos, "%c", current_story->text[play_pos]);
             play_pos++;
             refresh();
             playcnt = 0;
-            
         } else if (play_pos == current_story->text.size()) {
             for (int k = 0; k < current_story->options.size(); k++) {
                 mvprintw(original_point[0] * 2 + k, original_point[1], "%s", current_story->options[k].c_str());
             }
-            mvprintw(original_point[0] * 2 , original_point[1] - 3, "%s", "->");
-
+            mvprintw(original_point[0] * 2, original_point[1] - 3, "%s", "->");
             play_pos++;
             refresh();
         }
-        switch (ch){
+
+        switch (ch) {
             case KEY_UP:
-                if (choice > 0){
+                if (choice > 0) {
                     mvprintw(original_point[0] * 2 + choice, original_point[1] - 3, "%s", "  ");
                     choice--;
                     mvprintw(original_point[0] * 2 + choice, original_point[1] - 3, "%s", "->");
                     refresh();
-
                 }
                 break;
+
             case KEY_DOWN:
-                if (choice < current_story->options.size() - 1){
+                if (choice < current_story->options.size() - 1) {
                     mvprintw(original_point[0] * 2 + choice, original_point[1] - 3, "%s", "  ");
                     choice++;
                     mvprintw(original_point[0] * 2 + choice, original_point[1] - 3, "%s", "->");
                     refresh();
                 }
                 break;
+
             case '\n':
                 if (!current_story->reward.empty()) {
-                    if (current_story->reward[0] == "start story 11"){
-                        hospital_head_story.push_back(11);
-                    }
-                    else{
-                        for (const string& reward: current_story->reward){
-                            pair<string,string> result = interpret_reward(reward);
-                            string type = result.first;
-                            string value = result.second;
+                    for (const string& reward : current_story->reward) {
+                        pair<string, string> result = interpret_reward(reward);
+                        string type = result.first;
+                        string value = result.second;
 
-                            if (type == "inventory") {
-                                story_effect(type, value); // Inventory rewards
-                                cleanwholescreen(height, width);
-                                mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Added %s into your inventory", value.c_str());
-                                mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
-                            } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
-                                try {
-                                    story_effect(type, stoi(value)); // Numeric rewards
-                                    cleanwholescreen(height,width);
-                                    mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s %s", type.c_str(), value.c_str());
-                                    mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
-                                } catch (const invalid_argument& e) {
-                                    mvprintw(height / 3, (width - current_story->reward.size()) / 2, "Invalid numeric reward: %s", value.c_str()); //for debugging purposes
-                                }
-                            } else {
-                                // Display the message
-                                cleanwholescreen(height, width);
-                                mvprintw(height / 3, (width - current_story->reward.size()) / 2, "%s", reward.c_str());
-                                mvprintw(height / 2, (width - current_story->reward.size()) / 2, "Press Enter to continue");
-                            }
+                        if (type == "inventory") {
+                            story_effect(type, value); // Inventory rewards
+                            rewardPrint += reward + ", ";
+                        } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
+                            story_effect(type, stoi(value)); // Numeric rewards
+                            rewardPrint += reward + ", ";
+                        } else {
+                            rewardPrint += reward + ", ";
                         }
                     }
-                    refresh();
-                    while (getch() != '\n' && getch() != 'q') {
-                        continue;
+
+                    if (!rewardPrint.empty() && rewardPrint.length() > 2) {
+                        rewardPrint = rewardPrint.substr(0, rewardPrint.length() - 2); // Remove trailing ", "
                     }
                 }
 
@@ -222,14 +207,21 @@ void play_story(story* current_story, int height, int width) {
                 if (choice >= 0 && choice < current_story->next.size()) {
                     play_story(current_story->next[choice], height, width);
                 }
+
+                // Display the reward
+                if (!rewardPrint.empty()) {
+                    cleanwholescreen(height, width);
+                    refresh();
+                    mvprintw(height / 2, (width - rewardPrint.length() - 6) / 2, "Added %s", rewardPrint.c_str());
+                    mvprintw(height / 2 + 2, (width - 24) / 2, "Press Enter to continue...");
+                    refresh();
+                    while ((ch = getch()) != '\n') {
+                        continue; // Wait for the user to press Enter
+                    }
+                }
                 return;
-                break;
         }
     }
-    clear();
-    
-
-    
     clear();
     refresh();
 }
