@@ -5,9 +5,7 @@
 
 
 
-GameState gs={0,0,0,0,10,10,10,10,0,false,0,{}};
-
-Item item_list[100];
+GameState gs={0,0,0,0,10,10,10,10,0,false,{}};
 
 void display_status(GameState gs)
 {

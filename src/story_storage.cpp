@@ -16,6 +16,10 @@ int generate_random_num(int min, int max) {
 
 vector<int> hospital_head_story = {0,3,7,15};
 
+//Only for testing save_load functions
+vector<int> supermarket_head_story = {0,3,7,15};
+vector<int> weaponstore_head_story = {0,3,7,15};
+
 void initialize_hospital_story(){
     srand(time(0));
     hospital_story.push_back(new story);

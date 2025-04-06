@@ -14,7 +14,11 @@ exploration.o: exploration.cpp ../include/map_head.h
 	g++ -std=c++11 -c $^
 game_start.o: game_start.cpp ../include/game_start.h
 	g++ -std=c++11 -c $^
-game_file: exploration.o game_start.o map_main.o map_storage.o play_story.o story_storage.o game_state.o menu_map.o
+save_load.o: save_load.cpp ../include/save_load.h ../include/game_start.h ../include/game_state.h
+	g++ -std=c++11 -c $^
+init.o: init.cpp ../include/init.h
+	g++ -std=c++11 -c $^
+game_file: exploration.o game_start.o map_main.o map_storage.o play_story.o story_storage.o game_state.o menu_map.o save_load.o init.o
 	g++ -std=c++11 $^ -o $@ -lncurses
 
 run: game_file
