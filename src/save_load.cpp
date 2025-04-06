@@ -138,7 +138,7 @@ void load() {
                     clear();
                     mvprintw(LINES-1, 0, "Error: Could not load %s", filename.c_str());
                     refresh();
-                    //gm_start();
+                    gm_start();
                     return;
                 }
             }
@@ -147,7 +147,7 @@ void load() {
                 clear();
                 mvprintw(LINES-1, 0, "Load cancelled");
                 refresh();
-                //gm_start();
+                gm_start();
                 return;  // Exit without loading
         }
     }
