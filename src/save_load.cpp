@@ -48,7 +48,7 @@ void load() {
     // Create selection window
     WINDOW *load_win = newwin(height, width, start_y, start_x);
     box(load_win, 0, 0);
-    mvwprintw(load_win, 1, 2, "Select a save file:");
+    mvwprintw(load_win, 1, 2, "Select a save file to load from:");
     mvwprintw(load_win, height-2, 2, "Use arrows, Enter to load, ESC to cancel");
     wrefresh(load_win);
 
@@ -196,14 +196,17 @@ void save() {
         refresh();
         sleep(2);
         return;
-    } else if (input[0] == 27) {  
+    } else if (std::string(input).find('/') != std::string::npos) {
+        // Check if input contains '/', reject it if so
         delwin(input_win);
         delwin(save_win);
         noecho();
         curs_set(0);
-        mvprintw(LINES-1, 0, "Save cancelled");
+        mvprintw(LINES-1, 0, "Error: Filename cannot contain '/'");
         refresh();
-        sleep(2);
+        napms(1000);  // Show error message for 1 second
+        clear();
+        refresh();
         return;
     } else {
         filename = std::string(input); 
