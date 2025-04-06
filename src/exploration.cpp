@@ -7,11 +7,3 @@
 
 void start_explore() { run_shelter(); }//this will start one daytime, i feel that let start_explore be day basis
 void start_UI(){ gm_start(); }// this will start UI
-int main() {
-    init();
-    save();
-    load();
-    start_UI();
-    //start_explore();
-    return 0;
-}

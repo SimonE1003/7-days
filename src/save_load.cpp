@@ -29,7 +29,7 @@ std::vector<std::string> get_save_files(const std::string& directory, const std:
 
 void load() {
     // Define directory to look for save files
-    std::string directory = "../save";
+    std::string directory = "save";
 
     // Get list of save files
     std::vector<std::string> save_files = get_save_files(directory);
@@ -131,7 +131,7 @@ void load() {
                     clear();
                     mvprintw(LINES-1, 0, "Game loaded from %s", filename.c_str());
                     refresh();
-                    sleep(1);
+                    sleep(0.5);
                     return;  // Exit after successful load
                 } else {
                     delwin(load_win);
@@ -217,7 +217,7 @@ void save() {
     delwin(save_win);
     noecho();
     curs_set(0);
-    const std::string save_dir = "../save";
+    const std::string save_dir = "save";
     
     // Save game data to file
     if (!filename.empty()) {
