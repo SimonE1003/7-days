@@ -25,8 +25,10 @@ struct story_spot{
 };
 
 extern vector<story*> hospital_story;
+extern vector<story*> supermarket_story;
 extern vector<story*> knocking_door;
 extern vector<story*> glass_breaking_noise;
+extern vector<story*> UI_stories;
 
 extern vector<story_spot> story_spots;
 

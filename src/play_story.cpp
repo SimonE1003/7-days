@@ -56,26 +56,64 @@ pair<string, string> interpret_reward(const string& reward){
 }
 
 vector<story*> hospital_story;
+vector<story*> supermarket_story;
 vector<story_spot> story_spots;
-vector<story*> sample( int num) {
-    vector<story*> selected_stories;
-    srand(time(0));
-    random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
-    for (int i = 0; i < num; i++) {
-        selected_stories.push_back(hospital_story[hospital_head_story[hospital_head_story.size()-1-i]]);
-        
+vector<story*> UI_stories;
+vector<story*> sample( int num, string current_map) {
+    if (current_map == "hospital"){
+        vector<story*> selected_stories;
+        srand(time(0));
+        random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
+        for (int i = 0; i < num; i++) {
+            selected_stories.push_back(hospital_story[hospital_head_story[hospital_head_story.size()-1-i]]);
+            
+        }
+        for (int i = 0; i < num; i++) {
+            hospital_head_story.pop_back();
+            
+        }
+        return selected_stories;
     }
-    for (int i = 0; i < num; i++) {
-        hospital_head_story.pop_back();
-        
+    else if (current_map == "supermarket"){
+        vector<story*> selected_stories;
+        srand(time(0));
+        random_shuffle(supermarket_head_story.begin(), supermarket_head_story.end());
+        for (int i = 0; i < num; i++) {
+            selected_stories.push_back(supermarket_story[supermarket_head_story[supermarket_head_story.size()-1-i]]);
+            
+        }
+        for (int i = 0; i < num; i++) {
+            supermarket_head_story.pop_back();
+            
+        }
+        return selected_stories;
     }
-    return selected_stories;
+    return vector<story*>(); // Return an empty vector if no valid map is found
 }
 void create_story_spot(int num, int original_x, int original_y, int height, int width, vector<vector<char>> map,string current_map) {
     story_spots={};
     srand(time(0));
     if (current_map == "hospital") {
-        vector<story*> selected_stories = sample( num);
+        vector<story*> selected_stories = sample( num, current_map);
+
+        for (int i = 0; i < num; i++) {
+            story_spot ST;
+            ST.target_story = selected_stories[i];
+            ST.x = rand() % (height-1) + original_x + 1;
+            ST.y = rand() % width + original_y;
+            set <char> valid = { 'D', 'o', 'r'};
+            while (map[ST.x-original_x][ST.y-original_y] == '#' or valid.find(map[ST.x-original_x][ST.y-original_y]) != valid.end()) {
+                ST.x = rand() % (height-1) + original_x + 1;
+                ST.y = rand() % width + original_y;
+            }
+            cout << ST.x << " " << ST.y << endl;
+            story_spots.push_back(ST);
+            
+        }
+        mvprintw(5, 0, "%zu", story_spots.size());
+    }
+    if (current_map == "supermarket"){
+        vector<story*> selected_stories = sample( num, current_map);
 
         for (int i = 0; i < num; i++) {
             story_spot ST;

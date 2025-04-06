@@ -219,7 +219,7 @@ void initialize_hospital_story(){
     // Linking the new stories
     hospital_story[16]->next[0] = hospital_story[18]; // Search for the exit
     hospital_story[16]->next[1] = hospital_story[6]; // Ignore the journal
-    if(rand()>INT_MAX/2 - gs.difficulty*1000){//successfully open the door
+    if(rand()%10 >4 + gs.difficulty){//successfully open the door
         //mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
         hospital_story[18]->next[0] = hospital_story[24];
     }else{
@@ -227,7 +227,7 @@ void initialize_hospital_story(){
     }
     hospital_story[18]->next[1] = hospital_story[20]; // Look for clues
     srand(time(0));
-    if(rand()>INT_MAX/2 - gs.difficulty*1000){//successfully open the door
+    if(rand()%10 >4 + gs.difficulty){//successfully open the door
         //mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
         hospital_story[20]->next[0] = hospital_story[21];
     }else{
@@ -256,7 +256,105 @@ void initialize_hospital_story(){
     hospital_story[13]->next[1] = hospital_story[6]; 
 
     hospital_story[15]->next[0] = hospital_story[16];
+
+
 }
+
+vector<int> supermarket_head_story = {0,8};
+void initialize_supermarket_story(){
+    supermarket_story.push_back(new story);
+    supermarket_story[0]->text = "An ornate brass key with a note that read: \"Choose wisely, for this key unlocks more than just doors.\"";
+    supermarket_story[0]->options.push_back("Take the key and note");
+
+    supermarket_story.push_back(new story);
+    supermarket_story[1]->text = "The key starts to  emit two beams of light.";
+    supermarket_story[1]->options.push_back("Toward a door with a bumping sound behind it");
+    supermarket_story[0]->next.push_back(supermarket_story[1]);
+
+    supermarket_story.push_back(new story);
+    supermarket_story[2]->text = "The door opens, a boy is trapped by a zombie, he's crying for help.";
+    supermarket_story[2]->options.push_back("Help him");
+    supermarket_story[2]->options.push_back("Leave him alone");
+    supermarket_story[1]->next.push_back(supermarket_story[2]);
+
+    supermarket_story.push_back(new story);
+    supermarket_story[3]->text = "You got bitten on the hand, the boy ran away.";
+    supermarket_story[3]->options.push_back("Use a gun");
+    supermarket_story[3]->options.push_back("Fight with bare hands");
+    supermarket_story[2]->next.push_back(supermarket_story[3]);
+
+    supermarket_story.push_back(new story);
+    supermarket_story[4]->text = "You shot two bullets, the zombie is dead";
+    supermarket_story[4]->options.push_back("Take a deep breath");
+    supermarket_story[3]->next.push_back(supermarket_story[4]);
+
+    supermarket_story.push_back(new story);
+    supermarket_story[5]->text = "You killed the zombie, but yourself badly injured";
+    supermarket_story[5]->options.push_back("Take a deep breath");
+    supermarket_story[3]->next.push_back(supermarket_story[5]);
+
+    supermarket_story.push_back(new story);
+    supermarket_story[6]->text = "You're a hero, undoubtedly.";
+    supermarket_story[6]->options.push_back("Take it as a compliment");
+    supermarket_story[4]->next.push_back(supermarket_story[6]);
+    supermarket_story[5]->next.push_back(supermarket_story[6]);
+    supermarket_story[5]->next.push_back(nullptr);
+    supermarket_story[6]->reward = vector<string>{"health -1","bullet -2"}; //game ends here
+
+    supermarket_story.push_back(new story);
+    supermarket_story[7]->text = "You closed the door";
+    supermarket_story[7]->options.push_back("Feel a little bit guilty");
+    supermarket_story[7]->next.push_back(nullptr);
+
+    
+    supermarket_story.push_back(new story);
+    supermarket_story[8]->text = "An ornate brass key with a note that read: \"Choose wisely, for this key unlocks more than just doors.\"";
+    supermarket_story[8]->options.push_back("Take the key and note");
+
+    supermarket_story.push_back(new story);
+    supermarket_story[9]->text = "The key starts to  emit two beams of light.";
+    supermarket_story[9]->options.push_back("Toward a doll with a lock on its head");
+    supermarket_story[8]->next.push_back(supermarket_story[9]);
+
+    supermarket_story.push_back(new story);
+    supermarket_story[10]->text = "The doll is locked, but you can hear a voice inside it.";
+    supermarket_story[10]->options.push_back("Open the doll");
+    supermarket_story[10]->options.push_back("Leave it alone");
+    supermarket_story[9]->next.push_back(supermarket_story[10]);
+    
+    supermarket_story.push_back(new story);
+    supermarket_story[11]->text = "The doll starts to sing a lullaby, and you feel......crazy";
+    supermarket_story[11]->options.push_back("Leave it alone with a headache");
+    supermarket_story[10]->next.push_back(supermarket_story[11]);
+    supermarket_story[11]->next.push_back(nullptr);
+    supermarket_story[11]->reward = vector<string>{"sanity -1"}; //game ends here
+
+    supermarket_story.push_back(new story);
+    supermarket_story[12]->text = "You left the doll on the shelf";
+    supermarket_story[12]->options.push_back("Walk away");
+    supermarket_story[12]->next.push_back(nullptr);
+    supermarket_story[10]->next.push_back(supermarket_story[12]);
+
+
+
+    
+
+}
+
+
+void initialize_UI_stories(){
+    UI_stories.push_back(new story);
+    UI_stories[0]->text = "Let go directly back to the shelter";
+    UI_stories[0]->options.push_back("Start Night Time");
+    UI_stories[0]->next.push_back(nullptr);
+}
+
+    
+
+
+
+
+
 
 vector<story*> knocking_door;
 
@@ -455,4 +553,6 @@ void initialize_stories() {
     initialize_hospital_story();
     initialize_knocking_door();
     initialize_glass_breanking_noise();
+    initialize_supermarket_story();
+    initialize_UI_stories();
 }
