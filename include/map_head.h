@@ -12,6 +12,7 @@ extern vector<string> shelter; // Declare the external variable
 extern vector<string> weaponshop; // Declare the external variable
 extern vector<string> supermarket; // Declare the external variable
 extern vector<int> hospital_head_story;
+extern vector<int> supermarket_head_story;
 struct story {
     string text;
     vector<string> options;
@@ -25,8 +26,10 @@ struct story_spot{
 };
 
 extern vector<story*> hospital_story;
+extern vector<story*> supermarket_story;
 extern vector<story*> knocking_door;
 extern vector<story*> glass_breaking_noise;
+extern vector<story*> UI_stories;
 
 extern vector<story_spot> story_spots;
 

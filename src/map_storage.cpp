@@ -36,7 +36,7 @@ vector<string> shelter = {
 	"####################################################",
 	"# #############                                    #",
 	"# #           #                                    #",
-	"# #     M     #                                    #",
+	"# #  S    E   #                                    #",
 	"#                                                  #",
 	"#          #####################                   #",
 	"#                                                  #",
@@ -52,7 +52,9 @@ vector<string> shelter = {
 	"#                                                  #",
 	"#                                             Door #",
 	"####################################################",
-	"Check Status at M (Mirror)                          "};
+	"Press I to Check Status                             ",
+	"Save at S              			                 ",
+	"Exit at E                                           "};
 
 vector<string> weaponshop{
 	"Weapon Shop                                         ",
