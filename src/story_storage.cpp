@@ -31,6 +31,12 @@ void initialize_weaponshop_story(){
         weaponshop_story[1]->text="A zombie noticed you,it is time to try your new weapon.";
         weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
         weaponshop_story[1]->reward={"bullet -1"};
+	//story2
+	weaponshop_story.push_back(new story);
+	weaponshop_story[2]->text="After killing the zombie, you approach the counter,there are some bullets on it.";
+	weaponshop_story[2]->options.push_back("Get the bullets and continue to explore.");
+	weaponshop_story[2]->next.push_back(nullptr);
+	weaponshop_story[2]->reward={"bullet +5"};
 }
 void initialize_hospital_story()
 {
