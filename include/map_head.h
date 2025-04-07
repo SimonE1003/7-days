@@ -11,7 +11,7 @@ extern vector<string> hospital; // Declare the external variable
 extern vector<string> shelter; // Declare the external variable
 extern vector<string> weaponshop; // Declare the external variable
 extern vector<string> supermarket; // Declare the external variable
-extern vector<int> hospital_head_story;
+extern vector<int> hospital_head_story, supermarket_head_story, weaponstore_head_story;
 struct story {
     string text;
     vector<string> options;
@@ -25,8 +25,11 @@ struct story_spot{
 };
 
 extern vector<story*> hospital_story;
+extern vector<story*> supermarket_story;
 extern vector<story*> knocking_door;
 extern vector<story*> glass_breaking_noise;
+extern vector<story*> lights_off;
+extern vector<story*> UI_stories;
 
 extern vector<story_spot> story_spots;
 
@@ -38,18 +41,16 @@ void drawmap(vector<vector<char> > map , int , int);
 
 void initialize_stories();
 void initialize_hospital_story();
-void initialize_knocking_door();
-void initialize_glass_breanking_noise();
 
 void play_story(story* current_story, int height , int width);
 
-void create_story_spot(int num , int original_x , int original_y, int height , int width ,vector<vector<char>>map , string current_map);
+void create_story_spot(int num , int original_x , int original_y, int height , int width ,vector<vector<char> >map , string current_map);
 
 void run_shelter();
 
 int menu();
 
-void clearnear(int x, int y, vector<vector<char>> map, int height, int width);
+void clearnear(int x, int y, vector<vector<char> > map, int height, int width);
 
 void cleanwholescreen(int height, int width);
 

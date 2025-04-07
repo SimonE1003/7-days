@@ -6,6 +6,7 @@
 #include <iostream>
 #include <set>
 #include "../include/game_state.h"
+#include "../include/save_load.h"
 using namespace std;
 
 void cleanwholescreen(int height, int width)
@@ -111,13 +112,13 @@ void run_shelter()
     int ch;
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");
-    //create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);
+    // create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);
     drawmap(map, height, width);
 
-    //mvprintw(3, 0, "map size: %zu %zu", map.size(), map[0].size());
+    // mvprintw(3, 0, "map size: %zu %zu", map.size(), map[0].size());
     while ((ch = getch()) != 'q')
     { // Press 'q' to exit the loop
-        //mvprintw(5,0,"story_spots size: %zu",story_spots.size());
+        // mvprintw(5,0,"story_spots size: %zu",story_spots.size());
         clearnear(charactorpos[0], charactorpos[1], map, height, width);
         int checkX, checkY;
         // check if standing on story
@@ -150,7 +151,8 @@ void run_shelter()
             mvprintw(4, 0, "current_char: %c", current_char);
             if (valid.find(current_char) != valid.end())
             {
-                if ((int)(gs.day/0.5)%2 == 0){
+                if ((int)(gs.day / 0.5) % 2 == 0)
+                {
                     mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press Enter to start daytime");
                     if (ch == '\n')
                     {
@@ -160,12 +162,12 @@ void run_shelter()
                         charactorpos[0] = height / 2;
                         charactorpos[1] = width / 2;
                         cleanwholescreen(height, width);
-			switch (choice)
+                        switch (choice)
                         {
                         case 0:
                             map = string_to_vector(shelter);
                             current_map = "shelter";
-                            
+
                             break;
                         case 1:
                             map = string_to_vector(supermarket);
@@ -179,32 +181,64 @@ void run_shelter()
                             map = string_to_vector(weaponshop);
                             current_map = "weaponshop";
                             break;
-                        
                         }
                         create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);
                         drawmap(map, height, width);
                         refresh();
                     }
                 }
-                else{
+                else
+                {
                     mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "You cannot go out at night");
                 }
-            }
-            else if (current_char == 'M')
+            } /*
+             else if (current_char == 'M')
+             {
+                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to check status");
+                 if (ch == 'a' || ch == 'A')
+                 {
+                     cleanwholescreen(height, width);
+                     display_status(gs);
+                     cleanwholescreen(height, width);
+                     drawmap(map, height, width);
+                     refresh();
+                 }
+             }
+             else
+             {
+                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "                             ");
+             }*/
+            else if (current_char == 'S')
             {
-                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to check status");
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to save game");
                 if (ch == 'a' || ch == 'A')
                 {
                     cleanwholescreen(height, width);
-                    display_status(gs);
+                    save();
                     cleanwholescreen(height, width);
                     drawmap(map, height, width);
                     refresh();
                 }
             }
+
+            else if (current_char == 'E')
+            {
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to quit game");
+                if (ch == 'a' || ch == 'A')
+                {
+                    cleanwholescreen(height, width);
+                    //save_game(gs);
+                    cleanwholescreen(height, width);
+                    drawmap(map, height, width);
+                    refresh();
+                }
+            }
+            else if ((int)(gs.day/0.5)%2==1){
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press P to start night time");
+            }
             else
             {
-                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "                             ");
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "                                    ");
             }
         }
         if (current_map == "weaponshop" or current_map == "hospital" or current_map == "supermarket")
@@ -215,13 +249,22 @@ void run_shelter()
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press Enter to leave %s", current_map.c_str());
                 if (ch == '\n')
                 {
-                    int choice;
-		    story_spots.clear();
+                    play_story(UI_stories[0], height, width);
+                    map = string_to_vector(shelter);
+                    current_map = "shelter";
+                    gs.day += 0.5;
+                    charactorpos[0] = height / 2;
+                    charactorpos[1] = width / 2;
+                    story_spots.clear();
+                    drawmap(map, height, width);
+                    refresh();
+                /*int choice;
+                    story_spots.clear();
                     cleanwholescreen(height, width);
                     choice = menu();
                     charactorpos[0] = height / 2;
                     charactorpos[1] = width / 2;
-		    cleanwholescreen(height, width);
+                    cleanwholescreen(height, width);
                     switch (choice)
                     {
                     case 0:
@@ -243,7 +286,7 @@ void run_shelter()
                         break;
                     }
                     drawmap(map, height, width);
-                    refresh();
+                    refresh();*/
                 }
             }
             else
@@ -300,12 +343,19 @@ void run_shelter()
         case ERR:
             break;
         case 'p': // just for testing the story
-            play_story(glass_breaking_noise[0], height, width);
+            play_story(lights_off[0], height, width);
             drawmap(map, height, width);
+            return;
             break;
         case 'k': // reset the current map just for testing
             create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);
 
+            drawmap(map, height, width);
+            refresh();
+        case 'i':
+            cleanwholescreen(height, width);
+            display_status(gs);
+            cleanwholescreen(height, width);
             drawmap(map, height, width);
             refresh();
         default:

@@ -5,7 +5,7 @@
 using namespace std;
 
 // Save/load functions
-void load(const string& file);
-void save(const string& file);
+void load();
+void save();
 
 #endif
