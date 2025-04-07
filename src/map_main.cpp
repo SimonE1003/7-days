@@ -233,6 +233,9 @@ void run_shelter()
                     refresh();
                 }
             }
+            else if ((int)(gs.day/0.5)%2==1){
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press P to start night time");
+            }
             else
             {
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "                                    ");

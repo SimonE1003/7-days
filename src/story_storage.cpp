@@ -281,6 +281,7 @@ void initialize_supermarket_story()
     supermarket_story[3]->options.push_back("Use a gun");
     supermarket_story[3]->options.push_back("Fight with bare hands");
     supermarket_story[2]->next.push_back(supermarket_story[3]);
+    supermarket_story[2]->next.push_back(nullptr);
 
     supermarket_story.push_back(new story);
     supermarket_story[4]->text = "You shot two bullets, the zombie is dead";
@@ -332,6 +333,12 @@ void initialize_supermarket_story()
     supermarket_story[12]->options.push_back("Walk away");
     supermarket_story[12]->next.push_back(nullptr);
     supermarket_story[10]->next.push_back(supermarket_story[12]);
+
+    supermarket_story.resize(26);
+
+
+
+
 
     
 }
@@ -532,24 +539,26 @@ void initialize_glass_breanking_noise()
         glass_breaking_noise[5]->next = vector<story *>{glass_breaking_noise[6], glass_breaking_noise[9], glass_breaking_noise[4]};
         glass_breaking_noise[6]->next = vector<story *>{glass_breaking_noise[7], glass_breaking_noise[8]};
     }
-    else{
-        //cat branch
-        glass_breaking_noise[0]->next = vector<story*>{glass_breaking_noise[10], glass_breaking_noise[4]};
-        glass_breaking_noise[10]->next = vector<story*>{glass_breaking_noise[11], glass_breaking_noise[12], glass_breaking_noise[4]};
-        glass_breaking_noise[12]->next = vector<story*>{glass_breaking_noise[13], glass_breaking_noise[4]};
-        glass_breaking_noise[13]->next = vector<story*>{glass_breaking_noise[14], glass_breaking_noise[4]};
-
-    }  
+    else
+    {
+        // cat branch
+        glass_breaking_noise[0]->next = vector<story *>{glass_breaking_noise[10], glass_breaking_noise[4]};
+        glass_breaking_noise[10]->next = vector<story *>{glass_breaking_noise[11], glass_breaking_noise[12], glass_breaking_noise[4]};
+        glass_breaking_noise[12]->next = vector<story *>{glass_breaking_noise[13], glass_breaking_noise[4]};
+        glass_breaking_noise[13]->next = vector<story *>{glass_breaking_noise[14], glass_breaking_noise[4]};
+    }
 }
 
-vector<story*> lights_off;
+vector<story *> lights_off;
 
-void initialize_lights_off(){
+void initialize_lights_off()
+{
 
-    for (int i = 0; i <= 2; i++) {
+    for (int i = 0; i <= 2; i++)
+    {
         lights_off.push_back(new story);
     }
-    
+
     lights_off[0]->text = "You are chilling in the room, but the light suddenly went off";
     lights_off[0]->options.push_back("Go to the window to check");
     lights_off[0]->options.push_back("Ignore the light");
@@ -561,8 +570,7 @@ void initialize_lights_off(){
     lights_off[2]->options.push_back("End conversation");
     lights_off[2]->next.push_back(nullptr);
 
-    lights_off[0]->next = vector<story*>{lights_off[1], lights_off[2]};
-    
+    lights_off[0]->next = vector<story *>{lights_off[1], lights_off[2]};
 }
 
 void initialize_stories()

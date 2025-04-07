@@ -147,6 +147,9 @@ int gm_start() {
         }
         else if (choice == 2) {  // Continue
             load();
+            //delwin(diff_win);
+            run_shelter();
+                
             break;
         }
         else if (choice == 3) {  // Information
