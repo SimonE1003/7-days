@@ -17,21 +17,7 @@ int generate_random_num(int min, int max)
 
 
 vector<int> hospital_head_story = {0,3,7,15};
-vector<int> weaponshop_head_story = {0,3,7,15};
-void initialize_weaposhop_story(){
-        srand(time(0));
-        //story0
-        weaponshop_story.push_back(new story);
-        weaponshop_story[0]->text="You see an AK-47 on the ground.";
-        weaponshop_story[0]->options.push_back("Try to get that AK-47");
-        weaponshop_story[0]->options.push_back("Ignore the gun");
-        weaponshop_story[0]->reward={"inventory AK-47"};
-        //story1
-        weaponshop_story.push_back(new story);
-        weaponshop_story[1]->text="A zombie noticed you,it is time to try your new weapon.";
-        weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
-        weaponshop_story[1]->reward={"bullet -1"};
-}
+vector<int> weaponstore_head_story = {0,3,7,15};
 void initialize_hospital_story()
 {
     srand(time(0));
@@ -1176,10 +1162,10 @@ void initialize_stories()
     initialize_hospital_story();
     initialize_knocking_door();
     initialize_glass_breanking_noise();
-<<<<<<< HEAD
-=======
+
+
     initialize_lights_off();
     initialize_supermarket_story();
     initialize_UI_stories();
->>>>>>> b67b3cea57b8750db37cd99b26f7d01d4383157d
+
 }
