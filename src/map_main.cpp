@@ -345,6 +345,7 @@ void run_shelter()
         case 'p': // just for testing the story
             play_story(lights_off[0], height, width);
             drawmap(map, height, width);
+            return;
             break;
         case 'k': // reset the current map just for testing
             create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);

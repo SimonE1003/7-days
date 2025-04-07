@@ -258,7 +258,7 @@ void initialize_hospital_story()
     hospital_story[15]->next[0] = hospital_story[16];
 }
 
-vector<int> supermarket_head_story = {0, 8};
+vector<int> supermarket_head_story = {0, 8,13};
 void initialize_supermarket_story()
 {
     supermarket_story.push_back(new story);
@@ -335,6 +335,98 @@ void initialize_supermarket_story()
     supermarket_story[10]->next.push_back(supermarket_story[12]);
 
     supermarket_story.resize(26);
+
+    supermarket_story[13] = new story;
+    supermarket_story[13]->text = "In the supermarket, you spot two odd things: a can glowing like a tiny star and a shopping cart that moves on its own.";
+    supermarket_story[13]->options.push_back("Check the can");
+    supermarket_story[13]->options.push_back("Follow the cart");
+
+    // --- Branch 1: The Glowing Can ---
+    // Node 14
+    supermarket_story[14] = new story;
+    supermarket_story[14]->text = "You pick up the can. Its soft glow feels almost alive.";
+    supermarket_story[14]->options.push_back("Examine the can");
+    // Connect "Check the can" option (first option of node 13) to node 14.
+    supermarket_story[13]->next.push_back(supermarket_story[14]);
+
+    // Node 15
+    supermarket_story[15] = new story;
+    supermarket_story[15]->text = "At the far end of the aisle, you hear a quiet cry. A man is sitting by a sealed door.";
+    supermarket_story[15]->options.push_back("Help him");
+    supermarket_story[15]->options.push_back("Ignore him");
+    // Connect node 14 to node 15.
+    supermarket_story[14]->next.push_back(supermarket_story[15]);
+
+    // Node 16: Outcome when you choose "Help him"
+    supermarket_story[16] = new story;
+    supermarket_story[16]->text = "You rush to help, but you get a small cut on your arm.";
+    supermarket_story[16]->options.push_back("Use a bandage");
+    supermarket_story[16]->options.push_back("Run away quickly");
+    // Connect first option of node 15 ("Help him") to node 16.
+    supermarket_story[15]->next.push_back(supermarket_story[16]);
+
+    // Node 17: Outcome for "Use a bandage"
+    supermarket_story[17] = new story;
+    supermarket_story[17]->text = "You wrap the cut with a bandage and feel a warm rush of relief.";
+    supermarket_story[17]->options.push_back("Continue");
+    // Connect "Use a bandage" (first option of node 16) to node 17.
+    supermarket_story[16]->next.push_back(supermarket_story[17]);
+    supermarket_story[17]->reward = vector<string>{"health +1"};
+
+    // Node 18: Outcome for "Run away quickly"
+    supermarket_story[18] = new story;
+    supermarket_story[18]->text = "You bolt away and the pain sharpens, leaving you weaker.";
+    supermarket_story[18]->options.push_back("Continue");
+    // Connect "Run away quickly" (second option of node 16) to node 18.
+    supermarket_story[16]->next.push_back(supermarket_story[18]);
+    supermarket_story[18]->reward = vector<string>{"health -1"};
+
+    // Node 19: Outcome for "Ignore him"
+    supermarket_story[19] = new story;
+    supermarket_story[19]->text = "You walk past the crying man. A cold wave of regret hits you.";
+    supermarket_story[19]->options.push_back("Continue");
+    // Connect second option of node 15 ("Ignore him") to node 19.
+    supermarket_story[15]->next.push_back(supermarket_story[19]);
+    supermarket_story[19]->reward = vector<string>{"sanity -1"};
+
+    // --- Branch 2: The Moving Cart ---
+    // Node 20
+    supermarket_story[20] = new story;
+    supermarket_story[20]->text = "You follow the cart as it creaks down a quiet aisle, its wheels clicking a strange tune.";
+    supermarket_story[20]->options.push_back("Open the door");
+    // Connect "Follow the cart" option (second option of node 13) to node 20.
+    supermarket_story[13]->next.push_back(supermarket_story[20]);
+
+    // Node 21
+    supermarket_story[21] = new story;
+    supermarket_story[21]->text = "The door opens to a hidden aisle filled with odd, colorful items.";
+    supermarket_story[21]->options.push_back("Enter the aisle");
+    // Connect node 20 to node 21.
+    supermarket_story[20]->next.push_back(supermarket_story[21]);
+
+    // Node 22
+    supermarket_story[22] = new story;
+    supermarket_story[22]->text = "Inside, strange products are arranged like clues in a puzzle.";
+    supermarket_story[22]->options.push_back("Pick an item");
+    supermarket_story[22]->options.push_back("Walk away");
+    // Connect node 21 to node 22.
+    supermarket_story[21]->next.push_back(supermarket_story[22]);
+
+    // Node 23: Outcome for "Pick an item"
+    supermarket_story[23] = new story;
+    supermarket_story[23]->text = "You grab a dazzling item, and suddenly, extra bullets clatter in your pocket.";
+    supermarket_story[23]->options.push_back("Continue");
+    // Connect first option of node 22 to node 23.
+    supermarket_story[22]->next.push_back(supermarket_story[23]);
+    supermarket_story[23]->reward = vector<string>{"bullet +1"};
+
+    // Node 24: Outcome for "Walk away"
+    supermarket_story[24] = new story;
+    supermarket_story[24]->text = "You leave the aisle quickly, feeling a strange emptiness as your mind grows cloudy.";
+    supermarket_story[24]->options.push_back("Continue");
+    // Connect second option of node 22 to node 24.
+    supermarket_story[22]->next.push_back(supermarket_story[24]);
+    supermarket_story[24]->reward = vector<string>{"sanity -1"};
 
 
 
