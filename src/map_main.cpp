@@ -6,6 +6,7 @@
 #include <iostream>
 #include <set>
 #include "../include/game_state.h"
+#include "../include/save_load.h"
 using namespace std;
 
 void cleanwholescreen(int height, int width)
@@ -213,7 +214,7 @@ void run_shelter()
                 if (ch == 'a' || ch == 'A')
                 {
                     cleanwholescreen(height, width);
-                    //save_game(gs);
+                    save();
                     cleanwholescreen(height, width);
                     drawmap(map, height, width);
                     refresh();
@@ -251,6 +252,7 @@ void run_shelter()
                     gs.day += 0.5;
                     charactorpos[0] = height / 2;
                     charactorpos[1] = width / 2;
+                    story_spots.clear();
                     drawmap(map, height, width);
                     refresh();
                 /*int choice;
