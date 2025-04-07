@@ -123,7 +123,7 @@ void load() {
                         if (head == -1) {
                             break;
                         } else{
-                            weaponstore_head_story.push_back(head);
+                            weaponshop_head_story.push_back(head);
                         }
                     }
                     load_file.close();
@@ -252,7 +252,7 @@ void save() {
                 save_file<<*it<<endl;
             }
             save_file<<-1<<endl;
-            for (auto it = weaponstore_head_story.begin(); it!= weaponstore_head_story.end(); it++) {
+            for (auto it = weaponshop_head_story.begin(); it!= weaponshop_head_story.end(); it++) {
                 save_file<<*it<<endl;
             }
             save_file<<-1<<endl;

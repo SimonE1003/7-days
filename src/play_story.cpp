@@ -54,7 +54,7 @@ pair<string, string> interpret_reward(const string& reward){
     }
     return {type, value};
 }
-
+vector<story*> weaponshop_story;
 vector<story*> hospital_story;
 vector<story*> supermarket_story;
 vector<story_spot> story_spots;
