@@ -17,20 +17,28 @@ using namespace std;
 stats effect: story_effect("health", 10)
 inventory effect: story_effect("inventory", "item")*/
 
-void story_effect(const string& type, const int&value){
+bool story_effect(const string& type, const int&value){
     if (type == "health"){ // Update health point
         gs.health += value;
         if (gs.health < 0) gs.health = 0; // Prevent negative health
+        return true;
     } else if (type == "food") {
         gs.food += value; // Update food count
         if (gs.food < 0) gs.food = 0; // Prevent negative food
+        return true;
     } else if (type == "water") {
         gs.water += value; // Update water count
         if (gs.water < 0) gs.water = 0; // Prevent negative water
+        return true;
     } else if (type == "bullet") {
         gs.bullet += value;
-        if (gs.bullet < 0) gs.bullet =0;
+        if (gs.bullet < 0) {
+            gs.bullet -= value;
+            return false;
+        }
+        return true;
     }
+    return true;
 }
 
 void story_effect(const string&type, const string& item){
@@ -60,7 +68,7 @@ vector<story*> supermarket_story;
 vector<story_spot> story_spots;
 vector<story*> UI_stories;
 vector<story*> sample( int num, string current_map) {
-    if (current_map == "hospital"){
+    /*if (current_map == "hospital"){
         vector<story*> selected_stories;
         srand(time(0));
         random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
@@ -72,6 +80,29 @@ vector<story*> sample( int num, string current_map) {
             hospital_head_story.pop_back();
             
         }
+        return selected_stories;
+    }*/
+    if (current_map == "hospital") {
+        vector<story*> selected_stories;
+
+        // Ensure story 17 is included
+        if (hospital_story.size() > 13) {
+            selected_stories.push_back(hospital_story[13]);
+            num--; // Reduce the number of remaining stories to select
+        }
+
+        // Shuffle and select the remaining stories
+        srand(time(0));
+        random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
+        for (int i = 0; i < num && i < hospital_head_story.size(); i++) {
+            selected_stories.push_back(hospital_story[hospital_head_story[hospital_head_story.size() - 1 - i]]);
+        }
+
+        // Remove the selected stories from the pool
+        for (int i = 0; i < num; i++) {
+            hospital_head_story.pop_back();
+        }
+
         return selected_stories;
     }
     else if (current_map == "supermarket"){
@@ -181,6 +212,32 @@ void play_story(story* current_story, int height, int width) {
                 break;
 
             case '\n':
+                bool proceed = true; // track if the player can proceed
+                if (current_story != nullptr && choice >= 0 && current_story->next[choice] != nullptr) {
+                    story* next_story = current_story->next[choice];
+                    if (next_story->options.size() == 1) {
+                        int temp_bullet = gs.bullet;
+                        if (!next_story->reward.empty()) {
+                            for (const string& reward : next_story->reward) {
+                                pair<string, string> result = interpret_reward(reward);
+                                string type = result.first;
+                                int value = stoi(result.second);
+    
+                                if (type == "bullet"){
+                                    temp_bullet += value;
+                                    if (temp_bullet < 0) {
+                                        proceed = false;
+                                        mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
+                                        refresh();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
                 if (!current_story->reward.empty()) {
                     for (const string& reward : current_story->reward) {
                         pair<string, string> result = interpret_reward(reward);
@@ -191,8 +248,13 @@ void play_story(story* current_story, int height, int width) {
                             story_effect(type, value); // Inventory rewards
                             rewardPrint += reward + ", ";
                         } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
-                            story_effect(type, stoi(value)); // Numeric rewards
-                            rewardPrint += reward + ", ";
+                            if (!story_effect(type, stoi(value))) {
+                                proceed = false;
+                                mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
+                                refresh();
+                            } else {
+                                rewardPrint += reward + ", ";
+                            }
                         } else {
                             rewardPrint += reward + ", ";
                         }
@@ -201,6 +263,10 @@ void play_story(story* current_story, int height, int width) {
                     if (!rewardPrint.empty() && rewardPrint.length() > 2) {
                         rewardPrint = rewardPrint.substr(0, rewardPrint.length() - 2); // Remove trailing ", "
                     }
+                }
+                
+                if (!proceed) {
+                    break;
                 }
 
                 // Ensure choice is within bounds before proceeding
