@@ -28,6 +28,7 @@ extern vector<story*> hospital_story;
 extern vector<story*> supermarket_story;
 extern vector<story*> knocking_door;
 extern vector<story*> glass_breaking_noise;
+extern vector<story*> lights_off;
 extern vector<story*> UI_stories;
 
 extern vector<story_spot> story_spots;
@@ -40,8 +41,6 @@ void drawmap(vector<vector<char> > map , int , int);
 
 void initialize_stories();
 void initialize_hospital_story();
-void initialize_knocking_door();
-void initialize_glass_breanking_noise();
 
 void play_story(story* current_story, int height , int width);
 

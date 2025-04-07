@@ -541,17 +541,37 @@ void initialize_glass_breanking_noise(){
         glass_breaking_noise[12]->next = vector<story*>{glass_breaking_noise[13], glass_breaking_noise[4]};
         glass_breaking_noise[13]->next = vector<story*>{glass_breaking_noise[14], glass_breaking_noise[4]};
 
-    }
-
-
-    
+    }  
 }
 
+vector<story*> lights_off;
+
+void initialize_lights_off(){
+
+    for (int i = 0; i <= 2; i++) {
+        lights_off.push_back(new story);
+    }
+    
+    lights_off[0]->text = "You are chilling in the room, but the light suddenly went off";
+    lights_off[0]->options.push_back("Go to the window to check");
+    lights_off[0]->options.push_back("Ignore the light");
+    lights_off[1]->text = "to be continued...";
+    lights_off[1]->options.push_back("...");
+    lights_off[1]->options.push_back("...");
+    lights_off[1]->next.push_back(nullptr);
+    lights_off[2]->text = "After a while the light went back on";
+    lights_off[2]->options.push_back("End conversation");
+    lights_off[2]->next.push_back(nullptr);
+
+    lights_off[0]->next = vector<story*>{lights_off[1], lights_off[2]};
+    
+}
 
 void initialize_stories() {
     initialize_hospital_story();
     initialize_knocking_door();
     initialize_glass_breanking_noise();
+    initialize_lights_off();
     initialize_supermarket_story();
     initialize_UI_stories();
 }

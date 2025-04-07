@@ -338,7 +338,7 @@ void run_shelter()
         case ERR:
             break;
         case 'p': // just for testing the story
-            play_story(glass_breaking_noise[0], height, width);
+            play_story(lights_off[0], height, width);
             drawmap(map, height, width);
             break;
         case 'k': // reset the current map just for testing
