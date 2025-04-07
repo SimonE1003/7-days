@@ -258,7 +258,7 @@ void initialize_hospital_story()
     hospital_story[15]->next[0] = hospital_story[16];
 }
 
-vector<int> supermarket_head_story = {0, 8,13};
+vector<int> supermarket_head_story = {0, 8,13,25,32,42, 46,55,60,65,70,75,80};
 void initialize_supermarket_story()
 {
     supermarket_story.push_back(new story);
@@ -334,7 +334,7 @@ void initialize_supermarket_story()
     supermarket_story[12]->next.push_back(nullptr);
     supermarket_story[10]->next.push_back(supermarket_story[12]);
 
-    supermarket_story.resize(26);
+    supermarket_story.resize(88); // Resize to 50 to accommodate all nodes
 
     supermarket_story[13] = new story;
     supermarket_story[13]->text = "In the supermarket, you spot two odd things: a can glowing like a tiny star and a shopping cart that moves on its own.";
@@ -427,6 +427,500 @@ void initialize_supermarket_story()
     // Connect second option of node 22 to node 24.
     supermarket_story[22]->next.push_back(supermarket_story[24]);
     supermarket_story[24]->reward = vector<string>{"sanity -1"};
+
+
+
+
+    // Node 25: Starting node
+    supermarket_story[25] = new story;
+    supermarket_story[25]->text = "In the supermarket, the power flickers, and you hear a faint voice near the frozen food aisle.";
+    supermarket_story[25]->options.push_back("Investigate the voice");
+    supermarket_story[25]->options.push_back("Ignore it and keep shopping");
+
+    // --- Branch 1: Investigate the voice ---
+    // Node 26
+    supermarket_story[26] = new story;
+    supermarket_story[26]->text = "You walk to the frozen food aisle and see a freezer with its door slightly ajar.";
+    supermarket_story[26]->options.push_back("Open the freezer");
+    supermarket_story[25]->next.push_back(supermarket_story[26]);
+
+    // Node 27
+    supermarket_story[27] = new story;
+    supermarket_story[27]->text = "Inside the freezer, you find a frosty key and an old, torn map.";
+    supermarket_story[27]->options.push_back("Take the key and map");
+    supermarket_story[26]->next.push_back(supermarket_story[27]);
+
+    // Node 28: You find a locked supply room.
+    supermarket_story[28] = new story;
+    supermarket_story[28]->text = "The map leads you to a locked supply room near the storage area.";
+    supermarket_story[28]->options.push_back("Use the frosty key");
+    supermarket_story[27]->next.push_back(supermarket_story[28]);
+
+    // Node 29: Inside the supply room.
+    supermarket_story[29] = new story;
+    supermarket_story[29]->text = "The room holds emergency supplies, including some extra bullets.";
+    supermarket_story[29]->options.push_back("Take the bullets");
+    supermarket_story[28]->next.push_back(supermarket_story[29]);
+    supermarket_story[29]->reward = vector<string>{"bullet +1"};
+
+    // --- Branch 2: Ignore the voice ---
+    // Node 30
+    supermarket_story[30] = new story;
+    supermarket_story[30]->text = "You decide to ignore the voice and continue shopping, but the strange sounds persist.";
+    supermarket_story[30]->options.push_back("Leave the store quickly");
+    supermarket_story[30]->reward = vector<string>{"sanity -1"};
+    supermarket_story[25]->next.push_back(supermarket_story[30]);
+
+    // Node 32: Starting node
+    supermarket_story[32] = new story;
+    supermarket_story[32]->text = "In the supermarket, a flickering LED sign above an empty aisle catches your eye.";
+    supermarket_story[32]->options.push_back("Enter the mysterious aisle");
+
+    // --- Branch 1: Enter the mysterious aisle ---
+    // Node 33
+    supermarket_story[33] = new story;
+    supermarket_story[33]->text = "You step into the aisle and notice a rickety cart rolling by on its own.";
+    supermarket_story[33]->options.push_back("Follow the cart");
+    supermarket_story[33]->options.push_back("Examine the shelves");
+    // Connect "Enter the mysterious aisle" option to node 33.
+    supermarket_story[32]->next.push_back(supermarket_story[33]);
+
+    // Branch 1.1: "Follow the cart"
+    // Node 34
+    supermarket_story[34] = new story;
+    supermarket_story[34]->text = "You follow the cart to a locked backroom door.";
+    supermarket_story[34]->options.push_back("Force the door open");
+    supermarket_story[34]->options.push_back("Look for a key nearby");
+    // Connect "Follow the cart" option (first option of node 33) to node 34.
+    supermarket_story[33]->next.push_back(supermarket_story[34]);
+
+    // Node 35: Outcome for "Force the door open"
+    supermarket_story[35] = new story;
+    supermarket_story[35]->text = "You break the door with a loud crash, but scrape your arm.";
+    supermarket_story[35]->options.push_back("Move on");
+    supermarket_story[35]->reward = vector<string>{"health -1"};
+    // Connect first option of node 34 to node 35.
+    supermarket_story[34]->next.push_back(supermarket_story[35]);
+
+    // Node 36: Outcome for "Look for a key nearby"
+    supermarket_story[36] = new story;
+    supermarket_story[36]->text = "You find a rusty key behind a display that fits the lock perfectly.";
+    supermarket_story[36]->options.push_back("Enter the backroom");
+    // Connect second option of node 34 to node 36.
+    
+
+    // Branch 1.2: "Examine the shelves"
+    // Node 37
+    supermarket_story[37] = new story;
+    supermarket_story[37]->text = "You inspect the shelves and discover a hidden snack cabinet.";
+    supermarket_story[37]->options.push_back("Grab some snacks");
+    supermarket_story[37]->reward = vector<string>{"health +1"};
+    // Connect second option of node 33 to node 37.
+    supermarket_story[33]->next.push_back(supermarket_story[37]);
+
+    // --- Branch 2: Keep shopping normally ---
+    // Node 38
+    supermarket_story[38] = new story;
+    supermarket_story[38]->text = "You continue shopping. A blinking security camera catches your eye.";
+    supermarket_story[38]->options.push_back("Investigate the camera");
+    supermarket_story[38]->options.push_back("Ignore it");
+    // Connect "Keep shopping normally" option to node 38.
+    supermarket_story[32]->next.push_back(supermarket_story[38]);
+
+    // Branch 2.1: "Investigate the camera"
+    // Node 39
+    supermarket_story[39] = new story;
+    supermarket_story[39]->text = "The camera shows a dark staff room where strange shadows dance.";
+    supermarket_story[39]->options.push_back("Enter the staff room");
+    supermarket_story[39]->reward = vector<string>{"sanity -1"};
+    // Connect first option of node 38 to node 39.
+    supermarket_story[38]->next.push_back(supermarket_story[39]);
+
+    // Branch 2.2: "Ignore it"
+    // Node 40
+    supermarket_story[40] = new story;
+    supermarket_story[40]->text = "You ignore the camera, yet the unsettling feeling lingers as you finish shopping.";
+    supermarket_story[40]->options.push_back("Finish shopping");
+    supermarket_story[40]->reward = vector<string>{"sanity +1"};
+    // Connect second option of node 38 to node 40.
+    supermarket_story[38]->next.push_back(supermarket_story[40]);
+
+    //you cannot find a key
+    supermarket_story[41] = new story;
+    supermarket_story[41]-> text = "You search for a key, but the door remains locked.";
+    supermarket_story[41]-> options.push_back("Leave the backroom");
+    supermarket_story[41]-> next.push_back(nullptr);
+
+    if (rand() % 10 > 4 + gs.difficulty)
+    { // successfully open the door
+        // mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
+        supermarket_story[34]->next.push_back(supermarket_story[36]);
+    }
+    else
+    {
+        supermarket_story[34]->next.push_back(supermarket_story[41]); // fail to open
+    }
+
+    
+
+    supermarket_story[42] = new story;
+    supermarket_story[42]->text = "In the supermarket, you find a strange hatch hidden beneath stacks of flour bags.";
+    supermarket_story[42]->options.push_back("Open the hatch");
+    supermarket_story[42]->options.push_back("Ignore it and keep shopping");
+
+    // --- Branch 1: Open the hatch ---
+    // Node 43: Describe the hatch.
+    supermarket_story[43] = new story;
+    supermarket_story[43]->text = "The hatch is heavy and locked tight. You notice a faint glow coming from inside.";
+    supermarket_story[43]->options.push_back("Try to force it open");
+    supermarket_story[42]->next.push_back(supermarket_story[43]);
+
+    // Pre-create the outcome nodes for the difficulty check.
+    // Node 47: Success outcome.
+    supermarket_story[47] = new story;
+    supermarket_story[47]->text = "You force the hatch open, revealing a hidden stash of supplies.";
+    supermarket_story[47]->options.push_back("Take the supplies");
+    supermarket_story[47]->reward = vector<string>{"bullet +1"};
+
+    // Node 48: Failure outcome.
+    supermarket_story[48] = new story;
+    supermarket_story[48]->text = "The hatch resists your efforts, leaving you tired and bruised.";
+    supermarket_story[48]->options.push_back("Step back");
+    supermarket_story[48]->reward = vector<string>{"health -1"};
+
+    // Node 44: Attempt to open the hatch.
+    supermarket_story[44] = new story;
+    supermarket_story[44]->text = "You brace yourself and try to open the hatch.";
+    supermarket_story[44]->options.push_back("Give it your best shot");
+
+    // Difficulty check to determine if the hatch opens.
+    if (rand() % 10 > 4 + gs.difficulty)
+    { 
+        // Successfully open the hatch.
+        // mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
+        supermarket_story[44]->next.push_back(supermarket_story[47]);
+    }
+    else
+    {
+        // Fail to open the hatch.
+        supermarket_story[44]->next.push_back(supermarket_story[48]);
+    }
+    // Connect the option "Try to force it open" at Node 43 to Node 44 (the attempt logic).
+    supermarket_story[43]->next.push_back(supermarket_story[44]);
+
+    // --- Branch 2: Ignore the hatch ---
+    // Node 45: Alternative branch from Node 42.
+    supermarket_story[45] = new story;
+    supermarket_story[45]->text = "You walk away from the hatch, but its eerie glow sticks in your mind.";
+    supermarket_story[45]->options.push_back("Keep shopping");
+    supermarket_story[45]->reward = vector<string>{"sanity -1"};
+    supermarket_story[42]->next.push_back(supermarket_story[45]);
+
+
+
+
+
+    supermarket_story[46] = new story;
+    supermarket_story[46]->text = "In a quiet corner of the supermarket, a cooler hums loudly. Inside, you see a strange glowing jar.";
+    supermarket_story[46]->options.push_back("Take the jar");
+    supermarket_story[46]->options.push_back("Leave it alone");
+
+    // --- Branch 1: Take the jar ---
+    // Node 47: Describe taking the jar.
+    supermarket_story[47] = new story;
+    supermarket_story[47]->text = "You grab the jar. It feels heavier than it looks.";
+    supermarket_story[47]->options.push_back("Open the jar");
+    supermarket_story[46]->next.push_back(supermarket_story[47]);
+
+    // Pre-create the outcome nodes for the difficulty check.
+    // Node 50: Success outcome.
+    supermarket_story[50] = new story;
+    supermarket_story[50]->text = "The jar opens easily, revealing extra ammo hidden inside.";
+    supermarket_story[50]->options.push_back("Take the ammo");
+    supermarket_story[50]->reward = vector<string>{"bullet +1"};
+
+    // Node 51: Failure outcome.
+    supermarket_story[51] = new story;
+    supermarket_story[51]->text = "The jar slips from your hands, shattering on the ground. The strange glow fades.";
+    supermarket_story[51]->options.push_back("Step away");
+    supermarket_story[51]->reward = vector<string>{"sanity -1"};
+
+    // Node 48: Attempt to open the jar.
+    supermarket_story[48] = new story;
+    supermarket_story[48]->text = "You try to open the jar. The lid is stuck tight.";
+    supermarket_story[48]->options.push_back("Keep twisting the lid");
+
+    // Difficulty check to determine if the jar opens.
+    if (rand() % 10 > 5 + gs.difficulty)
+    { 
+        // Successfully open the jar.
+        // mvprintw(3,0,"%d cf %d",rand(),INT_MAX/2 - gs.difficulty*1000);
+        supermarket_story[48]->next.push_back(supermarket_story[50]);
+    }
+    else
+    {
+        // Fail to open the jar.
+        supermarket_story[48]->next.push_back(supermarket_story[51]);
+    }
+    // Connect the option "Open the jar" at Node 47 to Node 48 (the attempt logic).
+    supermarket_story[47]->next.push_back(supermarket_story[48]);
+
+    // --- Branch 2: Leave the jar alone ---
+    // Node 49: Alternative branch from Node 46.
+    supermarket_story[49] = new story;
+    supermarket_story[49]->text = "You leave the glowing jar untouched, but its hum lingers in your ears.";
+    supermarket_story[49]->options.push_back("Walk away quickly");
+    supermarket_story[49]->reward = vector<string>{"sanity +1"};
+    supermarket_story[46]->next.push_back(supermarket_story[49]);
+
+
+
+    supermarket_story[55] = new story;
+    supermarket_story[55]->text = "In the noisy supermarket, you notice a small quiet lounge tucked away near the exit.";
+    supermarket_story[55]->options.push_back("Sit and relax");
+    supermarket_story[55]->options.push_back("Keep rushing");
+
+    // --- Branch 1: Sit and relax (leads to sanity plus) ---
+    // Node 56: You decide to take a break.
+    supermarket_story[56] = new story;
+    supermarket_story[56]->text = "You step into the lounge, where soft music and comfortable chairs invite you to unwind.";
+    supermarket_story[56]->options.push_back("Close your eyes and breathe");
+    supermarket_story[55]->next.push_back(supermarket_story[56]);
+
+    // Node 57: Meditation success resulting in sanity improvement.
+    supermarket_story[57] = new story;
+    supermarket_story[57]->text = "As you focus on your breath, a deep calm washes over you. The store's chaos fades away, leaving you renewed.";
+    supermarket_story[57]->options.push_back("Open your eyes, feeling refreshed");
+    supermarket_story[57]->reward = vector<string>{"sanity +1"};
+    supermarket_story[56]->next.push_back(supermarket_story[57]);
+
+    // --- Branch 2: Keep rushing ---
+    // Node 58: You choose not to take a break.
+    supermarket_story[58] = new story;
+    supermarket_story[58]->text = "You decide there’s no time to rest and push on with your frantic shopping.";
+    supermarket_story[58]->options.push_back("Race to the checkout");
+    supermarket_story[55]->next.push_back(supermarket_story[58]);
+
+    // Node 59: The consequence of rushing leaves you more stressed.
+    supermarket_story[59] = new story;
+    supermarket_story[59]->text = "In your rush, the noise and bustle overwhelm you, leaving you feeling unsettled and distracted.";
+    supermarket_story[59]->options.push_back("Try to calm down later");
+    // (No reward is given here—this branch lacks the calming effect.)
+    supermarket_story[58]->next.push_back(supermarket_story[59]);
+
+
+    // =================== Story 1: "The Self-Checkout Enigma" ===================
+    // Starting at index 60.
+    supermarket_story[60] = new story;
+    supermarket_story[60]->text = "At the self-checkout, a glitchy kiosk stares at you.";
+    supermarket_story[60]->options.push_back("Try to scan");
+    supermarket_story[60]->options.push_back("Ask for help");
+
+    // Branch 1.1: "Try to scan" (from the first option).
+    supermarket_story[61] = new story;
+    supermarket_story[61]->text = "You press the scan button repeatedly.";
+    supermarket_story[61]->options.push_back("Wait for it...");
+    supermarket_story[60]->next.push_back(supermarket_story[61]);
+
+    // Difficulty branch for scanning:
+    // Node 62: Success outcome.
+    supermarket_story[62] = new story;
+    supermarket_story[62]->text = "The machine prints your receipt flawlessly.";
+    supermarket_story[62]->options.push_back("Collect receipt");
+    supermarket_story[62]->reward = vector<string>{"bullet +1"};
+    // Node 63: Failure outcome.
+    supermarket_story[63] = new story;
+    supermarket_story[63]->text = "The machine jams and zaps you with a shock.";
+    supermarket_story[63]->options.push_back("Step back");
+    supermarket_story[63]->reward = vector<string>{"sanity -1"};
+
+    if (rand() % 10 > 4 + gs.difficulty) {
+        supermarket_story[61]->next.push_back(supermarket_story[62]);
+    } else {
+        supermarket_story[61]->next.push_back(supermarket_story[63]);
+    }
+
+    // Branch 1.2: "Ask for help" (from the second option of node 60).
+    supermarket_story[64] = new story;
+    supermarket_story[64]->text = "An attendant helps reset the machine.";
+    supermarket_story[64]->options.push_back("Thank them");
+    supermarket_story[64]->reward = vector<string>{"sanity +1"};
+    supermarket_story[60]->next.push_back(supermarket_story[64]);
+
+    // =================== Story 2: "Dairy Aisle Dilemma" ===================
+    // Starting at index 65.
+    supermarket_story[65] = new story;
+    supermarket_story[65]->text = "In the dairy aisle, you spot a shiny coupon on a milk carton.";
+    supermarket_story[65]->options.push_back("Check the coupon");
+    supermarket_story[65]->options.push_back("Ignore it");
+
+    // Branch 2.1: "Check the coupon".
+    supermarket_story[66] = new story;
+    supermarket_story[66]->text = "You examine the coupon closely.";
+    supermarket_story[66]->options.push_back("Scrutinize it");
+    supermarket_story[65]->next.push_back(supermarket_story[66]);
+
+    // Difficulty check for coupon authenticity:
+    // Node 67: Success outcome.
+    supermarket_story[67] = new story;
+    supermarket_story[67]->text = "The coupon is valid — your day brightens with savings!";
+    supermarket_story[67]->options.push_back("Smile");
+    supermarket_story[67]->reward = vector<string>{"sanity +1"};
+    // Node 68: Failure outcome.
+    supermarket_story[68] = new story;
+    supermarket_story[68]->text = "The coupon is expired. But you really don't care";
+    supermarket_story[68]->options.push_back("Sigh");
+    supermarket_story[68]->reward = vector<string>{"sanity +1"};
+
+    if (rand() % 10 > 4 + gs.difficulty) {
+        supermarket_story[66]->next.push_back(supermarket_story[67]);
+    } else {
+        supermarket_story[66]->next.push_back(supermarket_story[68]);
+    }
+
+    // Branch 2.2: "Ignore it".
+    supermarket_story[69] = new story;
+    supermarket_story[69]->text = "You walk away, feeling a slight twinge of regret.";
+    supermarket_story[69]->options.push_back("Continue shopping");
+    supermarket_story[69]->reward = vector<string>{"sanity -1"};
+    supermarket_story[65]->next.push_back(supermarket_story[69]);
+
+    // =================== Story 3: "Spooky Snack Aisle" ===================
+    // Starting at index 70.
+    supermarket_story[70] = new story;
+    supermarket_story[70]->text = "The snack aisle whispers with eerie sounds.";
+    supermarket_story[70]->options.push_back("Enter the aisle");
+    supermarket_story[70]->options.push_back("Hurry along");
+
+    // Branch 3.1: "Enter the aisle".
+    supermarket_story[71] = new story;
+    supermarket_story[71]->text = "Inside, a spectral figure appears among the chips.";
+    supermarket_story[71]->options.push_back("Talk to the figure");
+    supermarket_story[70]->next.push_back(supermarket_story[71]);
+
+    // Difficulty check with the spectral figure:
+    // Node 72: Success outcome.
+    supermarket_story[72] = new story;
+    supermarket_story[72]->text = "The spirit shares a secret recipe that eases your mind.";
+    supermarket_story[72]->options.push_back("Listen intently");
+    supermarket_story[72]->reward = vector<string>{"sanity +3"};
+    // Node 73: Failure outcome.
+    supermarket_story[73] = new story;
+    supermarket_story[73]->text = "The spirit vanishes, leaving you more unsettled.";
+    supermarket_story[73]->options.push_back("Flee");
+    supermarket_story[73]->reward = vector<string>{"sanity -1"};
+
+    if (rand() % 10 > 4 + gs.difficulty) {
+        supermarket_story[71]->next.push_back(supermarket_story[72]);
+    } else {
+        supermarket_story[71]->next.push_back(supermarket_story[73]);
+    }
+
+    // Branch 3.2: "Hurry along".
+    supermarket_story[74] = new story;
+    supermarket_story[74]->text = "You rush by, yet a lingering chill shadows your steps.";
+    supermarket_story[74]->options.push_back("Shake it off");
+    supermarket_story[74]->reward = vector<string>{"sanity -1"};
+    supermarket_story[70]->next.push_back(supermarket_story[74]);
+
+    // =================== Story 4: "Gadget Gamble" ===================
+    // Starting at index 75.
+    supermarket_story[75] = new story;
+    supermarket_story[75]->text = "At the electronics section, a discounted gadget catches your eye.";
+    supermarket_story[75]->options.push_back("Try to grab it");
+    supermarket_story[75]->options.push_back("Leave it");
+
+    // Branch 4.1: "Try to grab it".
+    supermarket_story[76] = new story;
+    supermarket_story[76]->text = "You approach a locked display case guarding the gadget.";
+    supermarket_story[76]->options.push_back("Attempt to unlock it");
+    supermarket_story[75]->next.push_back(supermarket_story[76]);
+
+    // Difficulty check for unlocking the case:
+    // Node 77: Success outcome.
+    supermarket_story[77] = new story;
+    supermarket_story[77]->text = "You unlock the case and seize the gadget.";
+    supermarket_story[77]->options.push_back("Claim the gadget");
+    supermarket_story[77]->reward = vector<string>{"bullet +1"};
+    // Node 78: Failure outcome.
+    supermarket_story[78] = new story;
+    supermarket_story[78]->text = "The case remains secure, and a small alarm startles you.";
+    supermarket_story[78]->options.push_back("Step back");
+    supermarket_story[78]->reward = vector<string>{"sanity -1"};
+
+    if (rand() % 10 > 4 + gs.difficulty) {
+        supermarket_story[76]->next.push_back(supermarket_story[77]);
+    } else {
+        supermarket_story[76]->next.push_back(supermarket_story[78]);
+    }
+
+    // Branch 4.2: "Leave it".
+    supermarket_story[79] = new story;
+    supermarket_story[79]->text = "You turn away from the gadget, surprisingly relieved.";
+    supermarket_story[79]->options.push_back("Continue browsing");
+    supermarket_story[79]->reward = vector<string>{"sanity +1"};
+    supermarket_story[75]->next.push_back(supermarket_story[79]);
+
+    // =================== Story 5: "Exotic Drink Riddle" ===================
+    // Starting at index 80.
+    supermarket_story[80] = new story;
+    supermarket_story[80]->text = "In the beverage aisle, exotic drinks shimmer under neon lights.";
+    supermarket_story[80]->options.push_back("Try a drink");
+    supermarket_story[80]->options.push_back("Skip the shelf");
+
+    // Branch 5.1: "Try a drink".
+    supermarket_story[81] = new story;
+    supermarket_story[81]->text = "You twist open a vibrant bottle.";
+    supermarket_story[81]->options.push_back("Take a sip");
+    supermarket_story[80]->next.push_back(supermarket_story[81]);
+
+    // Difficulty check for the drink:
+    // Node 82: Success outcome.
+    supermarket_story[82] = new story;
+    supermarket_story[82]->text = "The drink rejuvenates you, washing away your stress.";
+    supermarket_story[82]->options.push_back("Sip happily");
+    supermarket_story[82]->reward = vector<string>{"sanity +1"};
+    // Node 83: Failure outcome.
+    supermarket_story[83] = new story;
+    supermarket_story[83]->text = "The drink is bitter, leaving an unwelcome aftertaste.";
+    supermarket_story[83]->options.push_back("Wince");
+    supermarket_story[83]->reward = vector<string>{"health -1"};
+
+    if (rand() % 10 > 4 + gs.difficulty) {
+        supermarket_story[81]->next.push_back(supermarket_story[82]);
+    } else {
+        supermarket_story[81]->next.push_back(supermarket_story[83]);
+    }
+
+    // Branch 5.2: "Skip the shelf".
+    supermarket_story[84] = new story;
+    supermarket_story[84]->text = "You pass by, with a faint regret at missing a taste of adventure.";
+    supermarket_story[84]->options.push_back("Move ahead");
+    supermarket_story[84]->reward = vector<string>{"sanity -1"};
+    supermarket_story[80]->next.push_back(supermarket_story[84]);
+
+    // =================== Story 6: "Secret Employee Lounge" ===================
+    // Starting at index 85.
+    supermarket_story[85] = new story;
+    supermarket_story[85]->text = "Behind a hidden door, a quiet lounge offers a respite from the chaos.";
+    supermarket_story[85]->options.push_back("Rest in the lounge");
+    supermarket_story[85]->options.push_back("Keep shopping");
+
+    // Branch 6.1: "Rest in the lounge".
+    supermarket_story[86] = new story;
+    supermarket_story[86]->text = "You sink into a comfy chair as soft music soothes your mind.";
+    supermarket_story[86]->options.push_back("Relax fully");
+    supermarket_story[86]->reward = vector<string>{"sanity +1"};
+    supermarket_story[85]->next.push_back(supermarket_story[86]);
+
+    // Branch 6.2: "Keep shopping".
+    supermarket_story[87] = new story;
+    supermarket_story[87]->text = "You pass the lounge, but an uneasy tension lingers.";
+    supermarket_story[87]->options.push_back("Hurry on");
+    supermarket_story[87]->reward = vector<string>{"sanity -1"};
+    supermarket_story[85]->next.push_back(supermarket_story[87]);
+
+
 
 
 
