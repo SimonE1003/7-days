@@ -20,23 +20,64 @@ vector<int> hospital_head_story = {0,3,7,15,28,30,32,34,36};
 vector<int> weaponshop_head_story = {0,3,7,15};
 void initialize_weaponshop_story(){
         srand(time(0));
-        //story0
+        //story0 Main story
         weaponshop_story.push_back(new story);
         weaponshop_story[0]->text="You see an AK-47 on the ground.";
         weaponshop_story[0]->options.push_back("Try to get that AK-47");
         weaponshop_story[0]->options.push_back("Ignore the gun");
         weaponshop_story[0]->reward={"inventory AK-47"};
-        //story1
+        //story1 Main story branch1
         weaponshop_story.push_back(new story);
         weaponshop_story[1]->text="A zombie noticed you,it is time to try your new weapon.";
         weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
         weaponshop_story[1]->reward={"bullet -1"};
-	//story2
+	//story2 Main story branch2
 	weaponshop_story.push_back(new story);
-	weaponshop_story[2]->text="After killing the zombie, you approach the counter,there are some bullets on it.";
-	weaponshop_story[2]->options.push_back("Get the bullets and continue to explore.");
+	weaponshop_story[2]->text="You keep searching in the weaponshop, and noticed some bullets on the counter.";
+	weaponshop_story[2]->options.push_back("Get the bullets.");
 	weaponshop_story[2]->next.push_back(nullptr);
 	weaponshop_story[2]->reward={"bullet +5"};
+
+	weaponshop_story[0]->next = vector<story*>{weaponshop_story[1], weaponshop_story[2]};
+	//story3 Main story2
+	weaponshop_story.push_back(new story);
+	weaponshop_story[3]->text="You meet a strong zombie with crowbar in his hand.";
+	weaponshop_story[3]->options.push_back("Try to kill it.");
+	weaponshop_story[3]->options.push_back("Bypass him and continue exploring.");
+	weaponshop_story[3]->options.push_back("Run out from the weaponshop and leave.");
+	
+	
+	//story4 Main story2 branch1
+	weaponshop_story.push_back(new story);
+	weaponshop_story[4]->text="You obtained a crowbar,maybe it can help you to open some doors?";
+	weaponshop_story[4]->options.push_back("Continue exploration.");
+	weaponshop_story[4]->reward={"inventory crowbar"};
+	//story5 Main story2 branch2
+	weaponshop_story.push_back(new story);
+        weaponshop_story[5]->text="The zombie doesn't see you,you notice someone's doomsday notebook.";
+        weaponshop_story[5]->options.push_back("Read it.");
+        weaponshop_story[5]->reward={"sanity +1"};
+	//story6 Main story2 branch3
+	weaponshop_story.push_back(new story);
+        weaponshop_story[6]->text="You exit the weaponshop.";
+        weaponshop_story[6]->options.push_back(nullptr);
+
+	weaponshop_story[3]->next = vector<story*>{weaponshop_story[4], weaponshop_story[5],weaponshop_story[6]};
+	//story7 Main story3
+	weaponshop_story[7]->text="You enter the warehouse of the weaponshop,it's completely dark.";
+	weaponshop_story[7]->options.push_back("Try to open the lights.");
+	weaponshop_story[7]->options.push_back("Investigate in the darkness.");
+	weaponshop_story[7]->options.push_back("It seems horrible,leave here.");
+	//story8 Main story3 branch1
+	weaponshop_story[7]->text="The zombies in the warehouse notice you,it becomes a little tricky.";
+	if (gs.bullet>=4)
+	{
+		weaponshop_story[7]->options.push_back("Kill them all!!!");
+	}
+        weaponshop_story[7]->options.push_back("Run!!!");
+	weaponshop_story[7]->reward={"bullet -4"};
+
+	
 }
 void initialize_hospital_story()
 {
