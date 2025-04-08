@@ -23,6 +23,7 @@ void display_status(GameState gs)
     mvprintw(11, 10, "Hunger: %d\n", gs.hunger);
     mvprintw(12, 10, "Thirst: %d\n", gs.thirst);
     mvprintw(13, 10, "Sanity: %d\n", gs.sanity);
+    mvprintw(14, 10, "Bullet: %d\n", gs.bullet);
     if (gs.ill)
     {
 	attron(COLOR_PAIR(1));

@@ -166,7 +166,7 @@ int gm_start() {
             mvwprintw(info_win, 5, 1, "Basically, in the morning you have to collect and follow main story at night");
             mvwprintw(info_win, 6, 1, "Special keys and points: ");
             mvwprintw(info_win, 7, 1, "Name: IDK");
-            mvwprintw(info_win, 8, 1, "Author: Group6");
+            mvwprintw(info_win, 8, 1, "Author: Group66");
             mvwprintw(info_win, 11, 1, "Press any key to continue...");
             wrefresh(info_win);
             wgetch(info_win);
