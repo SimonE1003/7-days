@@ -213,7 +213,7 @@ void play_story(story* current_story, int height, int width) {
 
             case '\n':
                 bool proceed = true; // track if the player can proceed
-                if (current_story != nullptr && choice >= 0 && current_story->next[choice] != nullptr) {
+                if (current_story != nullptr && choice >= 0 && choice < current_story->next.size() && current_story->next[choice] != nullptr) {
                     story* next_story = current_story->next[choice];
                     if (next_story->options.size() == 1) {
                         int temp_bullet = gs.bullet;
