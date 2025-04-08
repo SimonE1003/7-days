@@ -1158,33 +1158,79 @@ vector<story *> lights_off;
 void initialize_lights_off()
 {
 
-    for (int i = 0; i <= 2; i++)
+    for (int i = 0; i <= 8; i++)
     {
         lights_off.push_back(new story);
     }
 
-    lights_off[0]->text = "You are chilling in the room, but the light suddenly went off";
+    lights_off[0]->text = "You are chilling in the room, but the light suddenly goes off";
     lights_off[0]->options.push_back("Go to the window to check");
     lights_off[0]->options.push_back("Ignore the light");
-    lights_off[1]->text = "to be continued...";
-    lights_off[1]->options.push_back("...");
-    lights_off[1]->options.push_back("...");
-    lights_off[1]->next.push_back(nullptr);
+
+    //1:spider story
+    lights_off[1]->text = "You see a spider biting the cable, that might be the reason of why light goes off";
+    lights_off[1]->options.push_back("Go out to check the spider"); //3
+    lights_off[1]->options.push_back("Stay inside"); //2
     lights_off[2]->text = "After a while the light went back on";
     lights_off[2]->options.push_back("End conversation");
     lights_off[2]->next.push_back(nullptr);
+    lights_off[3]->text = "The spider rushed towards you";
+    lights_off[3]->options.push_back("Fight it with your fist"); //4
+    lights_off[3]->options.push_back("Shoot it with a gun"); //5
+    lights_off[3]->options.push_back("Run back home"); //6
+    lights_off[4]->text = "You killed the spider but you also got severly hurt, the meat from the spider is good quality protein";
+    lights_off[4]->options.push_back("End conversation");
+    lights_off[4]->next.push_back(nullptr);
+    lights_off[4]->reward = {"Food + 1, health - 2"};
+    lights_off[5]->text = "You killed the spider with a bullet, the meat from the spider is good quality protein";
+    lights_off[5]->options.push_back("End conversation");
+    lights_off[5]->next.push_back(nullptr);
+    lights_off[5]->reward = {"Food + 1, bullet - 1"};
+    lights_off[6]->text = "The spider is too fast, he bite your neck from the back, you died";
+    lights_off[6]->options.push_back("End game");
+    lights_off[6]->next.push_back(nullptr);
+    lights_off[6]->reward = {"death"};
 
-    lights_off[0]->next = vector<story *>{lights_off[1], lights_off[2]};
+    //2: ... story
+    lights_off[7]->text = "...";
+    lights_off[7]->options.push_back("...");
+    lights_off[7]->options.push_back("...");
+    lights_off[7]->next.push_back(nullptr);
+
+    //3: ... story
+    lights_off[8]->text = "...";
+    lights_off[8]->options.push_back("...");
+    lights_off[8]->options.push_back("...");
+    lights_off[8]->next.push_back(nullptr);
+
+    int random_branch = generate_random_num(0, 2);
+    if (random_branch == 0)
+    {
+        // spider branch
+        lights_off[0]->next = vector<story *>{lights_off[1], lights_off[2]};
+        lights_off[1]->next = vector<story *>{lights_off[3], lights_off[2]};
+        lights_off[3]->next = vector<story *>{lights_off[4], lights_off[5], lights_off[6]};
+    }
+    else if (random_branch == 1)
+    {
+        // ... branch
+        lights_off[0]->next = vector<story *>{lights_off[7], lights_off[2]};
+    }
+    else
+    {
+        // ... branch
+        lights_off[0]->next = vector<story *>{lights_off[8], lights_off[2]};
+    }
 }
 
 void initialize_stories()
 {
     initialize_hospital_story();
+    //nighttime stories
     initialize_knocking_door();
     initialize_glass_breanking_noise();
-
-
     initialize_lights_off();
+
     initialize_supermarket_story();
     initialize_UI_stories();
 
