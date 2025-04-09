@@ -1329,7 +1329,7 @@ vector<story *> lights_off;
 void initialize_lights_off()
 {
 
-    for (int i = 0; i <= 8; i++)
+    for (int i = 0; i <= 15; i++)
     {
         lights_off.push_back(new story);
     }
@@ -1339,12 +1339,13 @@ void initialize_lights_off()
     lights_off[0]->options.push_back("Ignore the light");
 
     //1:spider story
-    lights_off[1]->text = "You see a spider biting the cable, that might be the reason of why light goes off";
+    lights_off[1]->text = "You see a spider biting the cable, that might be the reason of why light went off";
     lights_off[1]->options.push_back("Go out to check the spider"); //3
     lights_off[1]->options.push_back("Stay inside"); //2
-    lights_off[2]->text = "After a while the light went back on";
+    lights_off[2]->text = "After a while the light went back on, but the darkness scared you";
     lights_off[2]->options.push_back("End conversation");
     lights_off[2]->next.push_back(nullptr);
+    lights_off[2]->reward = {"Sanity - 1"};
     lights_off[3]->text = "The spider rushed towards you";
     lights_off[3]->options.push_back("Fight it with your fist"); //4
     lights_off[3]->options.push_back("Shoot it with a gun"); //5
@@ -1362,17 +1363,40 @@ void initialize_lights_off()
     lights_off[6]->next.push_back(nullptr);
     lights_off[6]->reward = {"death"};
 
-    //2: ... story
-    lights_off[7]->text = "...";
-    lights_off[7]->options.push_back("...");
-    lights_off[7]->options.push_back("...");
-    lights_off[7]->next.push_back(nullptr);
+    //2: Zombie story
+    lights_off[7]->text = "You see a zombie kicking the cable, that might be the reason of why light went off";
+    lights_off[7]->options.push_back("Go out to check the zombie"); //8
+    lights_off[7]->options.push_back("Stay inside"); //2
+    lights_off[8]->text = "The zombie sees you and starts to move towards you";
+    lights_off[8]->options.push_back("Fight it with your fist"); //9
+    lights_off[8]->options.push_back("Shoot it with a gun"); //11
+    lights_off[8]->options.push_back("Run back home"); //12
+    lights_off[9]->text = "You killed the zombie with your fist but you also got injured";
+    lights_off[9]->options.push_back("Search the zombie"); //10
+    lights_off[10]->text = "The zombie's body is disgusting, but you got an apple in its pocket";
+    lights_off[10]->options.push_back("End conversation"); 
+    lights_off[10]->next.push_back(nullptr);
+    lights_off[10]->reward = {"sanity - 1, health - 2, food + 1"};
+    lights_off[11]->text = "You killed the zombie with a bullet, and got an apple that falled out of its pocket";
+    lights_off[11]->options.push_back("End conversation");
+    lights_off[11]->next.push_back(nullptr);
+    lights_off[11]->reward = {"bullet - 1, food + 1"};
+    lights_off[12]->text = "You got back home";
+    lights_off[12]->options.push_back("Continue");//2
 
-    //3: ... story
-    lights_off[8]->text = "...";
-    lights_off[8]->options.push_back("...");
-    lights_off[8]->options.push_back("...");
-    lights_off[8]->next.push_back(nullptr);
+    //3: water story
+    lights_off[13]->text = "There is heavy rain outside, and the flood destroyed the cable";
+    lights_off[13]->options.push_back("Co out to fix the cable"); //14
+    lights_off[13]->options.push_back("Open the window to collect rain water"); //15
+    lights_off[13]->options.push_back("Stay inside and keep the door locked"); //2
+    lights_off[14]->text = "You got electricuted when you got close to the cable"; 
+    lights_off[14]->options.push_back("End game"); 
+    lights_off[14]->next.push_back(nullptr);
+    lights_off[14]->reward = {"death"};
+    lights_off[15]->text = "You got some clean rain water"; 
+    lights_off[15]->options.push_back("End conversation"); 
+    lights_off[15]->next.push_back(nullptr);
+    lights_off[15]->reward = {"water + 1"};
 
     int random_branch = generate_random_num(0, 2);
     if (random_branch == 0)
@@ -1384,13 +1408,18 @@ void initialize_lights_off()
     }
     else if (random_branch == 1)
     {
-        // ... branch
+        // zombie branch
         lights_off[0]->next = vector<story *>{lights_off[7], lights_off[2]};
+        lights_off[7]->next = vector<story *>{lights_off[8], lights_off[2]};
+        lights_off[8]->next = vector<story *>{lights_off[9], lights_off[11], lights_off[12]};
+        lights_off[9]->next = vector<story *>{lights_off[10]};
+        lights_off[12]->next = vector<story *>{lights_off[2]};
     }
     else
     {
-        // ... branch
-        lights_off[0]->next = vector<story *>{lights_off[8], lights_off[2]};
+        // water branch
+        lights_off[0]->next = vector<story *>{lights_off[13], lights_off[2]};
+        lights_off[13]->next = vector<story *>{lights_off[14], lights_off[15], lights_off[2]};
     }
 }
 
