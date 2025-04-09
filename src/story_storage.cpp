@@ -1169,7 +1169,6 @@ void initialize_knocking_door()
     knocking_door[9]->text = "You pushed him away and locked the door again";
     knocking_door[9]->options.push_back("End conversation");
     knocking_door[9]->next.push_back(nullptr);
-    knocking_door[8]->reward = {"no reward"};
     knocking_door[10]->text = "You poke him in the eye, but got stabbed by him; you killed him with his own knife";
     knocking_door[10]->options.push_back("Search his body");
     knocking_door[11]->text = "You found a silver key inside his pocket";
@@ -1266,7 +1265,7 @@ void initialize_glass_breanking_noise()
     glass_breaking_noise[7]->text = "He thanked you and give you two bullets for return";
     glass_breaking_noise[7]->options.push_back("End conversation");
     glass_breaking_noise[7]->next.push_back(nullptr);
-    glass_breaking_noise[7]->reward = {"bullet + 1", "food - 1"};
+    glass_breaking_noise[7]->reward = {"bullet +1", "food -1"};
     glass_breaking_noise[8]->text = "The gun shot killed him instently, you searched him and found a water bottle";
     glass_breaking_noise[8]->options.push_back("End conversation");
     glass_breaking_noise[8]->next.push_back(nullptr);
@@ -1284,7 +1283,7 @@ void initialize_glass_breanking_noise()
     glass_breaking_noise[11]->text = "Congrats, you kill a cat, your sanity drops because of the shame";
     glass_breaking_noise[11]->options.push_back("End conversation");
     glass_breaking_noise[11]->next.push_back(nullptr);
-    glass_breaking_noise[11]->reward = {"Sanity - 1"};
+    glass_breaking_noise[11]->reward = {"sanity -1"};
     glass_breaking_noise[12]->text = "The cat got scared, it run out of the window";
     glass_breaking_noise[12]->options.push_back("Chase it");               // 13
     glass_breaking_noise[12]->options.push_back("Go back to the bedroom"); // 4
@@ -1393,7 +1392,7 @@ void initialize_lights_off()
     lights_off[15]->text = "You got some clean rain water"; 
     lights_off[15]->options.push_back("End conversation"); 
     lights_off[15]->next.push_back(nullptr);
-    lights_off[15]->reward = {"water + 1"};
+    lights_off[15]->reward = {"water +1"};
 
     int random_branch = generate_random_num(0, 2);
     if (random_branch == 0)
