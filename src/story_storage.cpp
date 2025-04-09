@@ -16,7 +16,8 @@ int generate_random_num(int min, int max)
 }
 
 
-vector<int> hospital_head_story = {0,3,7,15,28,30,32,34,36};
+vector<int> hospital_head_story = {0,3,7,15};
+//28,30,32,34,36
 vector<int> weaponshop_head_story = {0,3,7,15};
 void initialize_weaponshop_story(){
         srand(time(0));
@@ -282,78 +283,68 @@ void initialize_hospital_story()
 
     hospital_story.push_back(new story);
     hospital_story[27]->text = "Turns out he's a crazy man and suddenly he attacked you because you ignored him";
-    hospital_story[26]->options.push_back("End conversation");
-    hospital_story[26]->next = vector<story *>{nullptr, nullptr};
-    hospital_story[26]->reward = {"health -1"};
+    hospital_story[27]->options.push_back("End conversation");
+    hospital_story[27]->next = vector<story *>{nullptr, nullptr};
+    hospital_story[27]->reward = {"health -1"};
 
     hospital_story[25]->next = vector<story *>{hospital_story[26], hospital_story[27]};
 
 
-
+/*
     // Story 28
     hospital_story.push_back(new story);
     hospital_story[28]->text = "You discover a locked medical storage room.";
     hospital_story[28]->options.push_back("Try to pick the lock");
     hospital_story[28]->options.push_back("Leave it alone");
-    hospital_story[28]->next = vector<story *>{nullptr,nullptr};
 
     // Branch for Story 28
     hospital_story.push_back(new story);
     hospital_story[29]->text = "You successfully unlock the door and find medical supplies, but the lock picking makes you feel insane.";
     hospital_story[29]->options.push_back("Take the supplies");
-    hospital_story[28]->next = vector<story *>{nullptr};
+    hospital_story[29]->next.push_back(nullptr);
     hospital_story[29]->reward = {"health +1", "sanity -1"};
 
-    hospital_story[28]->next = vector<story *> {hospital_story[29], nullptr};
 
     // Story 30
     hospital_story.push_back(new story);
     hospital_story[30]->text = "A chilling voice whispers your name from the shadows.";
     hospital_story[30]->options.push_back("Investigate the source");
     hospital_story[30]->options.push_back("Run away");
-    hospital_story[30]->next = vector<story *>{nullptr,nullptr};
 
     // Branch for Story 30
     hospital_story.push_back(new story);
     hospital_story[31]->text = "You find a ghostly figure begging for help, he just wanted to talk.";
     hospital_story[31]->options.push_back("Talk to him");
     hospital_story[31]->options.push_back("Flee in terror");
-    hospital_story[31]->next = vector<story *>{nullptr,nullptr};
 
-    hospital_story[30]->next = vector<story *>{hospital_story[31],nullptr};
 
     //story 38 branch of 30
     hospital_story.push_back(new story);
     hospital_story[38]->text = "You feel happy after talking to the ghost";
     hospital_story[38]->options.push_back("End conversation");
-    hospital_story[38]->next = vector<story *>{nullptr};
+    hospital_story[38]->next.push_back(nullptr);
     hospital_story[38]->reward = {"sanity +2"};
     
-    hospital_story[31]->next = vector<story *>{hospital_story[38], nullptr};
 
     // Story 32
     hospital_story.push_back(new story);
     hospital_story[32]->text = "You stumble upon an eerie surgical room.";
     hospital_story[32]->options.push_back("Search the room");
     hospital_story[32]->options.push_back("Leave quickly");
-    hospital_story[32]->next = vector<story *>{nullptr,nullptr};
 
     // Branch for Story 32
     hospital_story.push_back(new story);
     hospital_story[33]->text = "You found a notebook of an insane patient.";
     hospital_story[33]->options.push_back("Read it");
     hospital_story[33]->options.push_back("Leave it behind");
-    hospital_story[33]->next = vector<story *>{nullptr,nullptr};
 
     //Branch for story 32
     hospital_story.push_back(new story);
     hospital_story[39]->text = "His notes make you feel uncomfortable and questioning your existence";
     hospital_story[39]->options.push_back("Finished reading");
-    hospital_story[39]->next = vector<story *>{nullptr};
+    hospital_story[39]->next.push_back(nullptr);
     hospital_story[39]->reward = {"sanity -1"};
 
-    hospital_story[32]->next = vector<story *>{hospital_story[33], nullptr};
-    hospital_story[33]->next = vector<story *>{hospital_story[39], nullptr};
 
 
     // Story 34
@@ -361,49 +352,53 @@ void initialize_hospital_story()
     hospital_story[34]->text = "You encounter a nurse who offers you a choice of treatments.";
     hospital_story[34]->options.push_back("Accept the treatment");
     hospital_story[34]->options.push_back("Decline the offer");
-    hospital_story[34]->next = vector<story *>{nullptr,nullptr};
 
     // Branch for Story 34
     hospital_story.push_back(new story);
     hospital_story[35]->text = "The treatment has unexpected side effects.";
     hospital_story[35]->options.push_back("Embrace the change");
     hospital_story[35]->options.push_back("Reject the treatment");
-    hospital_story[35]->next = vector<story *>{nullptr,nullptr};
 
 
     //story 40 branch of 30
     hospital_story.push_back(new story);
     hospital_story[40]->text = "You feel good after the treatment but your head hurts";
     hospital_story[40]->options.push_back("Continue");
-    hospital_story[40]->next = vector<story *>{nullptr};
+    hospital_story[40]->next.push_back(nullptr);
     hospital_story[40]->reward = {"sanity -1", "health +2"};
 
-    hospital_story[34]->next = vector<story *>{hospital_story[35], nullptr};
-    hospital_story[35]->next = vector<story *>{hospital_story[40], nullptr};
+
 
     // Story 36
     hospital_story.push_back(new story);
     hospital_story[36]->text = "You find an old patient record with strange notes.";
     hospital_story[36]->options.push_back("Examine the notes");
     hospital_story[36]->options.push_back("Discard the record");
-    hospital_story[36]->next = vector<story *>{nullptr,nullptr};
 
     // Branch for Story 36
     hospital_story.push_back(new story);
     hospital_story[37]->text = "The notes mention a hidden room in the hospital.";
     hospital_story[37]->options.push_back("Search for the hidden room");
     hospital_story[37]->options.push_back("Ignore the notes");
-    hospital_story[37]->next = vector<story *>{nullptr,nullptr};
     
     // Branch for Story 36
     hospital_story.push_back(new story);
     hospital_story[41]->text = "After searching the room you found some bullets";
     hospital_story[41]->options.push_back("End the search");
-    hospital_story[41]->next = vector<story *>{nullptr};
+    hospital_story[41]->next.push_back(nullptr);
     hospital_story[41]->reward = {"bullets +1"};
 
+
+    
+    hospital_story[28]->next = vector<story *> {hospital_story[29], nullptr};
+    hospital_story[30]->next = vector<story *>{hospital_story[31], nullptr};
+    hospital_story[31]->next = vector<story *>{hospital_story[38], nullptr};
+    hospital_story[32]->next = vector<story *>{hospital_story[33], nullptr};
+    hospital_story[33]->next = vector<story *>{hospital_story[39], nullptr};
+    hospital_story[34]->next = vector<story *>{hospital_story[35], nullptr};
+    hospital_story[35]->next = vector<story *>{hospital_story[40], nullptr};
     hospital_story[36]->next = vector<story *>{hospital_story[37], nullptr};
-    hospital_story[37]->next = vector<story *>{hospital_story[41], nullptr};
+    hospital_story[37]->next = vector<story *>{hospital_story[41], nullptr}; */
     
     // Linking the new stories
     hospital_story[16]->next[0] = hospital_story[18]; // Search for the exit
