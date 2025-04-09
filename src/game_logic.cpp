@@ -1,5 +1,7 @@
 #include "../include/game_logic.h"
 #include "../include/game_state.h"
+#include <ncurses.h>
+#include <unistd.h> // For usleep
 
 bool checkgs(){
 	int x=5,y=10;
@@ -10,7 +12,7 @@ bool checkgs(){
 	}
 	if (gs.water<0)
 	{
-		gs.thist+=gs.water;
+		gs.thirst+=gs.water;
 		x+=1;
 		mvprintw(x,y,"Your thirst level decreased due to insufficient water.");
 	}
@@ -32,7 +34,7 @@ bool checkgs(){
 		x+=1;
 		mvprintw(x,y,"Your health level decreased due to insufficient thirst.");
 	}
-	if (ill)
+	if (gs.ill)
 	{
 		gs.health-=1;
 		x+=1;
@@ -47,7 +49,7 @@ bool checkgs(){
 	{
 		mvprintw(16,10,"You lose!!!");
 		usleep(100000);
-		retutn false;
+		return false;
 	}
 	return true;
 
@@ -57,6 +59,7 @@ void start_a_day() { /* Implementation */ }
 void sixty_sec() { /* Implementation */ }
 void end_a_day()
 {
+	gs.day+=0.5;
 	if (gs.food>=1)
 	{
 		gs.food-=1;

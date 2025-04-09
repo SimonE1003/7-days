@@ -4,6 +4,7 @@
 // Core game logic functions
 bool checkgs();
 void start_a_day();
+void end_a_day();
 void end();
 
 #endif

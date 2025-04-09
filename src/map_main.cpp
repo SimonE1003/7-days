@@ -228,6 +228,8 @@ void run_shelter()
                 {
                     cleanwholescreen(height, width);
                     //save_game(gs);
+                    gs.day = 100;
+                    return;
                     cleanwholescreen(height, width);
                     drawmap(map, height, width);
                     refresh();
@@ -343,7 +345,7 @@ void run_shelter()
         case ERR:
             break;
         case 'p': // just for testing the story
-            play_story(lights_off[0], height, width);
+            play_story(temperature_drop[0], height, width);
             drawmap(map, height, width);
             return;
             break;

@@ -30,7 +30,23 @@ bool story_effect(const string& type, const int&value){
         gs.water += value; // Update water count
         if (gs.water < 0) gs.water = 0; // Prevent negative water
         return true;
-    } else if (type == "bullet") {
+    } 
+    else if (type == "sanity"){
+        gs.sanity += value; // Update sanity level
+        if (gs.sanity < 0) gs.sanity = 0; // Prevent negative sanity
+        return true;
+    } 
+    else if (type == "hunger") {
+        gs.hunger += value; // Update hunger level
+        if (gs.hunger < 0) gs.hunger = 0; // Prevent negative hunger
+        return true;
+    } 
+    else if (type == "thirst") {
+        gs.thirst += value; // Update thirst level
+        if (gs.thirst < 0) gs.thirst = 0; // Prevent negative thirst
+        return true;
+    }
+    else if (type == "bullet") {
         gs.bullet += value;
         if (gs.bullet < 0) {
             gs.bullet -= value;
@@ -221,10 +237,10 @@ void play_story(story* current_story, int height, int width) {
                             for (const string& reward : next_story->reward) {
                                 pair<string, string> result = interpret_reward(reward);
                                 string type = result.first;
-                                int value = stoi(result.second);
+                                string value = result.second;
     
                                 if (type == "bullet"){
-                                    temp_bullet += value;
+                                    temp_bullet += stoi(value);
                                     if (temp_bullet < 0) {
                                         proceed = false;
                                         mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
@@ -247,7 +263,7 @@ void play_story(story* current_story, int height, int width) {
                         if (type == "inventory") {
                             story_effect(type, value); // Inventory rewards
                             rewardPrint += reward + ", ";
-                        } else if (type == "health" || type == "food" || type == "water" || type == "bullet") {
+                        } else if (type == "health" || type == "food" || type == "water" || type == "bullet" || type == "sanity") {
                             if (!story_effect(type, stoi(value))) {
                                 proceed = false;
                                 mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
