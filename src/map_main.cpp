@@ -343,7 +343,7 @@ void run_shelter()
         case ERR:
             break;
         case 'p': // just for testing the story
-            play_story(knocking_door[0], height, width);
+            play_story(temperature_drop[0], height, width);
             drawmap(map, height, width);
             return;
             break;
