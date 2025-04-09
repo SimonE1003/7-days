@@ -17,83 +17,113 @@ int generate_random_num(int min, int max)
 
 
 vector<int> hospital_head_story = {0,3,7,15,28,30,32,34,36};
-vector<int> weaponshop_head_story = {0,3,7,15};
+vector<int> weaponshop_head_story = {0,3,7,10,12};
 void initialize_weaponshop_story(){
         srand(time(0));
-        //story0 Main story
+        //story0 Main1
         weaponshop_story.push_back(new story);
         weaponshop_story[0]->text="You see an AK-47 on the ground.";
         weaponshop_story[0]->options.push_back("Try to get that AK-47");//story1
         weaponshop_story[0]->options.push_back("Ignore the gun");//story2
-        weaponshop_story[0]->reward={"inventory AK-47"};
-        //story1 Main story branch1
+        //story1 Main1 branch1
         weaponshop_story.push_back(new story);
-        weaponshop_story[1]->text="A zombie noticed you,it is time to try your new weapon.";
+        weaponshop_story[1]->text="A zombie is walking to you,you quickly picked up the AK-47 on the floor.";
         weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
-        weaponshop_story[1]->reward={"bullet -1"};
-	//story2 Main story branch2
+	weaponshop_story[1]->next.push_back(nullptr);
+        weaponshop_story[1]->reward={"inventory AK-47",/*gs.weaponlevel+*/"bullet - 2"};//here will be bullet -2/weaponlevel
+	//story2 Main1 branch2
 	weaponshop_story.push_back(new story);
 	weaponshop_story[2]->text="You keep searching in the weaponshop, and noticed some bullets on the counter.";
 	weaponshop_story[2]->options.push_back("Get the bullets.");
-	weaponshop_story[2]->next.push_back(nullptr);
-	weaponshop_story[2]->reward={"bullet +5"};
+	weaponshop_story[2]->next.push_back(weaponshop_story[3]);
 
 	weaponshop_story[0]->next = vector<story*>{weaponshop_story[1], weaponshop_story[2]};
-	//story3 Main story2
-	weaponshop_story.push_back(new story);
-	weaponshop_story[3]->text="You meet a strong zombie with crowbar in his hand.";
-	weaponshop_story[3]->options.push_back("Try to kill it.");//story4
-	weaponshop_story[3]->options.push_back("Bypass him and continue exploring.");//story5
-	weaponshop_story[3]->options.push_back("Run out from the weaponshop and leave.");//story6
 	
-	
-	//story4 Main story2 branch1 有后续
-	weaponshop_story.push_back(new story);
-	weaponshop_story[4]->text="You obtained a crowbar,maybe it can help you to open some doors?";
-	weaponshop_story[4]->options.push_back("Continue exploration.");//story10
-	weaponshop_story[4]->reward={"inventory crowbar"};
-	//story5 Main story2 branch2
-	weaponshop_story.push_back(new story);
-        weaponshop_story[5]->text="The zombie doesn't see you,you notice someone's doomsday notebook.";
-        weaponshop_story[5]->options.push_back("Read it.");
-        weaponshop_story[5]->reward={"sanity +1"};
-	//story6 Main story2 branch3
-	weaponshop_story.push_back(new story);
-        weaponshop_story[6]->text="You exit the weaponshop.";
-        weaponshop_story[6]->options.push_back(nullptr);
+	//story3 after story2
+	weaponshop_story[3]->text="You got some bullets.";
+	weaponshop_story[3]->options.push_back("End.");
+	weaponshop_story[3]->reward={"bullet +5"};
+	weaponshop_story[3]->next.push_back(nullptr);
 
-	weaponshop_story[3]->next = vector<story*>{weaponshop_story[4], weaponshop_story[5],weaponshop_story[6]};
-	//story7 Main story3
-	weaponshop_story[7]->text="You enter the warehouse of the weaponshop,it's completely dark.";
-	weaponshop_story[7]->options.push_back("Try to open the lights.");//story8
-	weaponshop_story[7]->options.push_back("Investigate in the darkness.");//story9
-	weaponshop_story[7]->options.push_back("It seems horrible,leave here.");//leave weaponshop
-	//story8 Main story3 branch1 有后续
-	weaponshop_story[8]->text="The zombies in the warehouse notice you,it becomes a little tricky.";
-	if (gs.bullet>=4)
+	//story4 Main2
+	weaponshop_story.push_back(new story);
+	weaponshop_story[4]->text="You meet a strong zombie with a crowbar in his hand.";
+	weaponshop_story[4]->options.push_back("Try to kill it.");//story5
+	weaponshop_story[4]->options.push_back("Bypass him and continue exploring.");//story6
+	weaponshop_story[4]->options.push_back("Run away.");//story7
+	
+	
+	//story5 Main2 branch1
+	weaponshop_story.push_back(new story);
+	weaponshop_story[5]->text="You obtained a crowbar,maybe it can help you open some doors?";
+	weaponshop_story[5]->options.push_back("Continue exploration.");
+	weaponshop_story[5]->next.push_back(nullptr);
+	weaponshop_story[5]->reward={"inventory crowbar","bullet -2"};//here will be bullet -2/weaponlevel
+	//story6 Main2 branch2
+	weaponshop_story.push_back(new story);
+        weaponshop_story[6]->text="You notice someone's doomsday notebook.";
+        weaponshop_story[6]->options.push_back("Read it.");
+        weaponshop_story[6]->reward={"sanity +1"};
+	//story8 after story6
+	weaponshop_story[8]->text="It has some encouraging words on it.";
+	weaponshop_story[8]->options.push_back("At least I see a glimmer of hope.");
+	weaponshop_story[8]->next.push_back(nullptr);
+	weaponshop_story[8]->reward={"sanity +1"};
+	//story7 story4 branch3
+	weaponshop_story.push_back(new story);
+        weaponshop_story[6]->text="You escaped.";
+	weaponshop_story[6]->options.push_back("End.");
+        weaponshop_story[6]->next.push_back(nullptr);
+
+	weaponshop_story[4]->next = vector<story*>{weaponshop_story[5], weaponshop_story[6],weaponshop_story[7]};
+	weaponshop_story[6]->next.push_back(weaponhsop_story[8]);
+	//story9 Main3
+	weaponshop_story[9]->text="You enter the warehouse of the weaponshop,it's completely dark.";
+	weaponshop_story[9]->options.push_back("Try to open the lights.");//story10
+	weaponshop_story[9]->options.push_back("Investigate in the darkness.");//story11
+	weaponshop_story[9]->options.push_back("It seems horrible,leave here.");//story12
+	//story10 Main3 Branch1 
+	weaponshop_story[10]->text="The zombies in the warehouse noticed you,it becomes a little tricky.";
+	if (gs.bullet>=4)//here will be gs.bullet*gs.weaponlevel
 	{
-		weaponshop_story[8]->options.push_back("Kill them all!!!");
+		weaponshop_story[10]->options.push_back("Kill them all!!!");
+		weaponshop_story[10]->reward={"bullet -4"};/*here will be bullet -4/weaponlevel*/
 	}
-        weaponshop_story[8]->options.push_back("Run!!!");
-	weaponshop_story[8]->reward={"bullet -4"};
-	//story9 Main story3 branch2
-	weaponshop_story[9]->text="Oops!You accidentally triggered a trap!";
-	//need check if health is enough.
-	weaponshop_story[9]->options.push_back("Keep exploring.");
-	weaponshop_story[9]->options.push_back("Leave here.");
-	weaponshop_story[9]->reward={"health -1"};
-	//story10 After story4
-	weaponshop_story[10]->text="You find a locked door.";
-	//if crowbar in inventory
+        weaponshop_story[10]->options.push_back("Run!!!");
+	//story11 Main3 Branch2
+	weaponshop_story[11]->text="Oops!You accidentally triggered something!";
+	if (!gs.health>=2)
+	{
+		//You lose
+	}
+	weaponshop_story[11]->options.push_back("It seems that it is a trap set by others.");
+	weaponshop_story[11]->reward={"health -1"};
+	//story12 Main3 Branch3
+	weaponshop_story[12]->text="You leaved the warehouse.";
+	weaponshop_story[12]->next.push_back(nullptr);
+	//story13 after story10
+	weaponshop_story[13]->text="That's really narrow!!";
+	weaponshop_story[13]->options.push_back("End.");
+	weaponshop_story[13]->next.push_back(nullptr);
+	weaponshop_story[10]->next.push_back(weaponshop_story[13]);
+	//story14 after story11
+	weaponshop_story[14]->text="Maybe I shouldn't stat here for too long";
+	weaponshop_story[14]->options.push_back("Leave.");
+	weaponshop_story[14]->next.push_back(nullptr);
+	//story15 Main4
+	weaponshop_story[13]->text="You find a locked door.";
+	/* if crowbar in inventory */
+	weaponshop_story[13]->options.push_back("Pry open it with the crowbar.");
+
+
 	
-	weaponshop_story[10]->options.push_back("Pry open it with the crowbar.");
-	
-	weaponshop_story[10]->options.push_back("Leave.");
 	//story11 After story10
 	weaponshop_story[11]->text="Here seems to be an abandoned shelter.You find a bulletproof vest on the wall.";
 	weaponshop_story[11]->options.push_back("Put on the bulletproof vest.");
 	weaponshop_story[11]->reward={"inventory bulletproof vest"};
-	
+	weaponshop_story[10]->next.push_back(weaponshop_story[11]);
+	//story12 Main story4
+	weaponshop_story[12]->text="";
 
 	
 }
