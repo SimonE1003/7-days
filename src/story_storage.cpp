@@ -1420,13 +1420,36 @@ void initialize_lights_off()
     }
 }
 
+vector<story *> temperature_drop;
+
+void initialize_tempreature_drop(){
+    for (int i = 0; i <= 2; i++)
+    {
+        temperature_drop.push_back(new story);
+    }
+    temperature_drop[0]->text = "You are chilling in the room, but the room gets very chill and you could visibly see your breath";
+    temperature_drop[0]->options.push_back("Eat food to get warmer"); //1
+    temperature_drop[0]->options.push_back("Endured the code"); //2
+    temperature_drop[1]->text = "You endured the code night by eating some food";
+    temperature_drop[1]->options.push_back("End conversation"); 
+    temperature_drop[1]->next.push_back(nullptr);
+    temperature_drop[1]->reward.push_back("food - 1"); 
+    temperature_drop[2]->text = "Your got sick because of the cold";
+    temperature_drop[2]->options.push_back("End conversation"); 
+    temperature_drop[2]->next.push_back(nullptr);
+    temperature_drop[2]->reward.push_back("health - 1"); 
+    
+    temperature_drop[0]->next = vector<story *>{temperature_drop[1], temperature_drop[2]};
+}
+
 void initialize_stories()
 {
     initialize_hospital_story();
     //nighttime stories
-    initialize_knocking_door();
+    initialize_knocking_door(); 
     initialize_glass_breanking_noise();
     initialize_lights_off();
+    initialize_tempreature_drop();
 
     initialize_supermarket_story();
     initialize_UI_stories();
