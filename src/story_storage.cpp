@@ -1342,7 +1342,7 @@ void initialize_lights_off()
     lights_off[2]->text = "After a while the light went back on, but the darkness scared you";
     lights_off[2]->options.push_back("End conversation");
     lights_off[2]->next.push_back(nullptr);
-    lights_off[2]->reward = {"Sanity - 1"};
+    lights_off[2]->reward = {"sanity -1"};
     lights_off[3]->text = "The spider rushed towards you";
     lights_off[3]->options.push_back("Fight it with your fist"); //4
     lights_off[3]->options.push_back("Shoot it with a gun"); //5
@@ -1350,11 +1350,11 @@ void initialize_lights_off()
     lights_off[4]->text = "You killed the spider but you also got severly hurt, the meat from the spider is good quality protein";
     lights_off[4]->options.push_back("End conversation");
     lights_off[4]->next.push_back(nullptr);
-    lights_off[4]->reward = {"Food + 1, health - 2"};
+    lights_off[4]->reward = {"food +1, health -2"};
     lights_off[5]->text = "You killed the spider with a bullet, the meat from the spider is good quality protein";
     lights_off[5]->options.push_back("End conversation");
     lights_off[5]->next.push_back(nullptr);
-    lights_off[5]->reward = {"Food + 1, bullet - 1"};
+    lights_off[5]->reward = {"food +1", "bullet -1"};
     lights_off[6]->text = "The spider is too fast, he bite your neck from the back, you died";
     lights_off[6]->options.push_back("End game");
     lights_off[6]->next.push_back(nullptr);
@@ -1373,11 +1373,11 @@ void initialize_lights_off()
     lights_off[10]->text = "The zombie's body is disgusting, but you got an apple in its pocket";
     lights_off[10]->options.push_back("End conversation"); 
     lights_off[10]->next.push_back(nullptr);
-    lights_off[10]->reward = {"sanity - 1, health - 2, food + 1"};
+    lights_off[10]->reward = {"sanity -1, health -2, food +1"};
     lights_off[11]->text = "You killed the zombie with a bullet, and got an apple that falled out of its pocket";
     lights_off[11]->options.push_back("End conversation");
     lights_off[11]->next.push_back(nullptr);
-    lights_off[11]->reward = {"bullet - 1, food + 1"};
+    lights_off[11]->reward = {"bullet -1, food +1"};
     lights_off[12]->text = "You got back home";
     lights_off[12]->options.push_back("Continue");//2
 
@@ -1433,11 +1433,11 @@ void initialize_tempreature_drop(){
     temperature_drop[1]->text = "You endured the code night by eating some food";
     temperature_drop[1]->options.push_back("End conversation"); 
     temperature_drop[1]->next.push_back(nullptr);
-    temperature_drop[1]->reward.push_back("food - 1"); 
+    temperature_drop[1]->reward.push_back("food -1"); 
     temperature_drop[2]->text = "Your got sick because of the cold";
     temperature_drop[2]->options.push_back("End conversation"); 
     temperature_drop[2]->next.push_back(nullptr);
-    temperature_drop[2]->reward.push_back("health - 1"); 
+    temperature_drop[2]->reward.push_back("health -1"); 
     
     temperature_drop[0]->next = vector<story *>{temperature_drop[1], temperature_drop[2]};
 }
