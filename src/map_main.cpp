@@ -228,6 +228,8 @@ void run_shelter()
                 {
                     cleanwholescreen(height, width);
                     //save_game(gs);
+                    gs.day = 100;
+                    return;
                     cleanwholescreen(height, width);
                     drawmap(map, height, width);
                     refresh();

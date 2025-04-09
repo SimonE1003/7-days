@@ -6,6 +6,7 @@
 #include "../include/map_head.h"
 #include "../include/save_load.h"
 #include "../include/game_state.h"
+#include "../include/exploration.h"
 
 using namespace std;
 
@@ -138,7 +139,8 @@ int gm_start() {
                         case 3: gs.difficulty = 0; break;  // Easy
                     }
                     delwin(diff_win);
-                    run_shelter();
+                    //run_shelter();
+                    start_explore();
                     break;
                 }
             }
@@ -148,8 +150,8 @@ int gm_start() {
         else if (choice == 2) {  // Continue
             load();
             //delwin(diff_win);
-            run_shelter();
-                
+            //run_shelter();
+            start_explore();  
             break;
         }
         else if (choice == 3) {  // Information

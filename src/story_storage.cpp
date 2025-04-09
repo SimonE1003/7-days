@@ -1121,6 +1121,8 @@ void initialize_UI_stories()
     UI_stories[0]->text = "Let go directly back to the shelter";
     UI_stories[0]->options.push_back("Start Night Time");
     UI_stories[0]->next.push_back(nullptr);
+
+
 }
 
 vector<story *> knocking_door;
