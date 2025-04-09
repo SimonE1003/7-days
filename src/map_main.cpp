@@ -210,7 +210,7 @@ void run_shelter()
              }*/
             else if (current_char == 'S')
             {
-                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to save game");
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to save game       ");
                 if (ch == 'a' || ch == 'A')
                 {
                     cleanwholescreen(height, width);
@@ -223,7 +223,7 @@ void run_shelter()
 
             else if (current_char == 'E')
             {
-                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to quit game");
+                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to quit game       ");
                 if (ch == 'a' || ch == 'A')
                 {
                     cleanwholescreen(height, width);

@@ -29,7 +29,7 @@ void initialize_weaponshop_story(){
         weaponshop_story[0]->reward={"inventory AK-47"};
         //story1 Main story branch1
         weaponshop_story.push_back(new story);
-        weaponshop_story[1]->text="A zombie noticed you,it is time to try your new weapon.";
+        weaponshop_story[1]->text="A zombie noticed you, it is time to try your new weapon.";
         weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
         weaponshop_story[1]->reward={"bullet -1"};
 	//story2 Main story branch2
@@ -1118,7 +1118,7 @@ void initialize_supermarket_story()
 void initialize_UI_stories()
 {
     UI_stories.push_back(new story);
-    UI_stories[0]->text = "Let go directly back to the shelter";
+    UI_stories[0]->text = "Let's go directly back to the shelter";
     UI_stories[0]->options.push_back("Start Night Time");
     UI_stories[0]->next.push_back(nullptr);
 
@@ -1430,8 +1430,8 @@ void initialize_tempreature_drop(){
     }
     temperature_drop[0]->text = "You are chilling in the room, but the room gets very chill and you could visibly see your breath";
     temperature_drop[0]->options.push_back("Eat food to get warmer"); //1
-    temperature_drop[0]->options.push_back("Endured the code"); //2
-    temperature_drop[1]->text = "You endured the code night by eating some food";
+    temperature_drop[0]->options.push_back("Endured the cold"); //2
+    temperature_drop[1]->text = "You endured the cold night by eating some food";
     temperature_drop[1]->options.push_back("End conversation"); 
     temperature_drop[1]->next.push_back(nullptr);
     temperature_drop[1]->reward.push_back("food -1"); 
