@@ -221,10 +221,10 @@ void play_story(story* current_story, int height, int width) {
                             for (const string& reward : next_story->reward) {
                                 pair<string, string> result = interpret_reward(reward);
                                 string type = result.first;
-                                int value = stoi(result.second);
+                                string value = result.second;
     
                                 if (type == "bullet"){
-                                    temp_bullet += value;
+                                    temp_bullet += stoi(value);
                                     if (temp_bullet < 0) {
                                         proceed = false;
                                         mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
