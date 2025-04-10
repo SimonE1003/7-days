@@ -107,7 +107,7 @@ void run_shelter()
     // Get the size of the window
     int height, width;
     getmaxyx(stdscr, height, width);
-    initialize_stories();
+    
 
     int ch;
     int charactorpos[2] = {height / 2, width / 2};

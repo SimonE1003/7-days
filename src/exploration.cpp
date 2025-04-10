@@ -7,11 +7,11 @@
 #include "../include/game_logic.h"
 
 void start_explore() { 
-
+    initialize_stories();
+    if (gs.day == 7){
+        win();
+    }
     while(gs.day<100){
-        if (gs.day == 7){
-            win();
-        }
         run_shelter();
         end_a_day();
     }
