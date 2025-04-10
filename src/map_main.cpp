@@ -346,7 +346,8 @@ void run_shelter()
             break;
         case 'p': // just for testing the story
             play_story(temperature_drop[0], height, width);
-            drawmap(map, height, width);
+            //drawmap(map, height, width);
+            play_story(UI_stories[1], height, width);
             return;
             break;
         case 'k': // reset the current map just for testing

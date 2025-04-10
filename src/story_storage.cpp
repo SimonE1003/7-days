@@ -1213,6 +1213,32 @@ void initialize_UI_stories()
     UI_stories[0]->options.push_back("Start Night Time");
     UI_stories[0]->next.push_back(nullptr);
 
+    UI_stories.push_back(new story);
+    UI_stories[1]->text = "☀The dawn is breaking after a sweat sweat night☀";
+    UI_stories[1]->options.push_back("Wake up");
+    UI_stories[1]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[2]->text = "The boss is standing in front of you";
+    UI_stories[2]->options.push_back("Check your status");
+    UI_stories[2]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[3]->text = "You shoot a bullet";
+    UI_stories[3]->options.push_back("Continue shooting");
+    UI_stories[3]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[4]->text = "You hit the boss with bare hands";
+    UI_stories[4]->options.push_back("Continue fighting");
+    UI_stories[4]->next.push_back(nullptr);
+    
+    UI_stories.push_back(new story);
+    UI_stories[5]->text = "The boss hit you";
+    UI_stories[5]->options.push_back("Continue fighting");
+    UI_stories[5]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story); // for boss fight use;
 
 }
 
