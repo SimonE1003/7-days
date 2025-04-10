@@ -9,6 +9,7 @@
 void start_explore() { 
     initialize_stories();
     if (gs.day == 7){
+        boss_battle();
         win();
     }
     while(gs.day<100){

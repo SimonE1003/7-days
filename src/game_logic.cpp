@@ -54,6 +54,10 @@ void end_a_day()
 	}
 }
 
+void boss_battle(){
+	//
+}
+
 void win(){
 	//
 }

@@ -6,5 +6,6 @@ void win();
 void start_a_day();
 void end_a_day();
 void end();
+void boss_battle();
 
 #endif
