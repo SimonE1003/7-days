@@ -1545,7 +1545,7 @@ void initialize_tempreature_drop(){
     {
         temperature_drop.push_back(new story);
     }
-    temperature_drop[0]->text = "You are chilling in the room, but the room gets very chill and you could visibly see your breath";
+    temperature_drop[0]->text = "You are chilling in the room, but the room starts to get very chill and you could visibly see your breath";
     temperature_drop[0]->options.push_back("Eat food to get warmer"); //1
     temperature_drop[0]->options.push_back("Endured the cold"); //2
     temperature_drop[1]->text = "You endured the cold night by eating some food";
@@ -1560,6 +1560,28 @@ void initialize_tempreature_drop(){
     temperature_drop[0]->next = vector<story *>{temperature_drop[1], temperature_drop[2]};
 }
 
+vector<story *> temperature_increase;
+
+void initialize_tempreature_increase(){
+    for (int i = 0; i <= 2; i++)
+    {
+        temperature_increase.push_back(new story);
+    }
+    temperature_increase[0]->text = "You are chilling in the room, but the room starts to get hot and you start to sweat";
+    temperature_increase[0]->options.push_back("Put water on your face to cool down"); //1
+    temperature_increase[0]->options.push_back("Endured the heat"); //2
+    temperature_increase[1]->text = "You cooled yourself down and was able to get asleep";
+    temperature_increase[1]->options.push_back("End conversation"); 
+    temperature_increase[1]->next.push_back(nullptr);
+    temperature_increase[1]->reward.push_back("water -1"); 
+    temperature_increase[2]->text = "Your got sick and tired because of the heat";
+    temperature_increase[2]->options.push_back("End conversation"); 
+    temperature_increase[2]->next.push_back(nullptr);
+    temperature_increase[2]->reward.push_back("health -1"); 
+    
+    temperature_increase[0]->next = vector<story *>{temperature_increase[1], temperature_increase[2]};
+}
+
 void initialize_stories()
 {
     initialize_hospital_story();
@@ -1568,6 +1590,7 @@ void initialize_stories()
     initialize_glass_breanking_noise();
     initialize_lights_off();
     initialize_tempreature_drop();
+    initialize_tempreature_increase();
 
     initialize_supermarket_story();
     initialize_UI_stories();
