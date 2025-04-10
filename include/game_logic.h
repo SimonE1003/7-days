@@ -2,7 +2,7 @@
 #define GAME_LOGIC_H
 
 // Core game logic functions
-bool checkgs();
+void win();
 void start_a_day();
 void end_a_day();
 void end();

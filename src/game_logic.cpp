@@ -1,96 +1,59 @@
 #include "../include/game_logic.h"
 #include "../include/game_state.h"
 #include <ncurses.h>
-#include <unistd.h> // For usleep
+#include <unistd.h>
 
-bool checkgs(){
-	int x=5,y=10;
-	if (gs.food<0)
-	{
-		gs.hunger+=gs.food;
-		mvprintw(x,y,"Your hunger level decreased due to insufficient food.");
-	}
-	if (gs.water<0)
-	{
-		gs.thirst+=gs.water;
-		x+=1;
-		mvprintw(x,y,"Your thirst level decreased due to insufficient water.");
-	}
-	if(gs.sanity<0)
-	{
-		gs.health+=gs.sanity;
-		x+=1;
-		mvprintw(x,y,"Your health level decreased due to insufficient sanity.");
-	}
-	if (gs.hunger<0)
-	{
-		gs.health+=gs.hunger;
-		x+=1;
-		mvprintw(x,y,"Your health level decreased due to insufficient hunger.");
-	}
-	if (gs.thirst<0)
-	{
-		gs.health+=gs.thirst;
-		x+=1;
-		mvprintw(x,y,"Your health level decreased due to insufficient thirst.");
-	}
-	if (gs.ill)
-	{
-		gs.health-=1;
-		x+=1;
-		mvprintw(x,y,"Your health level decreased due to illness.");
-	}
-
-	usleep(4000000);
-	refresh();
-	usleep(1000000);
-	display_status(gs);
-	if (gs.health<=0)
-	{
-		mvprintw(16,10,"You lose!!!");
-		usleep(100000);
-		return false;
-	}
-	return true;
-
-
+void end(int code) {
+	//
 }
-void start_a_day() { /* Implementation */ }
-void sixty_sec() { /* Implementation */ }
+
 void end_a_day()
 {
 	gs.day+=0.5;
-	if (gs.food>=1)
+	int delta = 1 + gs.difficulty;
+	if (gs.food>=delta)
 	{
-		gs.food-=1;
+		gs.food-=delta;
 	}
-	else if (gs.food<1 && gs.hunger>0)
+	else if (gs.food<delta && gs.hunger<delta)
 	{
-		gs.hunger-=1;
+		gs.hunger-=delta;
 	}
-	else if (gs.food<1 && gs.hunger<1)
+	else if (gs.food<delta && gs.hunger<delta)
 	{
-		gs.health-=1;
+		gs.health-=delta;
+		if(gs.health<delta) {
+			end(1);//hunger
+		}
 	}
-	if (gs.water>=1)
+	if (gs.water>=delta)
 	{
-		gs.water-=1;
+		gs.water-=delta;
 	}
-	else if (gs.water<1 && gs.thirst>0)
+	else if (gs.water<delta && gs.thirst>delta)
 	{
-		gs.thirst-=1;
+		gs.thirst-=delta;
 	}
-	else if (gs.water<1 && gs.thirst<1)
+	else if (gs.water<delta && gs.thirst<delta)
 	{
-		gs.health-=1;
+		gs.health-=delta;
+		//TODO
 	}
-	if (gs.sanity>0)
+	if (gs.sanity>delta)
 	{
-		gs.sanity-=1;
+		gs.sanity-=delta;
 	}
 	else
 	{
-		gs.health-=1;
-	}	
+		gs.health-=delta;
+		//TODO
+	}
+	if (gs.ill){
+		gs.health-=delta;
+		//TODO
+	}
 }
-void end() { /* Implementation */ }
+
+void win(){
+	//
+}
