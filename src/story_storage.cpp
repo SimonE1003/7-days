@@ -17,12 +17,14 @@ int generate_random_num(int min, int max)
 
 
 vector<int> hospital_head_story = {0,3,7,15,28,30,32,34,36};
-vector<int> weaponshop_head_story = {0,3,7,10,12};
+
+vector<int> weaponshop_head_story = {0,4,9,14,15,18,20,23,33,36,37,38,41,44};
 
 //28,30,32,34,36
-void initialize_weaponshop_story(){
-        srand(time(0));
-	for (int i=0; i<100; i++)
+void initialize_weaponshop_story()
+{
+	srand(time(0));
+	for (int i=0; i<=44;i++)
 	{
 		weaponshop_story.push_back(new story);
 	}
@@ -176,18 +178,127 @@ void initialize_weaponshop_story(){
         if (gs.bullet>6)
         {
                 weaponshop_story[24]->options.push_back("Kill it.");
+		weaponshop_story[24]->options.push_back("Run away.");
 		weaponshop_story[24]->next=vector<story*>{weaponshop_story[25],weaponshop_story[26]};
         }
-        weaponshop_story[24]->options.push_back("Run away.");
+	else
+	{
+		weaponshop_story[24]->options.push_back("Run away.");
+		weaponshop_story[24]->next.push_back(weaponshop_story[26]);
+	}
 	//story25 Possible1 branch1
-	
-	//story Possible2  Bad
-	//story Possible3  Good
-	//story Possible4  Good
-	//story Possible5  Good
-	//story Possible6  Good
-    	
-	
+	weaponshop_story[25]->text="You killed the mutant bound.";
+	weaponshop_story[25]->options.push_back("End.");
+	weaponshop_story[25]->reward={"health -1","bullet -1"};
+	weaponshop_story[25]->next.push_back(nullptr);
+	//story26 Possible1 branch1
+	weaponshop_story[26]->text="You escaped.";
+	weaponshop_story[26]->options.push_back("End.");
+	weaponshop_story[26]->reward={"sanity -1"};
+	weaponshop_story[26]->next.push_back(nullptr);
+	//story27 Possible2  Bad
+	weaponshop_story[27]->text="You are startled by a strange noise.";
+        weaponshop_story[27]->options.push_back("That really freaked me out.");
+        weaponshop_story[27]->reward={"sanity -1"};
+        weaponshop_story[27]->next.push_back(nullptr);
+	//story28 Possible3  Good
+	weaponshop_story[28]->text="You find some medicine in the darkness.";
+        weaponshop_story[28]->options.push_back("Get the medicine.");
+        weaponshop_story[28]->reward={"inventory medicine"};
+        weaponshop_story[28]->next.push_back(nullptr);
+	//story29 Possible4  Good
+	weaponshop_story[29]->text="You find some food and water.";
+        weaponshop_story[29]->options.push_back("End.");
+        weaponshop_story[29]->reward={"food +1","water +1"};
+        weaponshop_story[29]->next.push_back(nullptr);
+	//story30 Possible5  Good
+	weaponshop_story[30]->text="You find some bullets.";
+        weaponshop_story[30]->options.push_back("End.");
+        weaponshop_story[30]->reward={"bullet +6"};
+        weaponshop_story[30]->next.push_back(nullptr);
+	//story31 Possible6  Good
+	weaponshop_story[31]->text="You find a box.";
+        weaponshop_story[31]->options.push_back("Open it.");
+        weaponshop_story[31]->next.push_back(weaponshop_story[32]);
+	//story32 Possible6 Branch1
+	weaponshop_story[32]->text="There is a health potion in it.";
+        weaponshop_story[32]->options.push_back("Get it.");
+        weaponshop_story[32]->reward={"inventory health_potion"};
+        weaponshop_story[32]->next.push_back(nullptr);
+	//story33 Main story9
+	weaponshop_story[33]->text="You find a locked door.";
+	//if thin iron swire in inventory
+        weaponshop_story[33]->options.push_back("Try to pick the lock.");
+	weaponshop_story[33]->next=vector<story*>{weaponshop_story[34],weaponshop_story[35],nullptr};
+	//else
+	weaponshop_story[33]->next=vector<story*>{weaponshop_story[35],nullptr};
+	weaponshop_story[33]->options.push_back("Make a force entry.[hunger -1]");
+	weaponshop_story[33]->options.push_back("Leave.");
+	//story34 Main9 Branch1
+	weaponshop_story[34]->text="You find some bullets and a ring.";
+	weaponshop_story[34]->options.push_back("End.");
+	weaponshop_story[34]->reward={"bullet +2","inventory ring"};
+	weaponshop_story[34]->next.push_back(nullptr);
+	//story35 Main9 Branch2
+	weaponshop_story[35]->text="You find some bullets and a ring.";
+        weaponshop_story[35]->options.push_back("End.");
+        weaponshop_story[35]->reward={"bullet +2","inventory ring","hunger -1"};
+        weaponshop_story[35]->next.push_back(nullptr);
+	//story36 Main story10
+	weaponshop_story[36]->text="You entered a door.";
+	weaponshop_story[36]->options.push_back("Explore.");
+	//srory37 Main story11
+	weaponshop_story[37]->text="You come to the second floor.";
+	weaponshop_story[37]->options.push_back("Explore.");
+
+	if (rand() % 10 > 4 + gs.difficulty)
+	{
+		weaponshop_story[23]->next.push_back(weaponshop_story[31]);
+		weaponshop_story[36]->next.push_back(weaponshop_story[30]);
+		weaponshop_story[37]->next.push_back(weaponshop_story[29]);
+	}
+	else
+	{
+		weaponshop_story[23]->next.push_back(weaponshop_story[28]);
+                weaponshop_story[36]->next.push_back(weaponshop_story[27]);
+                weaponshop_story[37]->next.push_back(weaponshop_story[24]);
+	}
+
+	//story38 Main story12
+	weaponshop_story[38]->text="";
+	weaponshop_story[38]->text="You noticed a hidden door.";
+        weaponshop_story[38]->options.push_back("Enter.");
+	weaponshop_story[38]->options.push_back("Ignore it.");
+        weaponshop_story[38]->next=vector<story*>{};
+	//story39 main12 Branch1
+	weaponshop_story[39]->text="You find some bullets.";
+        weaponshop_story[39]->options.push_back("End.");
+        weaponshop_story[39]->reward={"bullet +4"};
+        weaponshop_story[39]->next.push_back(nullptr);
+	//story40 main12 Branch2
+	weaponshop_story[40]->text="Nothing happend.";
+        weaponshop_story[40]->options.push_back("End.");
+        weaponshop_story[40]->next.push_back(nullptr);
+	//story41 Main story13
+	weaponshop_story[41]->text="You meet a strange merchant.";
+        weaponshop_story[41]->options.push_back("Trade with him.");
+        weaponshop_story[41]->reward={"Ignore him."};
+        weaponshop_story[41]->next=vector<story*>{};
+	//story42 main13 Branch1
+	weaponshop_story[42]->text="Spend 2 food to buy something.";
+        weaponshop_story[42]->options.push_back("OK.");
+        weaponshop_story[42]->reward={"food -2","bullet +1","water +1"};
+        weaponshop_story[42]->next.push_back(nullptr);
+	//story43 main13 Branch1
+	weaponshop_story[43]->text="That guy must be an unscrupulous merchant.";
+        weaponshop_story[43]->options.push_back("End.");
+        weaponshop_story[43]->next.push_back(nullptr);
+	//story44 Main story14
+	weaponshop_story[44]->text="A zombie suddenly appears.";
+        weaponshop_story[44]->options.push_back("Run.");
+	weaponshop_story[44]->reward={"health -1"};
+        weaponshop_story[44]->next.push_back(nullptr);
+	srand(time(0));
 }
 void initialize_hospital_story()
 {
