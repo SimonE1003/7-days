@@ -1340,7 +1340,7 @@ void initialize_UI_stories()
 	UI_stories[3]->next.push_back(nullptr);
 
     UI_stories.push_back(new story);
-    UI_stories[4]->text = "The boss looks aggressive! Fortunately you got bullets."
+    UI_stories[4]->text = "The boss looks aggressive! Fortunately you got bullets.";
     UI_stories[4]->options.push_back("Shoot at the boss");
     UI_stories[4]->next.push_back(nullptr);
 
@@ -1412,7 +1412,7 @@ void initialize_knocking_door()
     // 1. Nothing Outside story
     knocking_door[1]->text = "You see nothing outside, you wonder who knocked the door";
     knocking_door[1]->options.push_back("Go out and check");
-    knocking_door[1]->options.push_back("Lock the door and go back to the bedroom");
+    knocking_door[1]->options.push_back("Lock the door and go back to the sofa");
     knocking_door[2]->text = "After walking a few steps in the dark, you hear a scream and suddenly got scrached by a woman covered in blood.";
     knocking_door[2]->options.push_back("Fight the woman");
     knocking_door[2]->options.push_back("Run back home");
@@ -1430,7 +1430,7 @@ void initialize_knocking_door()
     // 2. A weird guy story
     knocking_door[6]->text = "You see a weird guy standing outside";
     knocking_door[6]->options.push_back("Go out and talk to him");
-    knocking_door[6]->options.push_back("Lock the door and go back to the bedroom");
+    knocking_door[6]->options.push_back("Lock the door and go back to the shelter");
     knocking_door[7]->text = "The guy asks you if you have any food";
     knocking_door[7]->options.push_back("Give him some food");
     knocking_door[7]->options.push_back("Refuse");
@@ -1452,7 +1452,7 @@ void initialize_knocking_door()
     // 3. A giant cockroach story
     knocking_door[12]->text = "You see a giant cockroach standing outside";
     knocking_door[12]->options.push_back("Go out to check the cockroach");
-    knocking_door[12]->options.push_back("Lock the door and go back to the bedroom");
+    knocking_door[12]->options.push_back("Lock the door and go back to the shelter");
     knocking_door[13]->text = "The cockroach saw you, and quickly runs away";
     knocking_door[13]->options.push_back("Chase it");               // 14
     knocking_door[13]->options.push_back("Shoot it with a bullet"); // 15
@@ -1736,6 +1736,98 @@ void initialize_tempreature_increase(){
     temperature_increase[0]->next = vector<story *>{temperature_increase[1], temperature_increase[2]};
 }
 
+vector<story *> green_light;
+
+void initialize_green_light(){
+    for (int i = 0; i <= 13; i++)
+    {
+        green_light.push_back(new story);
+    }
+    green_light[0]->text = "You are resting in the shelter, but suddenly saw green light appearing outside of the window";
+    green_light[0]->options.push_back("Go out and check"); 
+    green_light[0]->options.push_back("Stay inside the shelter"); //1
+    green_light[1]->text = "You stayed inside, and the green light stoped after a while";
+    green_light[1]->options.push_back("End conversation"); 
+    green_light[1]->next.push_back(nullptr);
+
+    //giant zombie branch
+    green_light[2]->text = "You see a giant zombie standing outside, glowing green light from its belley";
+    green_light[2]->options.push_back("Go closer to examine it"); //3
+    green_light[2]->options.push_back("Shoot it"); //9
+    green_light[2]->options.push_back("Go back to the shelter"); //7
+    green_light[3]->text = "You moved closer to the zombie, it noticed you and started moving towards you";
+    green_light[3]->options.push_back("Shoot it's head"); //4
+    green_light[3]->options.push_back("Shoot it's belley"); //5
+    green_light[3]->options.push_back("Shoot it's knee"); //8
+    green_light[3]->options.push_back("Run back to the shelter"); //7
+    green_light[4]->text = "You shot right through its head, it droped down to the ground";
+    green_light[4]->options.push_back("Continue"); //10
+    green_light[4]->reward = {"bullet -1"};
+    green_light[5]->text = "You shot its belley, it droped to the ground and didn't explode as you might have expected, green juicy is flowing out of his belley";
+    green_light[5]->options.push_back("Go drink some of the fresh green juice"); //6
+    green_light[5]->reward = {"bullet -1"};
+    green_light[6]->text = "You drank the green juicy, and felt refreshed and energized";
+    green_light[6]->options.push_back("End conversation"); 
+    green_light[6]->next.push_back(nullptr);
+    green_light[6]->reward = {"health +2"};
+    green_light[7]->text = "You went back to the shelter, nothing else happened during the night";
+    green_light[7]->options.push_back("End conversation"); 
+    green_light[7]->next.push_back(nullptr);
+    green_light[8]->text = "You shot its knee, it fell to the ground and its head exploded";
+    green_light[8]->options.push_back("Continue"); //11
+    green_light[8]->reward = {"bullet -1"};
+    green_light[9]->text = "It's really far, but you accidentally shot its head, the zombie died";
+    green_light[9]->options.push_back("Continue"); //11
+    green_light[9]->next.push_back(nullptr);
+    green_light[9]->reward = {"bullet -1"};
+    green_light[10]->text = "You felt good about your shooting skill";
+    green_light[10]->options.push_back("End conversation"); 
+    green_light[10]->next.push_back(nullptr);
+    green_light[10]->reward = {"sanity +2"};
+    green_light[11]->text = "You feel satisfied";
+    green_light[11]->options.push_back("End conversation"); 
+    green_light[11]->next.push_back(nullptr);
+    green_light[11]->reward = {"sanity +2"};
+
+
+    //car branch
+    green_light[12]->text = "car branch to be continued";
+    green_light[12]->options.push_back("End conversation"); 
+    green_light[12]->next.push_back(nullptr);
+
+
+    //green flashlight branch
+    green_light[13]->text = "green flashlight branch to be continued";
+    green_light[13]->options.push_back("End conversation"); 
+    green_light[13]->next.push_back(nullptr);
+
+    //beacon (can lead to an ending)
+
+    int random_branch = generate_random_num(0, 2);
+
+    if (random_branch == 0 || random_branch == 1 || random_branch == 2) //for testing
+    {
+        //giant zombie branch
+        green_light[0]->next = vector<story *>{green_light[2], green_light[1]};
+        green_light[2]->next = vector<story *>{green_light[3], green_light[9], green_light[7]};
+        green_light[3]->next = vector<story *>{green_light[4], green_light[5], green_light[8],green_light[7]};
+        green_light[4]->next = vector<story *>{green_light[10]};
+        green_light[5]->next = vector<story *>{green_light[6]};
+        green_light[8]->next = vector<story *>{green_light[11]};
+        green_light[9]->next = vector<story *>{green_light[11]};
+    }
+    else if (random_branch == 4)
+    {
+        //car branch
+        green_light[0]->next = vector<story *>{green_light[10], green_light[1]};
+    }
+    else
+    {
+        //green flashlight branch
+        green_light[0]->next = vector<story *>{green_light[11], green_light[1]};
+    }
+}
+
 void initialize_stories()
 {
     initialize_hospital_story();
@@ -1745,6 +1837,7 @@ void initialize_stories()
     initialize_lights_off();
     initialize_tempreature_drop();
     initialize_tempreature_increase();
+    initialize_green_light();
 
     initialize_supermarket_story();
     initialize_UI_stories();

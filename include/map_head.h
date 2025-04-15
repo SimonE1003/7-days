@@ -34,6 +34,7 @@ extern vector<story*> glass_breaking_noise;
 extern vector<story*> temperature_drop;
 extern vector<story*> temperature_increase;
 extern vector<story*> lights_off;
+extern vector<story*> green_light;
 
 extern vector<story*> UI_stories;
 

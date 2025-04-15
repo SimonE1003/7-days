@@ -345,7 +345,7 @@ void run_shelter()
         case ERR:
             break;
         case 'p': // just for testing the story
-            play_story(temperature_increase[0], height, width);
+            play_story(green_light[0], height, width);
             //drawmap(map, height, width);
             play_story(UI_stories[1], height, width);
             return;
