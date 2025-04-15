@@ -16,14 +16,14 @@ void end_a_day()
 	{
 		gs.food-=delta;
 	}
-	else if (gs.food<delta && gs.hunger<delta)
+	else if (gs.food<delta && gs.hunger>delta)
 	{
 		gs.hunger-=delta;
 	}
 	else if (gs.food<delta && gs.hunger<delta)
 	{
 		gs.health-=delta;
-		if(gs.health<delta) {
+		if(gs.health<=0) {
 			end(1);//hunger
 		}
 	}
@@ -38,7 +38,9 @@ void end_a_day()
 	else if (gs.water<delta && gs.thirst<delta)
 	{
 		gs.health-=delta;
-		//TODO
+		if(gs.health<=0) {
+			end(2);//thirst
+		}
 	}
 	if (gs.sanity>delta)
 	{
@@ -47,11 +49,15 @@ void end_a_day()
 	else
 	{
 		gs.health-=delta;
-		//TODO
+		if(gs.health<=0) {
+			end(3);//craziness
+		}
 	}
 	if (gs.ill){
 		gs.health-=delta;
-		//TODO
+		if(gs.health<=0) {
+			end(4);//illness
+		}
 	}
 }
 
@@ -97,7 +103,7 @@ void boss_battle(){
 			play_story(UI_stories[13], height, width);
 		}else{
 			play_story(UI_stories[14], height, width);
-			end(1);
+			end(5);//died of boss fight
 		}
 	}
 }
