@@ -1330,26 +1330,69 @@ void initialize_UI_stories()
     UI_stories[1]->next.push_back(nullptr);
 
     UI_stories.push_back(new story);
-    UI_stories[2]->text = "The boss is standing in front of you";
-    UI_stories[2]->options.push_back("Check your status");
-    UI_stories[2]->next.push_back(nullptr);
+    UI_stories[2]->text = "A giant zombie is standing in front of you. You feel like it's all going to end";
+	UI_stories[2]->options.push_back("Check what you got");
+	UI_stories[2]->next.push_back(nullptr);
 
     UI_stories.push_back(new story);
-    UI_stories[3]->text = "You shoot a bullet";
-    UI_stories[3]->options.push_back("Continue shooting");
-    UI_stories[3]->next.push_back(nullptr);
+    UI_stories[3]->text = "You got "+ to_string(gs.health) + " health, "+to_string(gs.sanity)+" sanity and "+ to_string(gs.bullet) + " bullets";
+	UI_stories[3]->options.push_back("Start fighting");
+	UI_stories[3]->next.push_back(nullptr);
 
     UI_stories.push_back(new story);
-    UI_stories[4]->text = "You hit the boss with bare hands";
-    UI_stories[4]->options.push_back("Continue fighting");
+    UI_stories[4]->text = "The boss looks aggressive! Fortunately you got bullets."
+    UI_stories[4]->options.push_back("Shoot at the boss");
     UI_stories[4]->next.push_back(nullptr);
-    
+
     UI_stories.push_back(new story);
-    UI_stories[5]->text = "The boss hit you";
-    UI_stories[5]->options.push_back("Continue fighting");
+    UI_stories[5]->text = "Head shot!!! You dealt 10 damage to the boss.";
+    UI_stories[5]->options.push_back("Nice!");
     UI_stories[5]->next.push_back(nullptr);
 
-    UI_stories.push_back(new story); // for boss fight use;
+    UI_stories.push_back(new story);
+    UI_stories[6]->text = "Nice shot. You dealt 3 damage to the boss.";
+    UI_stories[6]->options.push_back("Continue fighting");
+    UI_stories[6]->next.push_back(nullptr);
+    
+    UI_stories.push_back(new story);
+    UI_stories[7]->text = "Oops, you ran out of bullets.";
+    UI_stories[7]->options.push_back("Hit the boss with bare hands");
+    UI_stories[7]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[8]->text = "You dealt 1 damage to the boss.";
+    UI_stories[8]->options.push_back("Continue fighting");
+    UI_stories[8]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[9]->text = "The boss died!";
+    UI_stories[9]->options.push_back("Check its body");
+    UI_stories[9]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[10]->text = "There is a map on its body which guides to a safe place.";
+    UI_stories[10]->options.push_back("A new life is about to begin...");
+    UI_stories[10]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[11]->options.push_back("The boss rushed towards you");
+    UI_stories[11]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[12]->text = "The boss swings its fist and hit you, causing 1 damage.";
+    UI_stories[12]->options.push_back("Ouch!");
+    UI_stories[12]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[13]->options.push_back("It's your turn now");
+    UI_stories[13]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[14]->text = "You were seriously injured and collapsed.";
+    UI_stories[14]->options.push_back("Oh no...");
+    UI_stories[14]->next.push_back(nullptr);
+
+    //UI_stories.push_back(new story); // for boss fight use;
 
 }
 

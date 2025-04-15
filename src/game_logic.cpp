@@ -55,44 +55,49 @@ void end_a_day()
 	}
 }
 
+bool head_shot(){
+	return rand()%500 < gs.sanity*gs.sanity;
+}
+
 void boss_battle(){
-	int boss_health = 20;
+	int boss_health = 15;
 	int height, width;
     getmaxyx(stdscr, height, width);
 	play_story(UI_stories[2], height, width);
-	UI_stories[6]->text = "You got "+ to_string(gs.health) + " health and "+ to_string(gs.bullet) + " bullets";
-	UI_stories[6]->options.push_back("Start fighting");
-	UI_stories[6]->next.push_back(nullptr);
-	play_story(UI_stories[6], height, width);
-	while (boss_health > 0)
+	play_story(UI_stories[3], height, width);
+	while (1)
 	{
-		while(gs.bullet > 0){
-			play_story(UI_stories[3], height, width);
-			boss_health -= 2+2*gs.sanity;
-			if (boss_health <= 0)
-			{
-				break;
-			}
-			play_story(UI_stories[5], height, width);
-			gs.health -= 1;
-			if (gs.health <= 0)
-			{
-				end(1);
-			}
-		}
-		while(gs.health > 0){
+		if (gs.bullet > 0){
 			play_story(UI_stories[4], height, width);
-			boss_health -= 1;
-			if (boss_health <= 0)
-			{
-				break;
+			if (head_shot()){
+				play_story(UI_stories[5], height, width);
+				boss_health-=10;
+			} else{
+				play_story(UI_stories[6], height, width);
+				boss_health-=3;
 			}
-			play_story(UI_stories[5], height, width);
-			gs.health -= 1;
-			if (gs.health <= 0)
-			{
-				end(1);
-			}
+			gs.bullet--;
+		} else{
+			play_story(UI_stories[7], height, width);
+			play_story(UI_stories[8], height, width);
+			boss_health--;
+		}
+		if (boss_health>0){
+			UI_stories[11]->text = "The boss has "+to_string(boss_health)+" health left.";
+			play_story(UI_stories[11], height, width);
+		} else{
+			play_story(UI_stories[9], height, width);
+			play_story(UI_stories[10], height, width);
+			win();
+		}
+		play_story(UI_stories[12], height, width);
+		gs.health--;
+		if (gs.health>0){
+			UI_stories[13]->text = "You got "+to_string(gs.health)+" health left.";
+			play_story(UI_stories[13], height, width);
+		}else{
+			play_story(UI_stories[14], height, width);
+			end(1);
 		}
 	}
 }
