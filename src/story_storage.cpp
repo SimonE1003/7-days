@@ -37,7 +37,7 @@ void initialize_weaponshop_story()
         //story1 Main1 branch1
         weaponshop_story[1]->text="A zombie noticed you, it is time to try your new weapon.";
         weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
-	weaponshop_story[1]->next.push_back(nullptr);
+	    weaponshop_story[1]->next.push_back(nullptr);
         weaponshop_story[1]->reward={"inventory AK-47",/*gs.weaponlevel+*/"bullet - 2"};//here will be bullet -2/weaponlevel
 	//story2 Main1 branch2
 	
@@ -1739,7 +1739,7 @@ void initialize_tempreature_increase(){
 vector<story *> green_light;
 
 void initialize_green_light(){
-    for (int i = 0; i <= 13; i++)
+    for (int i = 0; i <= 18; i++)
     {
         green_light.push_back(new story);
     }
@@ -1789,23 +1789,40 @@ void initialize_green_light(){
     green_light[11]->next.push_back(nullptr);
     green_light[11]->reward = {"sanity +2"};
 
-
     //car branch
-    green_light[12]->text = "car branch to be continued";
-    green_light[12]->options.push_back("End conversation"); 
-    green_light[12]->next.push_back(nullptr);
-
+    green_light[12]->text = "You see a car parked outside, green light is shining from its lamp";
+    green_light[12]->options.push_back("Move closer to examine it"); //13
+    green_light[12]->options.push_back("Ignore it and go back to the shelter"); //7
+    green_light[13]->text = "You see three people on the car, each carring a gun";
+    green_light[13]->options.push_back("Go closer and talk to them"); //14
+    green_light[13]->options.push_back("Go full JUHN WICK and shoot them"); //16
+    green_light[13]->options.push_back("Run back to the shelter"); //7
+    green_light[14]->text = "They ask you for some food, and they will give you bullet for exchange";
+    green_light[14]->options.push_back("Give them 2 food for 4 bullets"); //15
+    green_light[14]->options.push_back("Surprise attack them with your gun");//16
+    green_light[14]->options.push_back("Tell them you have no food and go back to the shelter");//7
+    green_light[15]->text = "You gave them 2 food and got 4 bullets";
+    green_light[15]->options.push_back("End conversation"); 
+    green_light[15]->next.push_back(nullptr);
+    green_light[15]->reward = {"food -2","bullet +4"};
+    green_light[16]->text = "You killed them but also got shot";
+    green_light[16]->options.push_back("Examine their body"); //17
+    green_light[16]->reward = {"bullet -3","health -1"};
+    green_light[17]->text = "You got 10 bullets from their body";
+    green_light[17]->options.push_back("End conversation"); 
+    green_light[17]->next.push_back(nullptr);
+    green_light[17]->reward = {"bullet +10"};
 
     //green flashlight branch
-    green_light[13]->text = "green flashlight branch to be continued";
-    green_light[13]->options.push_back("End conversation"); 
-    green_light[13]->next.push_back(nullptr);
+    green_light[18]->text = "green flashlight branch to be continued";
+    green_light[18]->options.push_back("End conversation"); 
+    green_light[18]->next.push_back(nullptr);
 
     //beacon (can lead to an ending)
 
-    int random_branch = generate_random_num(0, 2);
+    int random_branch = generate_random_num(1, 2);
 
-    if (random_branch == 0 || random_branch == 1 || random_branch == 2) //for testing
+    if (random_branch == 0) 
     {
         //giant zombie branch
         green_light[0]->next = vector<story *>{green_light[2], green_light[1]};
@@ -1816,15 +1833,20 @@ void initialize_green_light(){
         green_light[8]->next = vector<story *>{green_light[11]};
         green_light[9]->next = vector<story *>{green_light[11]};
     }
-    else if (random_branch == 4)
+    else if (random_branch == 1 || random_branch == 2) //for testing
     {
         //car branch
-        green_light[0]->next = vector<story *>{green_light[10], green_light[1]};
+        green_light[0]->next = vector<story *>{green_light[12], green_light[1]};
+        green_light[12]->next = vector<story *>{green_light[13], green_light[7]};
+        green_light[13]->next = vector<story *>{green_light[14], green_light[16], green_light[7]};
+        green_light[14]->next = vector<story *>{green_light[15], green_light[16], green_light[7]};
+        green_light[16]->next = vector<story *>{green_light[17]};
+    
     }
     else
     {
         //green flashlight branch
-        green_light[0]->next = vector<story *>{green_light[11], green_light[1]};
+        green_light[0]->next = vector<story *>{green_light[18], green_light[1]};
     }
 }
 
