@@ -1739,7 +1739,7 @@ void initialize_tempreature_increase(){
 vector<story *> green_light;
 
 void initialize_green_light(){
-    for (int i = 0; i <= 18; i++)
+    for (int i = 0; i <= 25; i++)
     {
         green_light.push_back(new story);
     }
@@ -1795,11 +1795,11 @@ void initialize_green_light(){
     green_light[12]->options.push_back("Ignore it and go back to the shelter"); //7
     green_light[13]->text = "You see three people on the car, each carring a gun";
     green_light[13]->options.push_back("Go closer and talk to them"); //14
-    green_light[13]->options.push_back("Go full JUHN WICK and shoot them"); //16
+    green_light[13]->options.push_back("Go full JUHN WICK and shoot them with 3 bullets"); //16
     green_light[13]->options.push_back("Run back to the shelter"); //7
     green_light[14]->text = "They ask you for some food, and they will give you bullet for exchange";
     green_light[14]->options.push_back("Give them 2 food for 4 bullets"); //15
-    green_light[14]->options.push_back("Surprise attack them with your gun");//16
+    green_light[14]->options.push_back("Surprise attack them with your gun with 3 bullets");//16
     green_light[14]->options.push_back("Tell them you have no food and go back to the shelter");//7
     green_light[15]->text = "You gave them 2 food and got 4 bullets";
     green_light[15]->options.push_back("End conversation"); 
@@ -1814,13 +1814,41 @@ void initialize_green_light(){
     green_light[17]->reward = {"bullet +10"};
 
     //green flashlight branch
-    green_light[18]->text = "green flashlight branch to be continued";
-    green_light[18]->options.push_back("End conversation"); 
-    green_light[18]->next.push_back(nullptr);
+    green_light[18]->text = "You see green flashlight shining from the distance";
+    green_light[18]->options.push_back("Go their to examine"); //19
+    green_light[18]->options.push_back("Ignore it and go back to the shelter"); //7
+    green_light[19]->text = "You saw a group of people shining flashlight, two of them have guns";
+    green_light[19]->options.push_back("Approach them"); //20
+    green_light[19]->options.push_back("Shoot the two people with 2 bullets"); //23
+    green_light[19]->options.push_back("Go back to the shelter"); //7
+    green_light[20]->text = "They are happy to see you, and ask if you want to trade: 1 food for 2 bullets, 1 food for 2 water";
+    green_light[20]->options.push_back("Trade 1 food for 2 bullets"); //21
+    green_light[20]->options.push_back("Trade 1 food for 2 water"); //22
+    green_light[20]->options.push_back("Decline and go back to the shelter"); //7
+    green_light[21]->text = "You gave them 1 food and got 2 bullets";
+    green_light[21]->options.push_back("End conversation"); 
+    green_light[21]->next.push_back(nullptr);
+    green_light[21]->reward = {"food -1", "bullet +2"};
+    green_light[22]->text = "You gave them 1 food and got 2 water";
+    green_light[22]->options.push_back("End conversation"); 
+    green_light[22]->next.push_back(nullptr);
+    green_light[22]->reward = {"food -1", "water +2"};
+    green_light[23]->text = "You killed the two people, but the rest of them run away";
+    green_light[23]->options.push_back("Examine the body"); //24
+    green_light[23]->options.push_back("Chase the rest of them"); //25
+    green_light[23]->reward = {"bullet -2"};
+    green_light[24]->text = "You got 5 bullets and 4 water from their body";
+    green_light[24]->options.push_back("End conversation"); 
+    green_light[24]->next.push_back(nullptr);
+    green_light[24]->reward = {"bullet +5", "water +4"};
+    green_light[25]->text = "They run too fast and got out of your sight, two people carried the dead bodies and also got away";
+    green_light[25]->options.push_back("Go back to shelter"); //7
+    green_light[25]->next.push_back(nullptr);
 
-    //beacon (can lead to an ending)
 
-    int random_branch = generate_random_num(1, 2);
+    //beacon (can lead to another ending)
+
+    int random_branch = generate_random_num(0, 2);
 
     if (random_branch == 0) 
     {
@@ -1833,7 +1861,7 @@ void initialize_green_light(){
         green_light[8]->next = vector<story *>{green_light[11]};
         green_light[9]->next = vector<story *>{green_light[11]};
     }
-    else if (random_branch == 1 || random_branch == 2) //for testing
+    else if (random_branch == 1) 
     {
         //car branch
         green_light[0]->next = vector<story *>{green_light[12], green_light[1]};
@@ -1841,12 +1869,17 @@ void initialize_green_light(){
         green_light[13]->next = vector<story *>{green_light[14], green_light[16], green_light[7]};
         green_light[14]->next = vector<story *>{green_light[15], green_light[16], green_light[7]};
         green_light[16]->next = vector<story *>{green_light[17]};
-    
     }
     else
     {
         //green flashlight branch
         green_light[0]->next = vector<story *>{green_light[18], green_light[1]};
+        green_light[18]->next = vector<story *>{green_light[19], green_light[7]};
+        green_light[19]->next = vector<story *>{green_light[20], green_light[23],green_light[7]};
+        green_light[20]->next = vector<story *>{green_light[21], green_light[22],green_light[7]};
+        green_light[23]->next = vector<story *>{green_light[24], green_light[25]};
+        green_light[25]->next = vector<story *>{green_light[7]};
+
     }
 }
 
