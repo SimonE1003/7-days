@@ -61,4 +61,6 @@ void clearnear(int x, int y, vector<vector<char> > map, int height, int width);
 
 void cleanwholescreen(int height, int width);
 
+bool is_quit();
+
 #endif

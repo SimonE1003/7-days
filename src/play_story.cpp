@@ -54,6 +54,9 @@ bool story_effect(const string& type, const int&value){
         }
         return true;
     }
+    else if (type == "startstory"){
+        hospital_head_story.push_back(value);
+    }
     return true;
 }
 
@@ -61,6 +64,7 @@ void story_effect(const string&type, const string& item){
     if (type == "inventory"){
         gs.items.push_back(item);
     }
+    
 }
 
 pair<string, string> interpret_reward(const string& reward){
@@ -271,7 +275,11 @@ void play_story(story* current_story, int height, int width) {
                             } else {
                                 rewardPrint += reward + ", ";
                             }
-                        } else {
+                        } 
+                        else if (type == "startstory"){
+                            story_effect(type, value); // Start story rewards
+                        }
+                        else {
                             rewardPrint += reward + ", ";
                         }
                     }
