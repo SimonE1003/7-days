@@ -21,19 +21,25 @@ void end(int code) {
 
 void end_a_day()
 {
+	int height, width;
+	getmaxyx(stdscr, height, width);
 	gs.day+=0.5;
+	int health_minused = 0;
 	int delta = 1 + gs.difficulty;
 	if (gs.food>=delta)
 	{
 		gs.food-=delta;
+		UI_stories[17]->text += "Food "+to_string(gs.food)+"(-"+to_string(delta)+") ";
 	}
 	else if (gs.food<delta && gs.hunger>delta)
 	{
 		gs.hunger-=delta;
+		UI_stories[17]->text += "Hunger "+to_string(gs.hunger)+"(-"+to_string(delta)+") ";
 	}
 	else if (gs.food<delta && gs.hunger<delta)
 	{
 		gs.health-=delta;
+		health_minused += delta;
 		if(gs.health<=0) {
 			end(1);//hunger
 		}
@@ -41,14 +47,17 @@ void end_a_day()
 	if (gs.water>=delta)
 	{
 		gs.water-=delta;
+		UI_stories[17]->text += "Water "+to_string(gs.water)+"(-"+to_string(delta)+") ";
 	}
 	else if (gs.water<delta && gs.thirst>delta)
 	{
 		gs.thirst-=delta;
+		UI_stories[17]->text += "Thirst "+to_string(gs.thirst)+"(-"+to_string(delta)+") ";
 	}
 	else if (gs.water<delta && gs.thirst<delta)
 	{
 		gs.health-=delta;
+		health_minused += delta;
 		if(gs.health<=0) {
 			end(2);//thirst
 		}
@@ -56,20 +65,28 @@ void end_a_day()
 	if (gs.sanity>delta)
 	{
 		gs.sanity-=delta;
+		UI_stories[17]->text += "Sanity "+to_string(gs.sanity)+"(-"+to_string(delta)+") ";
 	}
 	else
 	{
 		gs.health-=delta;
+		
+		health_minused += delta;
 		if(gs.health<=0) {
 			end(3);//craziness
 		}
 	}
 	if (gs.ill > 0){
 		gs.health-=delta;
+		UI_stories[17]->text += "Illness, health "+to_string(gs.ill)+"(-"+to_string(delta)+") ";
 		if(gs.health<=0) {
 			end(4);//illness
 		}
 	}
+	if (health_minused > 0){
+		UI_stories[17]->text += "Health "+to_string(gs.health)+"(-"+to_string(health_minused)+") ";
+	}
+	play_story(UI_stories[16], height, width);
 }
 
 bool head_shot(){

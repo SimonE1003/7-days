@@ -105,7 +105,7 @@ vector<string> gameName = {
 	R"(|     __|    ___|   |   |    ___|    |  |    |     \|   _   |   |   |     __|)",
 	R"(|__     |    ___|   |   |    ___|       |    |  --  |       |\     /|__     |)",
 	R"(|_______|_______|\_____/|_______|__|____|    |_____/|___|___| |___| |_______|)"
-}
+};
 
 vector<vector<char> > string_to_vector(vector<string> s){
     vector<vector<char> > v;

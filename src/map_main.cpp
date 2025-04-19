@@ -7,6 +7,7 @@
 #include <set>
 #include "../include/game_state.h"
 #include "../include/save_load.h"
+#include "../include/game_logic.h"
 using namespace std;
 
 void cleanwholescreen(int height, int width)
@@ -116,7 +117,7 @@ void run_shelter()
     drawmap(map, height, width);
 
     // mvprintw(3, 0, "map size: %zu %zu", map.size(), map[0].size());
-    while ((ch = getch()) != 'q')
+    while ((ch = getch()))
     { // Press 'q' to exit the loop
         // mvprintw(5,0,"story_spots size: %zu",story_spots.size());
         clearnear(charactorpos[0], charactorpos[1], map, height, width);
@@ -148,7 +149,7 @@ void run_shelter()
         {
             set<char> valid = {'D', 'o', 'r'};
             char current_char = map[charactorpos[0] - (height - map.size()) / 2][charactorpos[1] - (width - map[0].size()) / 2];
-            mvprintw(4, 0, "current_char: %c", current_char);
+            //mvprintw(4, 0, "current_char: %c", current_char);
             if (valid.find(current_char) != valid.end())
             {
                 if ((int)(gs.day / 0.5) % 2 == 0)
@@ -221,11 +222,24 @@ void run_shelter()
                 }
             }
 
-            else if (current_char == 'E')
+            else if (current_char == 'E' or ch == 'q')
             {
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press A to quit game       ");
-                if (ch == 'a' || ch == 'A')
+                if (ch == 'a' || ch == 'A' || ch == 'q')
                 {
+                    cleanwholescreen(height, width);
+                    refresh();
+                    //save_game(gs);
+                    if (is_quit() == true)
+                    {
+                        gs.day = 100;
+                        return;
+                    }
+                    cleanwholescreen(height, width);
+                    drawmap(map, height, width);
+                    refresh();
+                }
+                /*{
                     cleanwholescreen(height, width);
                     refresh();
                     //save_game(gs);
@@ -237,7 +251,7 @@ void run_shelter()
                     cleanwholescreen(height, width);
                     drawmap(map, height, width);
                     refresh();
-                }
+                }*/
             }
             else if ((int)(gs.day/0.5)%2==1){
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press P to start night time");
@@ -351,6 +365,7 @@ void run_shelter()
         case 'p': // just for testing the story
             play_story(green_light[0], height, width);
             //drawmap(map, height, width);
+            end_a_day();
             play_story(UI_stories[1], height, width);
             return;
             break;
@@ -371,8 +386,8 @@ void run_shelter()
         }
 
         mvprintw(charactorpos[0], charactorpos[1], "X");
-        mvprintw(1, 0, "Position: %d, %d      ", charactorpos[0], charactorpos[1]);
-        mvprintw(2, 0, "Window size: %d, %d", height, width);
+        //mvprintw(1, 0, "Position: %d, %d      ", charactorpos[0], charactorpos[1]);
+        //mvprintw(2, 0, "Window size: %d, %d", height, width);
 
         refresh();
     }

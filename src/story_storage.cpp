@@ -1514,6 +1514,15 @@ void initialize_UI_stories()
     UI_stories.push_back(new story);
     UI_stories[15]->options.push_back("Don't lose heart, try again!");
     UI_stories[15]->next.push_back(nullptr);
+
+    UI_stories.push_back(new story);
+    UI_stories[16]->text = "At the end of the day, you are still alive.";
+    UI_stories[16]->options.push_back("Consume Supply");
+
+    UI_stories.push_back(new story);
+    UI_stories[17]->text = "";
+    UI_stories[17]->options.push_back("Ok");
+    UI_stories[16]->next.push_back(UI_stories[17]);
 }
 
 vector<story *> knocking_door;
@@ -2016,5 +2025,6 @@ void initialize_stories()
 
     initialize_supermarket_story();
     initialize_UI_stories();
+    initialize_weaponshop_story();
 
 }
