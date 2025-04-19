@@ -227,9 +227,13 @@ void run_shelter()
                 if (ch == 'a' || ch == 'A')
                 {
                     cleanwholescreen(height, width);
+                    refresh();
                     //save_game(gs);
-                    gs.day = 100;
-                    return;
+                    if (is_quit() == true){
+                        gs.day = 100;
+                        return;
+                    }
+                    
                     cleanwholescreen(height, width);
                     drawmap(map, height, width);
                     refresh();

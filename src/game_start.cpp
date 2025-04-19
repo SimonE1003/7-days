@@ -43,6 +43,63 @@ void print_menu(WINDOW* menu_win, int highlight, const vector<string>& options) 
     wrefresh(menu_win);
 }
 
+// To Alonso, this is a function that produce the window of is quit and returns false(not quit) or True(quit)
+// if you want to just let it quit, remove //
+bool is_quit() {
+    int screen_height, screen_width;
+    getmaxyx(stdscr, screen_height, screen_width);
+    if (screen_height < 5 || screen_width < 40) return false;
+
+    WINDOW* confirm_win = newwin(5, 40, (screen_height - 5) / 2, (screen_width - 40) / 2);
+    if (!confirm_win) return false;
+
+    keypad(confirm_win, TRUE);
+    box(confirm_win, 0, 0);
+
+    vector<string> confirm_options = {"Yes, Quit", "No, Go Back"};
+    int highlight = 1;
+    int choice = 0;
+
+    while (true) {
+        werase(confirm_win);
+        box(confirm_win, 0, 0);
+
+        mvwprintw(confirm_win, 1, 2, "Are you sure you want to quit?");
+        for (size_t i = 0; i < confirm_options.size(); ++i) {
+            if (i + 1 == highlight) {
+                wattron(confirm_win, COLOR_PAIR(2) | A_REVERSE);
+                mvwprintw(confirm_win, 3, 2 + (i * 15), "%s", confirm_options[i].c_str());
+                wattroff(confirm_win, COLOR_PAIR(2) | A_REVERSE);
+            } else {
+                mvwprintw(confirm_win, 3, 2 + (i * 15), "%s", confirm_options[i].c_str());
+            }
+        }
+        wrefresh(confirm_win);
+
+        int ch = wgetch(confirm_win);
+        switch (ch) {
+            case KEY_LEFT:
+                if (highlight > 1) highlight--;
+            break;
+            case KEY_RIGHT:
+                if (highlight < (int)confirm_options.size()) highlight++;
+            break;
+            case 10:
+                choice = highlight;
+            break;
+            case 27:
+                delwin(confirm_win);
+            return false;
+            default:
+                break;
+        }
+
+        if (choice != 0) {
+            delwin(confirm_win);
+            return (choice == 1);
+        }
+    }
+}
 int gm_start() {
     // initialize ncurses
     initscr();

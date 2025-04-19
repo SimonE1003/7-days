@@ -16,4 +16,13 @@ void start_explore() {
         end_a_day();
     }
 }//this will start one daytime, i feel that let start_explore be day basis
-void start_UI(){ gm_start(); }// this will start UI
+void start_UI(){
+	gm_start();
+  	/*
+	if (is_quit()){
+		endwin();
+    	exit(0);
+	}
+  	 */
+}// this will start UI
+//
