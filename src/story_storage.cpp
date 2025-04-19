@@ -16,7 +16,7 @@ int generate_random_num(int min, int max)
 }
 
 
-vector<int> hospital_head_story = {0,3,7,15,28,30,32,34,36};
+vector<int> hospital_head_story = {0,3,7,15,28,30,32,34,36,42,45,48,51,54,57};
 
 vector<int> weaponshop_head_story = {0,4,9,14,15,18,20,23,33,36,37,38,41,44};
 
@@ -492,7 +492,7 @@ void initialize_hospital_story()
     hospital_story[25]->next = vector<story *>{hospital_story[26], hospital_story[27]};
 
 
-    hospital_story.resize(50);
+    hospital_story.resize(70);
 
     // Story 28
     hospital_story[28] = new story;
@@ -588,7 +588,127 @@ void initialize_hospital_story()
     hospital_story[41]->reward = {"bullets +1"};
 
 
+    // Story 42
+    hospital_story[42] = new story;
+    hospital_story[42]->text = "You hear a distant scream echoing through the hallway.";
+    hospital_story[42]->options.push_back("Investigate the scream");
+    hospital_story[42]->options.push_back("Stay where you are");
     
+    hospital_story[43] = new story;
+    hospital_story[43]->text = "You find a wounded patient. He begs for help.";
+    hospital_story[43]->options.push_back("Help him");
+    hospital_story[43]->options.push_back("Ignore him and leave");
+    hospital_story[43]->next.push_back(nullptr);
+    hospital_story[43]->reward = {"sanity +1"};
+    
+    hospital_story[44] = new story;
+    hospital_story[44]->text = "You stand frozen. The screaming stops.";
+    hospital_story[44]->options.push_back("End conversation");
+    hospital_story[44]->next.push_back(nullptr);
+    hospital_story[44]->reward = {"sanity -1"};
+    
+    hospital_story[42]->next = vector<story *>{hospital_story[43], hospital_story[44]};
+   
+    //Story 45
+    hospital_story[45] = new story;
+    hospital_story[45]->text = "You enter an old operating theater. Lights flicker.";
+    hospital_story[45]->options.push_back("Explore the room");
+    hospital_story[45]->options.push_back("Leave quickly");
+    
+    hospital_story[46] = new story;
+    hospital_story[46]->text = "You find a surgical mask with dried blood.";
+    hospital_story[46]->options.push_back("Put it on");
+    hospital_story[46]->options.push_back("Throw it away");
+    hospital_story[46]->next.push_back(nullptr);
+    hospital_story[46]->reward = {"sanity -2"};
+    
+    hospital_story[47] = new story;
+    hospital_story[47]->text = "You decide not to risk it and leave unharmed.";
+    hospital_story[47]->options.push_back("End conversation");
+    hospital_story[47]->next.push_back(nullptr);
+    
+    hospital_story[45]->next = vector<story *>{hospital_story[46], hospital_story[47]};
+    
+    //Story 48
+    hospital_story[48] = new story;
+    hospital_story[48]->text = "A security camera whirs and follows your movement.";
+    hospital_story[48]->options.push_back("Wave at it");
+    hospital_story[48]->options.push_back("Destroy it");
+    
+    hospital_story[49] = new story;
+    hospital_story[49]->text = "You wave. A voice says: 'Subject stable.'";
+    hospital_story[49]->options.push_back("Keep moving");
+    hospital_story[49]->next.push_back(nullptr);
+    hospital_story[49]->reward = {"sanity +1"};
+    
+    hospital_story[50] = new story;
+    hospital_story[50]->text = "You destroy it. Alarms blare!";
+    hospital_story[50]->options.push_back("Run!");
+    hospital_story[50]->next.push_back(nullptr);
+    hospital_story[50]->reward = {"sanity -1", "inventory keycard"};
+    
+    hospital_story[48]->next = vector<story *>{hospital_story[49], hospital_story[50]};
+    
+    //Story 51
+    hospital_story[51] = new story;
+    hospital_story[51]->text = "You enter a small chapel room, candles flicker but no wind blows.";
+    hospital_story[51]->options.push_back("Light a candle");
+    hospital_story[51]->options.push_back("Say a prayer");
+    
+    hospital_story[52] = new story;
+    hospital_story[52]->text = "The candle lights itself before you touch it.";
+    hospital_story[52]->options.push_back("Step back");
+    hospital_story[52]->next.push_back(nullptr);
+    hospital_story[52]->reward = {"sanity -1"};
+    
+    hospital_story[53] = new story;
+    hospital_story[53]->text = "You feel peace as you pray. Something watches kindly.";
+    hospital_story[53]->options.push_back("End prayer");
+    hospital_story[53]->next.push_back(nullptr);
+    hospital_story[53]->reward = {"sanity +2"};
+    
+    hospital_story[51]->next = vector<story *>{hospital_story[52], hospital_story[53]};
+    
+    //Story 54
+    hospital_story[54] = new story;
+    hospital_story[54]->text = "You're in the morgue. One drawer is slightly open.";
+    hospital_story[54]->options.push_back("Open it fully");
+    hospital_story[54]->options.push_back("Walk away slowly");
+    
+    hospital_story[55] = new story;
+    hospital_story[55]->text = "Inside lies your own file... with tomorrow's date of death.";
+    hospital_story[55]->options.push_back("Burn it");
+    hospital_story[55]->next.push_back(nullptr);
+    hospital_story[55]->reward = {"sanity -2"};
+    
+    hospital_story[56] = new story;
+    hospital_story[56]->text = "You back away. Something breathes from the drawer.";
+    hospital_story[56]->options.push_back("Run");
+    hospital_story[56]->next.push_back(nullptr);
+    
+    hospital_story[54]->next = vector<story *>{hospital_story[55], hospital_story[56]};
+
+    //Story 57 
+    hospital_story[57] = new story;
+    hospital_story[57]->text = "You find a storage room labeled 'Hazardous Materials'.";
+    hospital_story[57]->options.push_back("Search inside");
+    hospital_story[57]->options.push_back("Close the door");
+    
+    hospital_story[58] = new story;
+    hospital_story[58]->text = "You find a strange vial labeled 'Do not consume'.";
+    hospital_story[58]->options.push_back("Drink it");
+    hospital_story[58]->options.push_back("Take it with you");
+    hospital_story[58]->next.push_back(nullptr);
+    hospital_story[58]->reward = {"inventory unknown_vial"};
+    
+    hospital_story[59] = new story;
+    hospital_story[59]->text = "You close the door. The lights flicker, but you feel safe.";
+    hospital_story[59]->options.push_back("End conversation");
+    hospital_story[59]->next.push_back(nullptr);
+    
+    hospital_story[57]->next = vector<story *>{hospital_story[58], hospital_story[59]};
+    
+
     hospital_story[28]->next = vector<story *> {hospital_story[29], nullptr};
     hospital_story[30]->next = vector<story *>{hospital_story[31], nullptr};
     hospital_story[31]->next = vector<story *>{hospital_story[38], nullptr};
