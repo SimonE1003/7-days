@@ -1685,7 +1685,7 @@ void initialize_glass_breanking_noise()
     glass_breaking_noise[14]->text = "You suddently run into a pit, and you got eaten by a bunch of cockroaches";
     glass_breaking_noise[14]->options.push_back("End game");
     glass_breaking_noise[14]->next.push_back(nullptr);
-    glass_breaking_noise[14]->reward = {"death"};
+    glass_breaking_noise[14]->reward = {"death"}; //game ends here
 
     int random_branch = generate_random_num(0, 2);
 
@@ -1749,7 +1749,7 @@ void initialize_lights_off()
     lights_off[6]->text = "The spider is too fast, he bite your neck from the back, you died";
     lights_off[6]->options.push_back("End game");
     lights_off[6]->next.push_back(nullptr);
-    lights_off[6]->reward = {"death"};
+    lights_off[6]->reward = {"death"}; //game ends here
 
     //2: Zombie story
     lights_off[7]->text = "You see a zombie kicking the cable, that might be the reason of why light went off";
@@ -1780,7 +1780,7 @@ void initialize_lights_off()
     lights_off[14]->text = "You got electricuted when you got close to the cable"; 
     lights_off[14]->options.push_back("End game"); 
     lights_off[14]->next.push_back(nullptr);
-    lights_off[14]->reward = {"death"};
+    lights_off[14]->reward = {"death"}; //game ends here
     lights_off[15]->text = "You got some clean rain water"; 
     lights_off[15]->options.push_back("End conversation"); 
     lights_off[15]->next.push_back(nullptr);
