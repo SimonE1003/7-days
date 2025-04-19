@@ -70,6 +70,7 @@ void boss_battle(){
 	int height, width;
     getmaxyx(stdscr, height, width);
 	play_story(UI_stories[2], height, width);
+	UI_stories[3]->text = "You got "+ to_string(gs.health) + " health, "+to_string(gs.sanity)+" sanity and "+ to_string(gs.bullet) + " bullets";
 	play_story(UI_stories[3], height, width);
 	while (1)
 	{

@@ -8,11 +8,10 @@
 
 void start_explore() { 
     initialize_stories();
-    if (gs.day == 7){
-        boss_battle();
-        win();
-    }
     while(gs.day<100){
+        if (gs.day == 7){
+            boss_battle();
+        }
         run_shelter();
         end_a_day();
     }
