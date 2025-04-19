@@ -10,7 +10,7 @@ using namespace std;
 struct GameState {
     double day;
     int food, water, difficulty, hunger, thirst, health, sanity, bullet;
-    bool ill;
+    int ill;
     vector <string> items;
 };
 

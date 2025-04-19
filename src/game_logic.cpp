@@ -5,7 +5,15 @@
 #include <unistd.h>
 
 void end(int code) {
-	//
+	switch (code){
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+	}
 }
 
 void end_a_day()
@@ -53,7 +61,7 @@ void end_a_day()
 			end(3);//craziness
 		}
 	}
-	if (gs.ill){
+	if (gs.ill > 0){
 		gs.health-=delta;
 		if(gs.health<=0) {
 			end(4);//illness

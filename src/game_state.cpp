@@ -13,7 +13,7 @@ struct GameState {
 };
 */
 
-GameState gs={0,0,0,0,10,10,10,10,0,false,{}};
+GameState gs={0,0,0,0,10,10,10,10,0,0,{}};
 
 void display_status(GameState gs)
 {
