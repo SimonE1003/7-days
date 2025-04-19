@@ -401,7 +401,7 @@ void initialize_hospital_story()
     hospital_story[14]->text = "The patient reveals a series of number 651149114, no idea what it means.";
     hospital_story[14]->options.push_back("Leave him alone");
     hospital_story[14]->next.push_back(nullptr);
-    hospital_story[14]->reward = {"startstory 11"}; //i havent implemented the program to print out weird stuff so it will core dumped when the reward is something other than the described type
+    //hospital_story[14]->reward = {"start story 11"}; i havent implemented the program to print out weird stuff so it will core dumped when the reward is something other than the described type
 
     // Story 15
     hospital_story.push_back(new story);
@@ -1335,7 +1335,6 @@ void initialize_UI_stories()
 	UI_stories[2]->next.push_back(nullptr);
 
     UI_stories.push_back(new story);
-    UI_stories[3]->text = "You got "+ to_string(gs.health) + " health, "+to_string(gs.sanity)+" sanity and "+ to_string(gs.bullet) + " bullets";
 	UI_stories[3]->options.push_back("Start fighting");
 	UI_stories[3]->next.push_back(nullptr);
 
