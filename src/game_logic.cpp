@@ -5,15 +5,18 @@
 #include <unistd.h>
 
 void end(int code) {
+	int height, width;
+    getmaxyx(stdscr, height, width);
 	switch (code){
-		case 1:
-		case 2:
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		case 7:
+		case 1:UI_stories[15]->text = "You starved to death at the end of the wilderness due to lack of food.";
+		case 2:UI_stories[15]->text = "You died of thirst, parched in the desolate wilderness.";
+		case 3:UI_stories[15]->text = "You lost your mind to madness, consumed by chaos in the end.";
+		case 4:UI_stories[15]->text = "You succumbed to illness, fading away in the grip of disease.";
+		case 5:UI_stories[15]->text = "You fell in the boss battle, vanquished by an unstoppable foe.";
+		case 6:UI_stories[15]->text = "You lie in a pool of blood, and your vision gradually turns black.";
+		case 7:UI_stories[15]->text = "You were seriously injured and collapsed.";
 	}
+	play_story(UI_stories[15], height, width);
 }
 
 void end_a_day()

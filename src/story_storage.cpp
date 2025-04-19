@@ -1511,8 +1511,9 @@ void initialize_UI_stories()
     UI_stories[14]->options.push_back("Oh no...");
     UI_stories[14]->next.push_back(nullptr);
 
-    //UI_stories.push_back(new story); // for boss fight use;
-
+    UI_stories.push_back(new story);
+    UI_stories[15]->options.push_back("Don't lose heart, try again!");
+    UI_stories[15]->next.push_back(nullptr);
 }
 
 vector<story *> knocking_door;
@@ -1535,10 +1536,10 @@ void initialize_knocking_door()
     knocking_door[2]->text = "After walking a few steps in the dark, you hear a scream and suddenly got scrached by a woman covered in blood.";
     knocking_door[2]->options.push_back("Fight the woman");
     knocking_door[2]->options.push_back("Run back home");
-    knocking_door[3]->text = "The woman killed you before you can draw your weapon, you should've never come outside at night";
+    knocking_door[3]->text = "The woman atacked you before you can draw your weapon, you should've never come outside at night";
     knocking_door[3]->options.push_back("End Game");
     knocking_door[3]->next.push_back(nullptr);
-    knocking_door[3]->reward = {"death"}; // game ends here
+    knocking_door[3]->reward = {"death"}; // game ends here end(6)
     knocking_door[4]->text = "You rushed back home and slamed the door behind you";
     knocking_door[4]->options.push_back("End conversation");
     knocking_door[4]->next.push_back(nullptr);
