@@ -3,6 +3,7 @@
 #include "../include/map_head.h"
 #include <ncurses.h>
 #include <unistd.h>
+#include <cstdlib>
 
 void end(int code) {
 	int height, width;
@@ -14,9 +15,10 @@ void end(int code) {
 		case 4:UI_stories[15]->text = "You succumbed to illness, fading away in the grip of disease.";
 		case 5:UI_stories[15]->text = "You fell in the boss battle, vanquished by an unstoppable foe.";
 		case 6:UI_stories[15]->text = "You lie in a pool of blood, and your vision gradually turns black.";
-		case 7:UI_stories[15]->text = "You were seriously injured and collapsed.";
+		case 7:UI_stories[15]->text = "";//not used yet
 	}
 	play_story(UI_stories[15], height, width);
+	exit(0);
 }
 
 void end_a_day()
@@ -62,12 +64,7 @@ void end_a_day()
 			end(2);//thirst
 		}
 	}
-	if (gs.sanity>delta)
-	{
-		gs.sanity-=delta;
-		UI_stories[17]->text += "Sanity "+to_string(gs.sanity)+"(-"+to_string(delta)+") ";
-	}
-	else
+	if (gs.sanity<delta)
 	{
 		gs.health-=delta;
 		
