@@ -335,7 +335,7 @@ void run_shelter()
         switch (ch)
         {
         case KEY_UP:
-            mvprintw(0, 0, "Up arrow key pressed");
+            //mvprintw(0, 0, "Up arrow key pressed");
             checkY = charactorpos[0] - 1 - (height - map.size()) / 2;
             checkX = charactorpos[1] - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -346,7 +346,7 @@ void run_shelter()
             }
             break;
         case KEY_DOWN:
-            mvprintw(0, 0, "Down arrow key pressed");
+            //mvprintw(0, 0, "Down arrow key pressed");
             checkY = charactorpos[0] + 1 - (height - map.size()) / 2;
             checkX = charactorpos[1] - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -357,7 +357,7 @@ void run_shelter()
             }
             break;
         case KEY_LEFT:
-            mvprintw(0, 0, "Left arrow key pressed");
+            //mvprintw(0, 0, "Left arrow key pressed");
             checkY = charactorpos[0] - (height - map.size()) / 2;
             checkX = charactorpos[1] - 1 - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -368,7 +368,7 @@ void run_shelter()
             }
             break;
         case KEY_RIGHT:
-            mvprintw(0, 0, "Right arrow key pressed");
+            //mvprintw(0, 0, "Right arrow key pressed");
             checkY = charactorpos[0] - (height - map.size()) / 2;
             checkX = charactorpos[1] + 1 - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -392,14 +392,14 @@ void run_shelter()
             drawmap(map, height, width);
             refresh();
         default:
-            mvprintw(0, 0, "Key pressed: %c       ", ch);
+            //mvprintw(0, 0, "Key pressed: %c       ", ch);
             break;
         }
 
         mvprintw(charactorpos[0], charactorpos[1], "X");
         //mvprintw(1, 0, "Position: %d, %d      ", charactorpos[0], charactorpos[1]);
         //mvprintw(2, 0, "Window size: %d, %d", height, width);
-
+        display_topleft_corner(gs,current_map);
         refresh();
     }
 

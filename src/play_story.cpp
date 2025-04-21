@@ -218,7 +218,9 @@ void create_story_spot(int num, int original_x, int original_y, int height, int 
 }
 
 void play_story(story* current_story, int height, int width) {
+    string current_map = "Story";
     clear();
+    display_topleft_corner(gs, current_map);
     refresh();
     if (current_story == nullptr) {
         return;
@@ -285,6 +287,22 @@ void play_story(story* current_story, int height, int width) {
                                         break;
                                     }
                                 }
+                                if (type == "inventory-"){
+                                    bool found = false;
+                                    for (auto it = gs.items.begin(); it != gs.items.end(); ++it) {
+                                        if (*it == value) {
+                                            gs.items.erase(it);
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!found) {
+                                        proceed = false;
+                                        mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Item not found!, please choose again)");
+                                        refresh();
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -334,6 +352,7 @@ void play_story(story* current_story, int height, int width) {
                 // Display the reward
                 if (!rewardPrint.empty()) {
                     cleanwholescreen(height, width);
+                    display_topleft_corner(gs, current_map);
                     refresh();
                     mvprintw(height / 2, (width - rewardPrint.length() - 6) / 2, "Added %s", rewardPrint.c_str());
                     mvprintw(height / 2 + 2, (width - 24) / 2, "Press Enter to continue...");
@@ -346,6 +365,7 @@ void play_story(story* current_story, int height, int width) {
         }
     }
     clear();
+    display_topleft_corner(gs, current_map);
     refresh();
 }
 

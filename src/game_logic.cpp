@@ -30,6 +30,7 @@ void end_a_day()
 	gs.day+=0.5;
 	int health_minused = 0;
 	int delta = 1 + gs.difficulty;
+	UI_stories[17]->text = "";
 	if (gs.food>=delta)
 	{
 		gs.food-=delta;
@@ -173,5 +174,5 @@ void win() {
     getch();
     delwin(good_ending_win);
     endwin();
-    exit(0);
+    //exit(0);
 }

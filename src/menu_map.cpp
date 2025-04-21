@@ -89,15 +89,15 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
 	{
 		clearnear(characterpos[0], characterpos[1], map, height, width);
 		clearnear(characterpos[0], characterpos[1]+1, map, height, width);
-		mvprintw(1,0,"X %d Y %d", characterpos[0], characterpos[1]);
+		//mvprintw(1,0,"X %d Y %d", characterpos[0], characterpos[1]);
 		int checkX, checkY, refX, refY;
 		refX = characterpos[0] - (height - map.size()) / 2;
 		refY = characterpos[1] - (width - map[0].size()) / 2;
-		mvprintw(2,0, "refX %d refY %d", refX, refY);
+		//mvprintw(2,0, "refX %d refY %d", refX, refY);
 		switch (ch)
         {
        		case KEY_UP:
-            		mvprintw(0, 0, "Up arrow key pressed");
+            		//mvprintw(0, 0, "Up arrow key pressed");
             		checkX = characterpos[0] - 1 - (height - map.size()) / 2;
             		checkY = characterpos[1] - (width - map[0].size()) / 2;
             		//mvprintw(4, 0, "checkX: %d", checkX);
@@ -112,7 +112,7 @@ int menu() // this will return an int value, 0 for shelter, 1 for hospital, 2 fo
 			}
             		break;
         	case KEY_DOWN:
-            		mvprintw(0, 0, "Down arrow key pressed");
+            		//mvprintw(0, 0, "Down arrow key pressed");
             		checkX = characterpos[0] + 1 - (height - map.size()) / 2;
             		checkY = characterpos[1] - (width - map[0].size()) / 2;
             		//mvprintw(4, 0, "checkX: %d", checkX);

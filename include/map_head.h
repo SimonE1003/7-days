@@ -65,4 +65,5 @@ void cleanwholescreen(int height, int width);
 
 bool is_quit();
 
+
 #endif
