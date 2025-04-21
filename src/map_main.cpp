@@ -1,7 +1,9 @@
 #include <ncurses.h> // For ncurses functions
-#include <vector>    // For ector
+#include <vector>    // For vector
 #include <string>    // For string
 #include <cstdio>    // For printf-style formatting in mvprintw
+#include <cstdlib>  // for rand() and srand()
+#include <ctime>    // for time()
 #include "../include/map_head.h"
 #include <iostream>
 #include <set>
@@ -67,6 +69,15 @@ void drawmap(vector<vector<char>> map, int height, int width)
 }
 void run_shelter()
 {
+    vector<story*> nstories;
+    nstories.push_back(knocking_door[0]);
+    nstories.push_back(glass_breaking_noise[0]);
+    nstories.push_back(lights_off[0]);
+    nstories.push_back(temperature_drop[0]);
+    nstories.push_back(temperature_increase[0]);
+    nstories.push_back(green_light[0]);
+    int index;
+
     string current_map;
     vector<vector<char>> map;
     /*cout << "choose a map\n0 : hospital\n1 : shelter\n2 : weaponshop\n3 : supermarket\n";
@@ -253,8 +264,15 @@ void run_shelter()
                     refresh();
                 }*/
             }
-            else if ((int)(gs.day/0.5)%2==1){
-                mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press P to start night time");
+            else if ((int)(gs.day/0.5)%2==1){ //trigger nighttime story
+                index = generate_random_num(0, nstories.size()-1);
+                play_story(nstories[index], height, width);
+                nstories.erase(nstories.begin() + index);
+                //drawmap(map, height, width);
+                end_a_day();
+                play_story(UI_stories[1], height, width);
+                return;
+                break;
             }
             else
             {
@@ -361,13 +379,6 @@ void run_shelter()
             }
             break;
         case ERR:
-            break;
-        case 'p': // just for testing the story
-            play_story(green_light[0], height, width);
-            //drawmap(map, height, width);
-            end_a_day();
-            play_story(UI_stories[1], height, width);
-            return;
             break;
         case 'k': // reset the current map just for testing
             create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);
