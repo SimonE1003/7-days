@@ -16,6 +16,13 @@ The player has status indicators including health, hunger, thirst, and sanity, a
 
 If the player is not dead within seven-days, he/she will enter the final boss fight, and win if the boss is defeated. 
 
+Important keys:
+
+	1. in shelter: S-> save, E-> Exit 
+	2. out side: S-> story
+	3. press I to check your status
+
+
 ## Implemented Features:
 
 ## Non-standard libraries:
