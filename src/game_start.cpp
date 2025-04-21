@@ -215,18 +215,39 @@ int gm_start() {
             clear();
             refresh();
             //simplified information display
-            WINDOW* info_win = newwin(30, 90,
-                                     (screen_height - 30) / 2,
-                                     (screen_width - 90) / 2);
+            WINDOW* info_win = newwin(screen_height, screen_height,0,0);
             box(info_win, 0, 0);
-            mvwprintw(info_win, 1, 1, "Game Information:");
-            mvwprintw(info_win, 3, 1, "Goal of game: survive 7days");
-            mvwprintw(info_win, 4, 1, "Rule: you have to control human's basic need with items");
-            mvwprintw(info_win, 5, 1, "Basically, in the morning you have to collect and follow main story at night");
-            mvwprintw(info_win, 6, 1, "Special keys and points: ");
-            mvwprintw(info_win, 7, 1, "Name: IDK");
-            mvwprintw(info_win, 8, 1, "Author: Group66");
-            mvwprintw(info_win, 11, 1, "Press any key to continue...");
+            vector<string> gameInfo = {
+                "Game Information:",
+                "Name: Seven Days",
+                "Group number: 66",
+                "Authors: KIM YOUNGSEO, LIN CHUNG HAY, SUN JINNAN, SUN YI-TSEN, WANG YUMING, ZHANG JIAHAO",
+                "Goal of game: survive 7 days",
+                "Rules:",
+                "   - You have to control human's basic needs with items",
+                "Factors influence your survival:",
+                "  * Hunger, Thirst, Sanity, Illness, and other items",
+                "Game Mechanics:",
+                "   1. After night:",
+                "       - If hunger, thirst, or sanity reaches zero -> health decreases",
+                "       - If illness is above zero -> health decreases",
+                "   2. Through events -> sanity changes",
+                "   3. You can collect food/water to avoid hunger/thirst (automatically used after night)",
+                "   4. No health -> different endings",
+                "Gameplay:",
+                "   1. Day time: Go out and collect items",
+                "   2. Night time: Important story happens at shelter",
+                "   3. Both night/day show 1 story",
+                "   4. After 7 days something happens - prepare well",
+                "Important Keys:",
+                "   1. In shelter: - S -> Save - E -> Exit",
+                "   2. Outside: - S -> Story",
+                "   3. Press I to check your status"
+            };
+            int y = 1;
+            for (const auto& line : gameInfo) {
+                mvwprintw(info_win, y++, 2, "%s", line.c_str());
+            }
             wrefresh(info_win);
             wgetch(info_win);
             delwin(info_win);
