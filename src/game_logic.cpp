@@ -17,7 +17,7 @@ void end(int code) {
 		case 4:UI_stories[15]->text = "You succumbed to illness, fading away in the grip of disease.";
 		case 5:UI_stories[15]->text = "You fell in the boss battle, vanquished by an unstoppable foe.";
 		case 6:UI_stories[15]->text = "You lie in a pool of blood, and your vision gradually turns black.";
-		case 7:UI_stories[15]->text = "";//not used yet
+		case 7:UI_stories[15]->text = "You died";//not used yet
 	}
 	play_story(UI_stories[15], height, width);
 	exit(0);

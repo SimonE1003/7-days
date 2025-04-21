@@ -3,6 +3,7 @@
 #include <string>  // For string
 #include "../include/map_head.h"
 #include "../include/game_state.h"
+#include "../include/game_logic.h"
 #include <iostream>
 #include <ctime>
 #include <sstream>
@@ -20,30 +21,30 @@ inventory effect: story_effect("inventory", "item")*/
 bool story_effect(const string& type, const int&value){
     if (type == "health"){ // Update health point
         gs.health += value;
-        if (gs.health < 0) gs.health = 0; // Prevent negative health
+        if (gs.health <= 0) return false; // Prevent negative health
         return true;
     } else if (type == "food") {
         gs.food += value; // Update food count
-        if (gs.food < 0) gs.food = 0; // Prevent negative food
+        if (gs.food <= 0) return false; // Prevent negative food
         return true;
     } else if (type == "water") {
         gs.water += value; // Update water count
-        if (gs.water < 0) gs.water = 0; // Prevent negative water
+        if (gs.water <= 0) return false; // Prevent negative water
         return true;
     } 
     else if (type == "sanity"){
         gs.sanity += value; // Update sanity level
-        if (gs.sanity < 0) gs.sanity = 0; // Prevent negative sanity
+        if (gs.sanity <= 0) return false; // Prevent negative sanity
         return true;
     } 
     else if (type == "hunger") {
         gs.hunger += value; // Update hunger level
-        if (gs.hunger < 0) gs.hunger = 0; // Prevent negative hunger
+        if (gs.hunger <= 0) return false; // Prevent negative hunger
         return true;
     } 
     else if (type == "thirst") {
         gs.thirst += value; // Update thirst level
-        if (gs.thirst < 0) gs.thirst = 0; // Prevent negative thirst
+        if (gs.thirst <= 0) return false; // Prevent negative thirst
         return true;
     }
     else if (type == "bullet") {
@@ -319,14 +320,21 @@ void play_story(story* current_story, int height, int width) {
                             story_effect(type, value); // Inventory rewards
                             rewardPrint += reward + ", ";
                         } else if (type == "health" || type == "food" || type == "water" || type == "bullet" || type == "sanity") {
-                            if (!story_effect(type, stoi(value))) {
+                            if (story_effect(type, stoi(value))) rewardPrint += reward + ", ";
+                            else if (type == "health") end(6);
+                            else if (type == "food") end(1);
+                            else if (type == "water") end(2);
+                            else if (type == "sanity") end(3);
+                            else if (type == "ill") end(4); 
+                            /*if (!story_effect(type, stoi(value))) {
                                 proceed = false;
                                 mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
                                 refresh();
                             } else {
                                 rewardPrint += reward + ", ";
-                            }
+                            }*/
                         } 
+                        else if (type == "death") end(7);
                         else if (type == "startstory"){
                             story_effect(type, value); // Start story rewards
                         }
