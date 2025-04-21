@@ -30,15 +30,15 @@ void initialize_weaponshop_story()
 	}
         //story0 Main1
         
-        weaponshop_story[0]->text="You see an AK-47 on the ground.";
-        weaponshop_story[0]->options.push_back("Try to get that AK-47");//story1
+        weaponshop_story[0]->text="You see an AK47 on the ground.";
+        weaponshop_story[0]->options.push_back("Try to get that AK47");//story1
         weaponshop_story[0]->options.push_back("Ignore the gun");//story2
 
         //story1 Main1 branch1
         weaponshop_story[1]->text="A zombie noticed you, it is time to try your new weapon.";
         weaponshop_story[1]->options.push_back("Kill it with your AK-47!!!");
 	    weaponshop_story[1]->next.push_back(nullptr);
-        weaponshop_story[1]->reward={"inventory AK-47",/*gs.weaponlevel+*/"bullet - 2"};//here will be bullet -2/weaponlevel
+        weaponshop_story[1]->reward={"inventory AK47","bullet -2"};
 	//story2 Main1 branch2
 	
 	weaponshop_story[2]->text="You keep searching in the weaponshop, and noticed some bullets on the counter.";
