@@ -2,7 +2,7 @@
 
 Team members:
 Kim Youngseo - 3036446042
-Lin Chung Hay Brandon
+Lin Chung Hay Brandon - 3036451578
 Sun Jinnan - 3036289688
 Sun Yi-Tsen - 3036385767
 Wang Yuming - 3036297386
