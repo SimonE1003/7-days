@@ -168,8 +168,8 @@ void win() {
     }
 
 
-    string exit = "Press any key to exit";
-    mvwprintw(good_ending_win, start_y + lines + 2, (screen_width - exit.length()) / 2, "%s", exit.c_str());
+    string exitM = "Press any key to exit";
+    mvwprintw(good_ending_win, start_y + lines + 2, (screen_width - exitM.length()) / 2, "%s", exitM.c_str());
     wrefresh(good_ending_win);
     getch();
     delwin(good_ending_win);
