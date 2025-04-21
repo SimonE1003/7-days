@@ -214,40 +214,35 @@ int gm_start() {
         else if (choice == 3) {  // Information
             clear();
             refresh();
-            //simplified information display
-            WINDOW* info_win = newwin(screen_height, screen_height,0,0);
+            WINDOW* info_win = newwin(30, 90,
+                         (screen_height - 30) / 2,
+                         (screen_width - 90) / 2);
             box(info_win, 0, 0);
-            vector<string> gameInfo = {
-                "Game Information:",
-                "Name: Seven Days",
-                "Group number: 66",
-                "Authors: KIM YOUNGSEO, LIN CHUNG HAY, SUN JINNAN, SUN YI-TSEN, WANG YUMING, ZHANG JIAHAO",
-                "Goal of game: survive 7 days",
-                "Rules:",
-                "   - You have to control human's basic needs with items",
-                "Factors influence your survival:",
-                "  * Hunger, Thirst, Sanity, Illness, and other items",
-                "Game Mechanics:",
-                "   1. After night:",
-                "       - If hunger, thirst, or sanity reaches zero -> health decreases",
-                "       - If illness is above zero -> health decreases",
-                "   2. Through events -> sanity changes",
-                "   3. You can collect food/water to avoid hunger/thirst (automatically used after night)",
-                "   4. No health -> different endings",
-                "Gameplay:",
-                "   1. Day time: Go out and collect items",
-                "   2. Night time: Important story happens at shelter",
-                "   3. Both night/day show 1 story",
-                "   4. After 7 days something happens - prepare well",
-                "Important Keys:",
-                "   1. In shelter: - S -> Save - E -> Exit",
-                "   2. Outside: - S -> Story",
-                "   3. Press I to check your status"
-            };
-            int y = 1;
-            for (const auto& line : gameInfo) {
-                mvwprintw(info_win, y++, 2, "%s", line.c_str());
-            }
+
+            // Game information display
+            mvwprintw(info_win, 1, 1, "Game Information:");
+            mvwprintw(info_win, 3, 1, "Name: Seven Days");
+            mvwprintw(info_win, 4, 1, "Group number: 66");
+            mvwprintw(info_win, 5, 1, "Authors: KIM YOUNGSEO, LIN CHUNG HAY, SUN JINNAN,");
+            mvwprintw(info_win, 6, 1, "        SUN YI-TSEN, WANG YUMING, ZHANG JIAHAO");
+            mvwprintw(info_win, 8, 1, "Goal of game: survive 7 days");
+            mvwprintw(info_win, 10, 1, "Rules:");
+            mvwprintw(info_win, 11, 3, "- You have to control human's basic needs with items");
+            mvwprintw(info_win, 13, 1, "Factors influence your survival:");
+            mvwprintw(info_win, 14, 3, "* Hunger, Thirst, Sanity, Illness, and other items");
+            mvwprintw(info_win, 16, 1, "Game Mechanics:");
+            mvwprintw(info_win, 17, 3, "1. After night:");
+            mvwprintw(info_win, 18, 5, "- If hunger, thirst, or sanity reaches zero -> health decreases");
+            mvwprintw(info_win, 19, 5, "- If illness is above zero -> health decreases");
+            mvwprintw(info_win, 20, 3, "2. Through events -> sanity changes");
+            mvwprintw(info_win, 21, 3, "3. Collect food/water (automatically used after night)");
+            mvwprintw(info_win, 22, 3, "4. No health -> different endings");
+            mvwprintw(info_win, 24, 1, "Important Keys:");
+            mvwprintw(info_win, 25, 3, "1. In shelter: S->Save  E->Exit");
+            mvwprintw(info_win, 26, 3, "2. Outside: S->Story");
+            mvwprintw(info_win, 27, 3, "3. Press I to check your status");
+            mvwprintw(info_win, 28, 1, "Press any key to continue...");
+
             wrefresh(info_win);
             wgetch(info_win);
             delwin(info_win);
