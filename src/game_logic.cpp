@@ -4,6 +4,8 @@
 #include <ncurses.h>
 #include <unistd.h>
 #include <cstdlib>
+#include <vector>
+#include <string>
 
 void end(int code) {
 	int height, width;
@@ -134,6 +136,42 @@ void boss_battle(){
 	}
 }
 
-void win(){
-	//
+void win() {
+    clear();
+    refresh();
+
+    int screen_height, screen_width;
+    getmaxyx(stdscr, screen_height, screen_width);
+
+    WINDOW* good_ending_win = newwin(screen_height-2, screen_width, 0, 0);
+    box(good_ending_win, 0, 0);
+
+    //ASCII art if you guys want some other win ascii change the vector, the x directtion must be equal
+    vector<string> victoryArt = {
+        R"($$\     $$\                                       $$\           )",
+        R"(\$$\   $$  |                                      \__|          )",
+        R"( \$$\ $$  /$$$$$$\  $$\   $$\       $$\  $$\  $$\ $$\ $$$$$$$\  )",
+        R"(  \$$$$  /$$  __$$\ $$ |  $$ |      $$ | $$ | $$ |$$ |$$  __$$\ )",
+        R"(   \$$  / $$ /  $$ |$$ |  $$ |      $$ | $$ | $$ |$$ |$$ |  $$ |)",
+        R"(    $$ |  $$ |  $$ |$$ |  $$ |      $$ | $$ | $$ |$$ |$$ |  $$ |)",
+        R"(    $$ |  \$$$$$$  |\$$$$$$  |      \$$$$$\$$$$  |$$ |$$ |  $$ |)",
+        R"(    \__|   \______/  \______/        \_____\____/ \__|\__|  \__|)"
+    };
+
+
+    int lines = victoryArt.size();
+    int start_y = (screen_height - lines) / 2;
+    for (int i = 0; i < lines; i++) {
+        int start_x = (screen_width - victoryArt[i].length()) / 2;
+        mvwprintw(good_ending_win, start_y + i, start_x, "%s", victoryArt[i].c_str());
+    }
+
+
+    string exit = "Press any key to exit";
+    mvwprintw(good_ending_win, start_y + lines + 2, (screen_width - exit.length()) / 2, "%s", exit.c_str());
+    wrefresh(good_ending_win);
+    getch();
+    delwin(good_ending_win);
+    endwin();
+    exit(0);
 }
