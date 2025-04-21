@@ -46,6 +46,8 @@ void clearnear(int x,int y,vector<vector<char> > map, int , int);
 
 void drawmap(vector<vector<char> > map , int , int);
 
+int generate_random_num(int min, int max);
+
 void initialize_stories();
 void initialize_hospital_story();
 

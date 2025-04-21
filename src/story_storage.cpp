@@ -1440,7 +1440,7 @@ void initialize_supermarket_story()
 void initialize_UI_stories()
 {
     UI_stories.push_back(new story);
-    UI_stories[0]->text = "Let's go directly back to the shelter";
+    UI_stories[0]->text = "You HAVE to go back to the shelter now because it is NIGHT";
     UI_stories[0]->options.push_back("Start Night Time");
     UI_stories[0]->next.push_back(nullptr);
 
@@ -1973,7 +1973,6 @@ void initialize_green_light(){
     green_light[25]->text = "They run too fast and got out of your sight, two people carried the dead bodies and also got away";
     green_light[25]->options.push_back("Go back to shelter"); //7
     green_light[25]->next.push_back(nullptr);
-
 
     //beacon (can lead to another ending)
 
