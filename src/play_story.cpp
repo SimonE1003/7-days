@@ -3,6 +3,7 @@
 #include <string>  // For string
 #include "../include/map_head.h"
 #include "../include/game_state.h"
+#include "../include/game_logic.h"
 #include <iostream>
 #include <ctime>
 #include <sstream>
@@ -20,30 +21,30 @@ inventory effect: story_effect("inventory", "item")*/
 bool story_effect(const string& type, const int&value){
     if (type == "health"){ // Update health point
         gs.health += value;
-        if (gs.health < 0) gs.health = 0; // Prevent negative health
+        if (gs.health <= 0) return false; // Prevent negative health
         return true;
     } else if (type == "food") {
         gs.food += value; // Update food count
-        if (gs.food < 0) gs.food = 0; // Prevent negative food
+        if (gs.food <= 0) return false; // Prevent negative food
         return true;
     } else if (type == "water") {
         gs.water += value; // Update water count
-        if (gs.water < 0) gs.water = 0; // Prevent negative water
+        if (gs.water <= 0) return false; // Prevent negative water
         return true;
     } 
     else if (type == "sanity"){
         gs.sanity += value; // Update sanity level
-        if (gs.sanity < 0) gs.sanity = 0; // Prevent negative sanity
+        if (gs.sanity <= 0) return false; // Prevent negative sanity
         return true;
     } 
     else if (type == "hunger") {
         gs.hunger += value; // Update hunger level
-        if (gs.hunger < 0) gs.hunger = 0; // Prevent negative hunger
+        if (gs.hunger <= 0) return false; // Prevent negative hunger
         return true;
     } 
     else if (type == "thirst") {
         gs.thirst += value; // Update thirst level
-        if (gs.thirst < 0) gs.thirst = 0; // Prevent negative thirst
+        if (gs.thirst <= 0) return false; // Prevent negative thirst
         return true;
     }
     else if (type == "bullet") {
@@ -106,8 +107,8 @@ vector<story*> sample( int num, string current_map) {
         vector<story*> selected_stories;
 
         // Ensure story 17 is included
-        if (hospital_story.size() > 13) {
-            selected_stories.push_back(hospital_story[13]);
+        if (hospital_story.size() > 0) {
+            selected_stories.push_back(hospital_story[0]);
             num--; // Reduce the number of remaining stories to select
         }
 
@@ -123,8 +124,8 @@ vector<story*> sample( int num, string current_map) {
             hospital_head_story.pop_back();
         }
 
-        return selected_stories;*/
-
+        return selected_stories;
+    }*/
     else if (current_map == "supermarket"){
         vector<story*> selected_stories;
         srand(time(0));
@@ -217,8 +218,10 @@ void create_story_spot(int num, int original_x, int original_y, int height, int 
     }
 }
 
-void play_story(story* current_story, int height, int width) {
+void play_story(story* current_story, int height, int width, string& rewardPrint) {
+    string current_map = "Story";
     clear();
+    display_topleft_corner(gs, current_map);
     refresh();
     if (current_story == nullptr) {
         return;
@@ -228,8 +231,6 @@ void play_story(story* current_story, int height, int width) {
     int play_pos = 0;
     int original_point[2] = {height / 3, int((width - current_story->text.size()) / 2)};
     int choice = 0;
-    string rewardPrint = "";
-
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
         if (play_pos < current_story->text.size()) {
             mvprintw(original_point[0], original_point[1] + play_pos, "%c", current_story->text[play_pos]);
@@ -285,6 +286,22 @@ void play_story(story* current_story, int height, int width) {
                                         break;
                                     }
                                 }
+                                if (type == "inventory-"){
+                                    bool found = false;
+                                    for (auto it = gs.items.begin(); it != gs.items.end(); ++it) {
+                                        if (*it == value) {
+                                            gs.items.erase(it);
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!found) {
+                                        proceed = false;
+                                        mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Item not found!, please choose again)");
+                                        refresh();
+                                        break;
+                                    }
+                                }
                             }
                         }
                     }
@@ -301,14 +318,14 @@ void play_story(story* current_story, int height, int width) {
                             story_effect(type, value); // Inventory rewards
                             rewardPrint += reward + ", ";
                         } else if (type == "health" || type == "food" || type == "water" || type == "bullet" || type == "sanity") {
-                            if (!story_effect(type, stoi(value))) {
-                                proceed = false;
-                                mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
-                                refresh();
-                            } else {
-                                rewardPrint += reward + ", ";
-                            }
+                            if (story_effect(type, stoi(value))) rewardPrint += reward + ", ";
+                            else if (type == "health") end(6);
+                            else if (type == "food") end(1);
+                            else if (type == "water") end(2);
+                            else if (type == "sanity") end(3);
+                            else if (type == "ill") end(4); 
                         } 
+                        else if (type == "death") end(7);
                         else if (type == "startstory"){
                             story_effect(type, value); // Start story rewards
                         }
@@ -317,23 +334,14 @@ void play_story(story* current_story, int height, int width) {
                         }
                     }
 
+                }
+                // Display the reward
+                if (!rewardPrint.empty() && current_story->next[0] == nullptr) {
                     if (!rewardPrint.empty() && rewardPrint.length() > 2) {
                         rewardPrint = rewardPrint.substr(0, rewardPrint.length() - 2); // Remove trailing ", "
                     }
-                }
-                
-                if (!proceed) {
-                    break;
-                }
-
-                // Ensure choice is within bounds before proceeding
-                if (choice >= 0 && choice < current_story->next.size()) {
-                    play_story(current_story->next[choice], height, width);
-                }
-
-                // Display the reward
-                if (!rewardPrint.empty()) {
                     cleanwholescreen(height, width);
+                    display_topleft_corner(gs, current_map);
                     refresh();
                     mvprintw(height / 2, (width - rewardPrint.length() - 6) / 2, "Added %s", rewardPrint.c_str());
                     mvprintw(height / 2 + 2, (width - 24) / 2, "Press Enter to continue...");
@@ -341,11 +349,20 @@ void play_story(story* current_story, int height, int width) {
                     while ((ch = getch()) != '\n') {
                         continue; // Wait for the user to press Enter
                     }
+                    rewardPrint.clear();
+                }
+                if (!proceed) {
+                    break;
+                }
+                // Ensure choice is within bounds before proceeding
+                if (choice >= 0 && choice < current_story->next.size()) {
+                    play_story(current_story->next[choice], height, width, rewardPrint);
                 }
                 return;
         }
     }
     clear();
+    display_topleft_corner(gs, current_map);
     refresh();
 }
 

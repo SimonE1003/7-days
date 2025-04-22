@@ -19,4 +19,6 @@ extern GameState gs;
 
 void display_status(GameState gs);
 
+void display_topleft_corner(GameState gs, string);
+
 #endif

@@ -2,7 +2,7 @@ F = -std=c++11 -c -w
 
 menu_map.o: src/menu_map.cpp include/map_head.h
 	g++ $(F) $^
-game_state.o: src/game_state.cpp include/game_state.h
+game_state.o: src/game_state.cpp include/game_state.h include/map_head.h
 	g++ $(F) $^
 story_storage.o: src/story_storage.cpp include/map_head.h
 	g++ $(F) $^

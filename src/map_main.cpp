@@ -122,6 +122,7 @@ void run_shelter()
     
 
     int ch;
+    string rewardPrint = "";
     int charactorpos[2] = {height / 2, width / 2};
     mvprintw(charactorpos[0], charactorpos[1], "X");
     // create_story_spot(2, (height - map.size()) / 2, (width - map[0].size()) / 2, map.size(), map[0].size(), map, current_map);
@@ -144,7 +145,7 @@ void run_shelter()
                 // refresh();
                 if (ch == 'a' || ch == 'A')
                 {
-                    play_story(k.target_story, height, width);
+                    play_story(k.target_story, height, width, rewardPrint);
                     story_spots.erase(it);
                     drawmap(map, height, width);
                 }
@@ -266,11 +267,11 @@ void run_shelter()
             }
             else if ((int)(gs.day/0.5)%2==1){ //trigger nighttime story
                 index = generate_random_num(0, nstories.size()-1);
-                play_story(nstories[index], height, width);
+                play_story(nstories[index], height, width, rewardPrint);
                 nstories.erase(nstories.begin() + index);
                 //drawmap(map, height, width);
                 end_a_day();
-                play_story(UI_stories[1], height, width);
+                play_story(UI_stories[1], height, width, rewardPrint);
                 return;
                 break;
             }
@@ -287,7 +288,7 @@ void run_shelter()
                 mvprintw(map.size() / 2 + height / 2 - 1, map[0].size() / 2 + width / 2 + 1, "Press Enter to leave %s", current_map.c_str());
                 if (ch == '\n')
                 {
-                    play_story(UI_stories[0], height, width);
+                    play_story(UI_stories[0], height, width, rewardPrint);
                     map = string_to_vector(shelter);
                     current_map = "shelter";
                     gs.day += 0.5;
@@ -335,7 +336,7 @@ void run_shelter()
         switch (ch)
         {
         case KEY_UP:
-            mvprintw(0, 0, "Up arrow key pressed");
+            //mvprintw(0, 0, "Up arrow key pressed");
             checkY = charactorpos[0] - 1 - (height - map.size()) / 2;
             checkX = charactorpos[1] - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -346,7 +347,7 @@ void run_shelter()
             }
             break;
         case KEY_DOWN:
-            mvprintw(0, 0, "Down arrow key pressed");
+            //mvprintw(0, 0, "Down arrow key pressed");
             checkY = charactorpos[0] + 1 - (height - map.size()) / 2;
             checkX = charactorpos[1] - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -357,7 +358,7 @@ void run_shelter()
             }
             break;
         case KEY_LEFT:
-            mvprintw(0, 0, "Left arrow key pressed");
+            //mvprintw(0, 0, "Left arrow key pressed");
             checkY = charactorpos[0] - (height - map.size()) / 2;
             checkX = charactorpos[1] - 1 - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -368,7 +369,7 @@ void run_shelter()
             }
             break;
         case KEY_RIGHT:
-            mvprintw(0, 0, "Right arrow key pressed");
+            //mvprintw(0, 0, "Right arrow key pressed");
             checkY = charactorpos[0] - (height - map.size()) / 2;
             checkX = charactorpos[1] + 1 - (width - map[0].size()) / 2;
             // mvprintw(4, 0, "checkX: %d", checkX);
@@ -392,14 +393,14 @@ void run_shelter()
             drawmap(map, height, width);
             refresh();
         default:
-            mvprintw(0, 0, "Key pressed: %c       ", ch);
+            //mvprintw(0, 0, "Key pressed: %c       ", ch);
             break;
         }
 
         mvprintw(charactorpos[0], charactorpos[1], "X");
         //mvprintw(1, 0, "Position: %d, %d      ", charactorpos[0], charactorpos[1]);
         //mvprintw(2, 0, "Window size: %d, %d", height, width);
-
+        display_topleft_corner(gs,current_map);
         refresh();
     }
 

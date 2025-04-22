@@ -51,7 +51,7 @@ int generate_random_num(int min, int max);
 void initialize_stories();
 void initialize_hospital_story();
 
-void play_story(story* current_story, int height , int width);
+void play_story(story* current_story, int height , int width, string& rewardPrint);
 
 void create_story_spot(int num , int original_x , int original_y, int height , int width ,vector<vector<char> >map , string current_map);
 
@@ -64,5 +64,6 @@ void clearnear(int x, int y, vector<vector<char> > map, int height, int width);
 void cleanwholescreen(int height, int width);
 
 bool is_quit();
+
 
 #endif

@@ -5,7 +5,7 @@
 void win();
 void start_a_day();
 void end_a_day();
-void end();
+void end(int code);
 void boss_battle();
 
 #endif

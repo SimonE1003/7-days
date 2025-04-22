@@ -18,11 +18,14 @@ void init_colors() {
 }
 
 // name output
-void print_title(WINDOW* win, const string& title) {
+void print_title(WINDOW* win, const string& title, const string& title1, const string& title2, const string& title3) {
     wattron(win, COLOR_PAIR(1) | A_BOLD); // yellow with better text
     int width = getmaxx(win);
     int start_x = (width - title.length()) / 2;
     mvwprintw(win, 1, start_x, "%s", title.c_str());
+    mvwprintw(win, 2, start_x, "%s", title1.c_str());
+    mvwprintw(win, 3, start_x, "%s", title2.c_str());
+    mvwprintw(win, 4, start_x, "%s", title3.c_str());
     wattroff(win, COLOR_PAIR(1) | A_BOLD);
     wrefresh(win);
 }
@@ -115,7 +118,11 @@ int gm_start() {
     getmaxyx(stdscr, screen_height, screen_width);
 
     // title
-    string title = "MY GAME MENU";
+    string title  = R"( _______ _______ ___ ___ _______ _______      _____  _______ ___ ___ _______ )";
+    string title1 = R"(|     __|    ___|   |   |    ___|    |  |    |     \|   _   |   |   |     __|)";
+    string title2 = R"(|__     |    ___|   |   |    ___|       |    |  --  |       |\     /|__     |)";
+    string title3 = R"(|_______|_______|\_____/|_______|__|____|    |_____/|___|___| |___| |_______|)";
+
 
     // Menu options
     vector<string> options = {"Start Game", "Continue", "Information", "Quit"};
@@ -124,7 +131,7 @@ int gm_start() {
     int choice = 0;
 
     // board size
-    int title_height = 3;
+    int title_height = 6;
     int menu_height = options.size() + 2;
     int menu_width = 30;
 
@@ -135,7 +142,7 @@ int gm_start() {
     // nameBoard
     WINDOW* title_win = newwin(title_height, screen_width, start_y - title_height, 0);
     wbkgd(title_win, COLOR_PAIR(1));
-    print_title(title_win, title);
+    print_title(title_win, title, title1 , title2 , title3);
 
     // menu
     WINDOW* menu_win = newwin(menu_height, menu_width, start_y, start_x);
@@ -214,26 +221,42 @@ int gm_start() {
         else if (choice == 3) {  // Information
             clear();
             refresh();
-            //simplified information display
             WINDOW* info_win = newwin(30, 90,
-                                     (screen_height - 30) / 2,
-                                     (screen_width - 90) / 2);
+                         (screen_height - 30) / 2,
+                         (screen_width - 90) / 2);
             box(info_win, 0, 0);
+
+            // Game information display
             mvwprintw(info_win, 1, 1, "Game Information:");
-            mvwprintw(info_win, 3, 1, "Goal of game: survive 7days");
-            mvwprintw(info_win, 4, 1, "Rule: you have to control human's basic need with items");
-            mvwprintw(info_win, 5, 1, "Basically, in the morning you have to collect and follow main story at night");
-            mvwprintw(info_win, 6, 1, "Special keys and points: ");
-            mvwprintw(info_win, 7, 1, "Name: IDK");
-            mvwprintw(info_win, 8, 1, "Author: Group66");
-            mvwprintw(info_win, 11, 1, "Press any key to continue...");
+            mvwprintw(info_win, 3, 1, "Name: Seven Days");
+            mvwprintw(info_win, 4, 1, "Group number: 66");
+            mvwprintw(info_win, 5, 1, "Authors: KIM YOUNGSEO, LIN CHUNG HAY, SUN JINNAN,");
+            mvwprintw(info_win, 6, 1, "        SUN YI-TSEN, WANG YUMING, ZHANG JIAHAO");
+            mvwprintw(info_win, 8, 1, "Goal of game: survive 7 days");
+            mvwprintw(info_win, 10, 1, "Rules:");
+            mvwprintw(info_win, 11, 3, "- You have to control human's basic needs with items");
+            mvwprintw(info_win, 13, 1, "Factors influence your survival:");
+            mvwprintw(info_win, 14, 3, "* Hunger, Thirst, Sanity, Illness, and other items");
+            mvwprintw(info_win, 16, 1, "Game Mechanics:");
+            mvwprintw(info_win, 17, 3, "1. After night:");
+            mvwprintw(info_win, 18, 5, "- If hunger, thirst, or sanity reaches zero -> health decreases");
+            mvwprintw(info_win, 19, 5, "- If illness is above zero -> health decreases");
+            mvwprintw(info_win, 20, 3, "2. Through events -> sanity changes");
+            mvwprintw(info_win, 21, 3, "3. Collect food/water (automatically used after night)");
+            mvwprintw(info_win, 22, 3, "4. No health -> different endings");
+            mvwprintw(info_win, 24, 1, "Important Keys:");
+            mvwprintw(info_win, 25, 3, "1. In shelter: S->Save  E->Exit");
+            mvwprintw(info_win, 26, 3, "2. Outside: S->Story");
+            mvwprintw(info_win, 27, 3, "3. Press I to check your status");
+            mvwprintw(info_win, 28, 1, "Press any key to continue...");
+
             wrefresh(info_win);
             wgetch(info_win);
             delwin(info_win);
 
             clear();
             refresh();
-            print_title(title_win, title);
+            print_title(title_win, title, title1 , title2 , title3);
             choice = 0;  // Return to main menu
             continue;
         }
