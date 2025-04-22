@@ -4,9 +4,7 @@
 
 <h2 align="center">Team members:</h2>
 
-###
-
-<p align="center">Kim Youngseo - 3036446042 <br>Lin Chung Hay Brandon - 3036451578 <br>Sun Jinnan - 3036289688 <br>Sun Yi-Tsen - 3036385767 <br>Wang Yuming - 3036297386 <br>Zhang Jiahao - 3036291679</p>
+<p align="center">(Sort by alphabetical order)<br>Kim Youngseo - 3036446042 <br>Lin Chung Hay Brandon - 3036451578 <br>Sun Jinnan - 3036289688 <br>Sun Yi-Tsen - 3036385767 <br>Wang Yuming - 3036297386 <br>Zhang Jiahao - 3036291679</p>
 
 ###
 
@@ -22,15 +20,15 @@
 
 ###
 
-<p align="left">hunger, thirsty, sanity, illness, and other items.<br><br>	1. After night, if hunger, thirsty, sanity is insufficient -> health decreases, if ill over zero -> health decreases<br>	2. Through event-> sanity change<br>	3, You can collect food and water to avoid hunger and thirsty (they are automatically consumed after night)<br>	4. You can collect medicine at specific places, which would reduce ill by 1 and add to your health (medicines are automatically used upon collected)<br> 5. Bullets are important! Try to collect them to prepare for battles<br> 6. No health -> bad endings (there are many different endings)</p>
+<p align="left">Hunger, thirsty, sanity, illness, and other items.<br><br>	1. After night, if hunger, thirsty, sanity is insufficient -> health decreases, if ill over zero -> health decreases<br>	2. Through event-> sanity change<br>	3, You can collect food and water to avoid hunger and thirsty (they are automatically consumed after night)<br>	4. You can collect medicine at specific places, which would reduce ill by 1 and add to your health (medicines are automatically used upon collected)<br> 5. Bullets are important! Try to collect them to prepare for battles<br> 6. No health -> bad endings (there are many different endings)</p>
 
 ###
 
-<h3 align="left">What should the players do:</h3>
+<h3 align="left">What should the player do:</h3>
 
 ###
 
-<p align="left">1. day time: you have to go out and collect items<br>	2. night time: important story happens at shelter<br>	3. both night and daytime shows 1 story <br>	4. after 7 days something happens so prepare well</p>
+<p align="left">1. Day time: you have to go out and collect items<br>	2. Night time: important story happens at shelter<br>	3. Both night and daytime shows 1 story <br>	4. After 7 days something happens so prepare well</p>
 
 ###
 
@@ -38,24 +36,28 @@
 
 ###
 
-<p align="left">1. in shelter: S-> save, E-> Exit <br>	2. out side: S-> story<br>	3. press I to check your status</p>
+<p align="left">1. In shelter: S-> save, E-> Exit (No automatic saving! Please make sure you save your game before exiting)<br>	2. Out side: S-> story<br>	3. Press I to check your status</p>
 
 ###
 
 <h2 align="left">Implemented Features:</h2>
+###
 
+<p align="left">1. Difficulty choice<br> 2. Random events<br> 3. Save and load</p>
 ###
 
 <h2 align="left">Compilation/execution instructions:</h2>
-
 ###
 
-<h2 align="left">code with</h2>
+<p align="left">Enter the following command in the main directory<br> make run -> run the game<br> make clean -> clean all compile files<br> make delsave -> delete all save files(Be careful! You will lost all your save!)</p>
+###
+
+<h2 align="left">Code with</h2>
 
 ###
 
 <div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" height="40" alt="cplusplus logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" height="40" alt="cplusplus logo"  /><img src="https://i0.wp.com/easydatadoesit.org/wp-content/uploads/2022/03/makefiles-logo.png?resize=800%2C576&ssl=1" height="40" alt="cplusplus logo"  />
 </div>
 
 ###
