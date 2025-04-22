@@ -14,7 +14,7 @@
 
 ###
 
-<p align="left">This application is a text-based game called "Seven Days", where the player tries to survive for 7 days in a post-apocalyptic world. The game features day and night, where players can visit places like a supermarket or a weapon shop during the day, but they must stay in the shelter at night. These maps (such as supermarkets) will contain story points where the player can trigger relevant events and receive rewards or punishments. At night, random (and weird) things will happen. The path of the story is primarily dictated by the player's choice, leading to rewards, punishments, or both. After each night, the player will have to consume some food and water; otherwise, or else bad things will happen.<br><br>The player has status indicators including health, hunger, thirst, and sanity, as well as an item list that includes food, water, bullets, and more. These will be crucial during gameplay, and the boss fight after seven days of survival.<br><br>If the player is not dead within seven-days, he/she will enter the final boss fight, and win if the boss is defeated.</p>
+<p align="left">This application is a text-based game called "Seven Days", where the player tries to survive for 7 days in a post-apocalyptic world. Try to collect the necessary items and make the right choices in random events! <br><br>The player has status indicators including health, hunger, thirst, and sanity, as well as an item list that includes food, water, bullets, and more. These will be crucial during gameplay, and also a big event after seven days of survival. Through all of this, you will win!<br><br>The game offers different difficulty choice, which would influence probability in random events, and the changes of player status. Players can also save the game for next time of playing!</p>
 
 ###
 
@@ -22,7 +22,7 @@
 
 ###
 
-<p align="left">hunger, thirsty, sanity, illness, and other items.<br><br>	1. after night, if hunger, thirsty, sanity is zero -> health decreases, if ill over zero -> health decreases<br>	2. though event-> sanity change<br>	3, you can collect food or water to avoid hunger and thirsty (they are automatically used after night)<br>	4. no health -> endings (there are many different endings)</p>
+<p align="left">hunger, thirsty, sanity, illness, and other items.<br><br>	1. After night, if hunger, thirsty, sanity is insufficient -> health decreases, if ill over zero -> health decreases<br>	2. Through event-> sanity change<br>	3, You can collect food and water to avoid hunger and thirsty (they are automatically consumed after night)<br>	4. You can collect medicine at specific places, which would reduce ill by 1 and add to your health (medicines are automatically used upon collected)<br> 5. Bullets are important! Try to collect them to prepare for battles<br> 6. No health -> bad endings (there are many different endings)</p>
 
 ###
 
@@ -43,14 +43,6 @@
 ###
 
 <h2 align="left">Implemented Features:</h2>
-
-###
-
-<h2 align="left">Non-standard libraries:</h2>
-
-###
-
-<p align="left">We didn't include any non-standard libraries.</p>
 
 ###
 
