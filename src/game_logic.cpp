@@ -9,6 +9,7 @@
 
 void end(int code) {
 	int height, width;
+	string rewardPrint = "";
     getmaxyx(stdscr, height, width);
 	switch (code){
 		case 1:UI_stories[15]->text = "You starved to death at the end of the wilderness due to lack of food.";
@@ -19,13 +20,14 @@ void end(int code) {
 		case 6:UI_stories[15]->text = "You lie in a pool of blood, and your vision gradually turns black.";
 		case 7:UI_stories[15]->text = "You died";//not used yet
 	}
-	play_story(UI_stories[15], height, width);
+	play_story(UI_stories[15], height, width, rewardPrint);
 	exit(0);
 }
 
 void end_a_day()
 {
 	int height, width;
+	string rewardPrint ="";
 	getmaxyx(stdscr, height, width);
 	gs.day+=0.5;
 	int health_minused = 0;
@@ -86,7 +88,7 @@ void end_a_day()
 	if (health_minused > 0){
 		UI_stories[17]->text += "Health "+to_string(gs.health)+"(-"+to_string(health_minused)+") ";
 	}
-	play_story(UI_stories[16], height, width);
+	play_story(UI_stories[16], height, width, rewardPrint);
 }
 
 bool head_shot(){
@@ -95,43 +97,44 @@ bool head_shot(){
 
 void boss_battle(){
 	int boss_health = 15;
+	string rewardPrint = "";
 	int height, width;
     getmaxyx(stdscr, height, width);
-	play_story(UI_stories[2], height, width);
+	play_story(UI_stories[2], height, width, rewardPrint);
 	UI_stories[3]->text = "You got "+ to_string(gs.health) + " health, "+to_string(gs.sanity)+" sanity and "+ to_string(gs.bullet) + " bullets";
-	play_story(UI_stories[3], height, width);
+	play_story(UI_stories[3], height, width, rewardPrint);
 	while (1)
 	{
 		if (gs.bullet > 0){
-			play_story(UI_stories[4], height, width);
+			play_story(UI_stories[4], height, width, rewardPrint);
 			if (head_shot()){
-				play_story(UI_stories[5], height, width);
+				play_story(UI_stories[5], height, width, rewardPrint);
 				boss_health-=10;
 			} else{
-				play_story(UI_stories[6], height, width);
+				play_story(UI_stories[6], height, width, rewardPrint);
 				boss_health-=3;
 			}
 			gs.bullet--;
 		} else{
-			play_story(UI_stories[7], height, width);
-			play_story(UI_stories[8], height, width);
+			play_story(UI_stories[7], height, width, rewardPrint);
+			play_story(UI_stories[8], height, width, rewardPrint);
 			boss_health--;
 		}
 		if (boss_health>0){
 			UI_stories[11]->text = "The boss has "+to_string(boss_health)+" health left.";
-			play_story(UI_stories[11], height, width);
+			play_story(UI_stories[11], height, width, rewardPrint);
 		} else{
-			play_story(UI_stories[9], height, width);
-			play_story(UI_stories[10], height, width);
+			play_story(UI_stories[9], height, width, rewardPrint);
+			play_story(UI_stories[10], height, width, rewardPrint);
 			win();
 		}
-		play_story(UI_stories[12], height, width);
+		play_story(UI_stories[12], height, width, rewardPrint);
 		gs.health--;
 		if (gs.health>0){
 			UI_stories[13]->text = "You got "+to_string(gs.health)+" health left.";
-			play_story(UI_stories[13], height, width);
+			play_story(UI_stories[13], height, width, rewardPrint);
 		}else{
-			play_story(UI_stories[14], height, width);
+			play_story(UI_stories[14], height, width, rewardPrint);
 			end(5);//died of boss fight
 		}
 	}

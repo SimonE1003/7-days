@@ -1681,7 +1681,7 @@ void initialize_glass_breanking_noise()
     glass_breaking_noise[9]->text = "You missed, he run away through the window";
     glass_breaking_noise[9]->options.push_back("End conversation");
     glass_breaking_noise[9]->next.push_back(nullptr);
-    glass_breaking_noise[9]->reward = {"bullet - 1"};
+    glass_breaking_noise[9]->reward = {"bullet -1"};
 
     // 3. cat story
     glass_breaking_noise[10]->text = "You see a cute cat";

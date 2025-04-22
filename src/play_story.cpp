@@ -89,7 +89,7 @@ vector<story*> supermarket_story;
 vector<story_spot> story_spots;
 vector<story*> UI_stories;
 vector<story*> sample( int num, string current_map) {
-    if (current_map == "hospital"){
+    /*if (current_map == "hospital"){
         vector<story*> selected_stories;
         srand(time(0));
         random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
@@ -102,13 +102,13 @@ vector<story*> sample( int num, string current_map) {
             
         }
         return selected_stories;
-    }
-    /*if (current_map == "hospital") {
+    }*/
+    if (current_map == "hospital") {
         vector<story*> selected_stories;
 
         // Ensure story 17 is included
-        if (hospital_story.size() > 13) {
-            selected_stories.push_back(hospital_story[13]);
+        if (hospital_story.size() > 0) {
+            selected_stories.push_back(hospital_story[0]);
             num--; // Reduce the number of remaining stories to select
         }
 
@@ -124,8 +124,8 @@ vector<story*> sample( int num, string current_map) {
             hospital_head_story.pop_back();
         }
 
-        return selected_stories;*/
-
+        return selected_stories;
+    }
     else if (current_map == "supermarket"){
         vector<story*> selected_stories;
         srand(time(0));
@@ -218,7 +218,7 @@ void create_story_spot(int num, int original_x, int original_y, int height, int 
     }
 }
 
-void play_story(story* current_story, int height, int width) {
+void play_story(story* current_story, int height, int width, string& rewardPrint) {
     string current_map = "Story";
     clear();
     display_topleft_corner(gs, current_map);
@@ -231,8 +231,6 @@ void play_story(story* current_story, int height, int width) {
     int play_pos = 0;
     int original_point[2] = {height / 3, int((width - current_story->text.size()) / 2)};
     int choice = 0;
-    string rewardPrint = "";
-
     while ((ch = getch()) != 'q') { // Press 'q' to exit the loop
         if (play_pos < current_story->text.size()) {
             mvprintw(original_point[0], original_point[1] + play_pos, "%c", current_story->text[play_pos]);
@@ -326,13 +324,6 @@ void play_story(story* current_story, int height, int width) {
                             else if (type == "water") end(2);
                             else if (type == "sanity") end(3);
                             else if (type == "ill") end(4); 
-                            /*if (!story_effect(type, stoi(value))) {
-                                proceed = false;
-                                mvprintw(original_point[0] * 2 + choice, original_point[1] + 20, "(Insufficient stats!, please choose again)");
-                                refresh();
-                            } else {
-                                rewardPrint += reward + ", ";
-                            }*/
                         } 
                         else if (type == "death") end(7);
                         else if (type == "startstory"){
@@ -343,22 +334,12 @@ void play_story(story* current_story, int height, int width) {
                         }
                     }
 
+                }
+                // Display the reward
+                if (!rewardPrint.empty() && current_story->next[0] == nullptr) {
                     if (!rewardPrint.empty() && rewardPrint.length() > 2) {
                         rewardPrint = rewardPrint.substr(0, rewardPrint.length() - 2); // Remove trailing ", "
                     }
-                }
-                
-                if (!proceed) {
-                    break;
-                }
-
-                // Ensure choice is within bounds before proceeding
-                if (choice >= 0 && choice < current_story->next.size()) {
-                    play_story(current_story->next[choice], height, width);
-                }
-
-                // Display the reward
-                if (!rewardPrint.empty()) {
                     cleanwholescreen(height, width);
                     display_topleft_corner(gs, current_map);
                     refresh();
@@ -368,6 +349,14 @@ void play_story(story* current_story, int height, int width) {
                     while ((ch = getch()) != '\n') {
                         continue; // Wait for the user to press Enter
                     }
+                    rewardPrint.clear();
+                }
+                if (!proceed) {
+                    break;
+                }
+                // Ensure choice is within bounds before proceeding
+                if (choice >= 0 && choice < current_story->next.size()) {
+                    play_story(current_story->next[choice], height, width, rewardPrint);
                 }
                 return;
         }
