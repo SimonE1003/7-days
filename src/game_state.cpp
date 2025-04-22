@@ -32,24 +32,24 @@ void display_status(GameState gs)
     mvprintw(12, 10, "Thirst: %d\n", gs.thirst);
     mvprintw(13, 10, "Sanity: %d\n", gs.sanity);
     mvprintw(14, 10, "Bullet: %d\n", gs.bullet);
-    if (gs.ill)
+    if (gs.ill>0)
     {
 	attron(COLOR_PAIR(1));
-        mvprintw(14, 10, "You are ill!!!");
+        mvprintw(15, 10, "You are ill!!!");
 	attroff(COLOR_PAIR(1));
 
     }
     int prtcnt = 0;
-    mvprintw(15, 10+prtcnt, "Items: ");
+    mvprintw(16, 10+prtcnt, "Items: ");
     prtcnt += 7;
     for (string item : gs.items)
     {
         
-        mvprintw(15, 10+prtcnt, "%s", item.c_str());
+        mvprintw(16, 10+prtcnt, "%s", item.c_str());
         prtcnt += item.size() + 2;
 
     }
-    mvprintw(17, 10, "Press 'q' to quit\n");
+    mvprintw(18, 10, "Press 'q' to quit\n");
     refresh();
 
     // Wait for the user to press 'q'
