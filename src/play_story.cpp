@@ -336,7 +336,7 @@ void play_story(story* current_story, int height, int width, string& rewardPrint
 
                 }
                 // Display the reward
-                if (!rewardPrint.empty() && current_story->next[0] == nullptr) {
+                if (!rewardPrint.empty() && (current_story->next.empty() || current_story->next[0] == nullptr)) {
                     if (!rewardPrint.empty() && rewardPrint.length() > 2) {
                         rewardPrint = rewardPrint.substr(0, rewardPrint.length() - 2); // Remove trailing ", "
                     }
