@@ -8,11 +8,11 @@
 
 ###
 
-<h2 align="left">Application description:</h2>
+<h2 align="left">Game description:</h2>
 
 ###
 
-<p align="left">This application is a text-based game called "Seven Days", where the player tries to survive for 7 days in a post-apocalyptic world. Try to collect the necessary items and make the right choices in random events! <br><br>The player has status indicators including health, hunger, thirst, and sanity, as well as an item list that includes food, water, bullets, and more. These will be crucial during gameplay, and also a big event after seven days of survival. Through all of this, you will win!<br><br>The game offers different difficulty choice, which would influence probability in random events, and the changes of player status. Players can also save the game for next time of playing!</p>
+<p align="left">This is a text-based game called "Seven Days", where the player tries to survive for 7 days in a post-apocalyptic world. Try to collect the necessary items and make the right choices in random events! <br><br>The player has status indicators including health, hunger, thirst, and sanity, as well as an item list that includes food, water, bullets, and more. These will be crucial during gameplay, and also a big event after seven days of survival. Through all of this, you will win!<br><br>The game offers different difficulty choice, which would influence probability in random events, and the changes of player status. Players can also save the game for next time of playing!</p>
 
 ###
 
@@ -36,21 +36,21 @@
 
 ###
 
-<p align="left">1. In shelter: S-> save, E-> Exit (No automatic saving! Please make sure you save your game before exiting)<br>	2. Out side: S-> story<br>	3. Press I to check your status</p>
+<p align="left">1. In shelter: S-> save, E-> Exit (No automatic saving! Please make sure you save your game before exit)<br>	2. Out side: S-> story<br>	3. Press I to check your status</p>
 
 ###
 
 <h2 align="left">Implemented Features:</h2>
-###
+
 
 <p align="left">1. Difficulty choice<br> 2. Random events<br> 3. Save and load</p>
-###
+
 
 <h2 align="left">Compilation/execution instructions:</h2>
-###
+
 
 <p align="left">Enter the following command in the main directory<br> make run -> run the game<br> make clean -> clean all compile files<br> make delsave -> delete all save files(Be careful! You will lost all your save!)</p>
-###
+
 
 <h2 align="left">Code with</h2>
 
