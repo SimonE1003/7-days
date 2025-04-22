@@ -89,7 +89,7 @@ vector<story*> supermarket_story;
 vector<story_spot> story_spots;
 vector<story*> UI_stories;
 vector<story*> sample( int num, string current_map) {
-    /*if (current_map == "hospital"){
+    if (current_map == "hospital"){
         vector<story*> selected_stories;
         srand(time(0));
         random_shuffle(hospital_head_story.begin(), hospital_head_story.end());
@@ -102,8 +102,8 @@ vector<story*> sample( int num, string current_map) {
             
         }
         return selected_stories;
-    }*/
-    if (current_map == "hospital") {
+    }
+    /*if (current_map == "hospital") {
         vector<story*> selected_stories;
 
         // Ensure story 17 is included
@@ -125,7 +125,7 @@ vector<story*> sample( int num, string current_map) {
         }
 
         return selected_stories;
-    }
+    }*/
     else if (current_map == "supermarket"){
         vector<story*> selected_stories;
         srand(time(0));
