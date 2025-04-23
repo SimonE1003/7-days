@@ -28,7 +28,7 @@
 
 ###
 
-<p align="left">1. Day time: you have to go out and collect items<br>	2. Night time: important story happens at shelter<br>	3. Both night and daytime shows 1 story <br>	4. After 7 days something happens so prepare well</p>
+<p align="left">1. Day time: you have to go out and collect items, walk to the door and choose a destination.<br>	2. Night time: important story happens at shelter<br>	3. Both night and daytime shows 1 story <br>	4. After 7 days something happens so prepare well</p>
 
 ###
 
@@ -43,7 +43,19 @@
 <h2 align="left">Implemented Features:</h2>
 
 
-<p align="left">1. Generation of random events: In each map (hospital, weaponshop, supermarket etc) there are randomly generated storys that the player could trigger, which lead to different reward/punishments. Each night, a random (and non-repeating) story will be generated. These stories will also have random branches to further enhance the user experience.<br>2. Data structures for storing data: <br>3. Save and load:<br>4. Dynamic memory management:<br>5. File input/output (e.g., for loading/saving data):<br>6. Multiple Difficulty Levels: The game has easy, medium, and hard modes, which are achieved by varying the status change after each day and the difficulty of the boss fight.</p>
+<p align="left">1. Generation of random events: <br>
+<blockquote>In each map (hospital, weaponshop, supermarket etc) there are randomly generated storys that the player could trigger, which lead to different reward/punishments. Each night, a random (and non-repeating) story will be generated. These stories will also have random branches to further enhance the user experience. The possibility of each outcome is affected by game difficulty.</blockquote>
+<br>2. Data structures for storing data: <br>
+<blockquote>The team used STL::vector for saving Items that the player owns. Text based graphs are stored in an two dimensional array, and transformed to STL::vector for passing by value through functions. Several strutures are applied for saving content of stories and the player's game status (health, resources, lived days, etc).</blockquote>
+<br>3. Save and load:
+<blockquote>This game allows the player to save their game status (health, resources, lived days, etc), items they own, and stories they have experienced. The team make sure that the player will retrieve the same game status and will not experience stories they have met, when loading  a gamefile. </blockquote>
+<br>4. Dynamic memory management:
+<blockquote>Content of stories are in the format of a self-defined structure: struct story. The variables are declared in the form of pointer, and a story is linked to its sequential stories in linked list format, which include dynamic memory management. Those variables are then appended to an integer array. </blockquote>
+<br>5. File input/output (e.g., for loading/saving data):
+<blockquote>The game uses file input/output to realise the Save and Load function. </blockquote>
+<br>6. Multiple Difficulty Levels: <br>
+<blockquote>The game has easy, medium, and hard modes, which are achieved by varying the status change after each day, possibility of story outcomes, and the difficulty of the boss fight.
+</blockquote></p>
   
 <h2 align="left">Compilation/execution instructions:</h2>
 
