@@ -43,9 +43,8 @@
 <h2 align="left">Implemented Features:</h2>
 
 
-<p align="left">1. Difficulty choice<br> 2. Random events<br> 3. Save and load</p>
-
-
+<p align="left">1. Generation of random events: In each map (hospital, weaponshop, supermarket etc) there are randomly generated storys that the player could trigger, which lead to different reward/punishments. Each night, a random (and non-repeating) story will be generated. These stories will also have random branches to further enhance the user experience.<br>2. Data structures for storing data: <br>3. Save and load:<br>4. Dynamic memory management:<br>5. File input/output (e.g., for loading/saving data):<br>6. Multiple Difficulty Levels: The game has easy, medium, and hard modes, which are achieved by varying the status change after each day and the difficulty of the boss fight.</p>
+  
 <h2 align="left">Compilation/execution instructions:</h2>
 
 
