@@ -147,15 +147,15 @@ void win() {
     int screen_height, screen_width;
     getmaxyx(stdscr, screen_height, screen_width);
 
-    WINDOW* good_ending_win = newwin(screen_height-2, screen_width, 0, 0);
+    WINDOW* good_ending_win = newwin(screen_height-1, screen_width, 0, 0);
     box(good_ending_win, 0, 0);
 
     //ASCII art if you guys want some other win ascii change the vector, the x directtion must be equal
     vector<string> victoryArt = {
-        R"($$\     $$\                                       $$\           )",
-        R"(\$$\   $$  |                                      \__|          )",
-        R"( \$$\ $$  /$$$$$$\  $$\   $$\       $$\  $$\  $$\ $$\ $$$$$$$\  )",
-        R"(  \$$$$  /$$  __$$\ $$ |  $$ |      $$ | $$ | $$ |$$ |$$  __$$\ )",
+        R"($$\     $$\                                       $$\)",
+        R"(\$$\   $$  |                                      \__|)",
+        R"( \$$\ $$  /$$$$$$\  $$\   $$\       $$\  $$\  $$\ $$\ $$$$$$$\)",
+        R"(  \$$$$  /$$  __$$\ $$ |  $$ |      $$ | $$ | $$ |$$ |$$  __$$\)",
         R"(   \$$  / $$ /  $$ |$$ |  $$ |      $$ | $$ | $$ |$$ |$$ |  $$ |)",
         R"(    $$ |  $$ |  $$ |$$ |  $$ |      $$ | $$ | $$ |$$ |$$ |  $$ |)",
         R"(    $$ |  \$$$$$$  |\$$$$$$  |      \$$$$$\$$$$  |$$ |$$ |  $$ |)",
