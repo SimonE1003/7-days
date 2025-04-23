@@ -46,8 +46,7 @@ void print_menu(WINDOW* menu_win, int highlight, const vector<string>& options) 
     wrefresh(menu_win);
 }
 
-// To Alonso, this is a function that produce the window of is quit and returns false(not quit) or True(quit)
-// if you want to just let it quit, remove //
+// returns false(not quit) or True(quit)
 bool is_quit() {
     int screen_height, screen_width;
     getmaxyx(stdscr, screen_height, screen_width);
@@ -149,7 +148,6 @@ int gm_start() {
     keypad(menu_win, TRUE);
 
     // main loop
-
     while (true) {
         print_menu(menu_win, highlight, options);
         int ch = wgetch(menu_win);
@@ -203,7 +201,6 @@ int gm_start() {
                         case 3: gs.difficulty = 0; break;  // Easy
                     }
                     delwin(diff_win);
-                    //run_shelter();
                     start_explore();
                     break;
                 }
@@ -211,14 +208,14 @@ int gm_start() {
 
             break;
         }
-        else if (choice == 2) {  // Continue
+        // Continue
+        else if (choice == 2) {
             load();
-            //delwin(diff_win);
-            //run_shelter();
             start_explore();  
             break;
         }
-        else if (choice == 3) {  // Information
+        // Information
+        else if (choice == 3) {
             clear();
             refresh();
             WINDOW* info_win = newwin(30, 90,
@@ -257,10 +254,11 @@ int gm_start() {
             clear();
             refresh();
             print_title(title_win, title, title1 , title2 , title3);
-            choice = 0;  // Return to main menu
+            choice = 0;
             continue;
         }
-        else if (choice == 4) {  // Quit
+        //Quit
+        else if (choice == 4) {
             clear();
             attron(COLOR_PAIR(1));
             mvprintw(0, 0, "Quitting the Game...");

@@ -177,5 +177,5 @@ void win() {
     getch();
     delwin(good_ending_win);
     endwin();
-    //exit(0);
+    exit(0);
 }
