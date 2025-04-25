@@ -12,7 +12,7 @@
 
 ###
 
-<p align="left">This is a text-based game called "Seven Days", where the player tries to survive for 7 days in a post-apocalyptic world. Try to collect the necessary items and make the right choices in random events! <br><br>The player has status indicators including health, hunger, thirst, and sanity, as well as an item list that includes food, water, bullets, and more. These will be crucial during gameplay, and also a big event after seven days of survival. Through all of this, you will win!<br><br>The game offers different difficulty choice, which would influence probability in random events, and the changes of player status. Players can also save the game for next time of playing!</p>
+<p align="left">This is a text-based game called "7 Days", where the player tries to survive for 7 days in a post-apocalyptic world. Try to collect the necessary items and make the right choices in random events! <br><br>The player has status indicators, including health, hunger, thirst, and sanity, as well as an item list that includes food, water, bullets, and more. These will be crucial during gameplay and also a big event after seven days of survival. Through all of this, you will win!<br><br>The game offers different difficulty choices, which would influence probability in random events and the changes in player status. Players can also save the game for the next time they play!</p>
 
 ###
 
@@ -20,7 +20,7 @@
 
 ###
 
-<p align="left">Hunger, thirsty, sanity, illness, and other items.<br><br>	1. After night, if hunger, thirsty, sanity is insufficient -> health decreases, if ill over zero -> health decreases<br>	2. Through event-> sanity change<br>	3, You can collect food and water to avoid hunger and thirsty (they are automatically consumed after night)<br>	4. You can collect medicine at specific places, which would reduce ill by 1 and add to your health (medicines are automatically used upon collected)<br> 5. Bullets are important! Try to collect them to prepare for battles<br> 6. No health -> bad endings (there are many different endings)</p>
+<p align="left">Hunger, thirst, sanity, illness, and other items.<br><br>	1. After night, if hunger, thirsty, sanity is insufficient -> health decreases, if ill over zero -> health decreases<br>	2. Through event-> sanity change<br>	3, You can collect food and water to avoid hunger and thirst (they are automatically consumed after night)<br>	4. You can collect medicine at specific locations, which will reduce illness by 1 and add to your health (medicines are automatically used upon collection). <br> 5. Bullets are important! Try to gather them to prepare for battles<br> 6. No health -> bad endings (there are many different endings)</p>
 
 ###
 
@@ -28,7 +28,7 @@
 
 ###
 
-<p align="left">1. Day time: you have to go out and collect items, walk to the door and choose a destination.<br>	2. Night time: important story happens at shelter<br>	3. Both night and daytime shows 1 story <br>	4. After 7 days something happens so prepare well</p>
+<p align="left">1. Daytime: you have to go out and collect items, walk to the door, and choose a destination.<br>	2. Night time: important story happens at the shelter<br>	3. Both night and daytime show the same story. <br> 4. After 7 days, something happens, so prepare well</p>
 
 ###
 
@@ -36,7 +36,7 @@
 
 ###
 
-<p align="left">1. In shelter: S-> save, E-> Exit (No automatic saving! Please make sure you save your game before exit)<br>	2. Out side: S-> story<br>	3. Press I to check your status</p>
+<p align="left">1. In shelter: S-> save, E-> Exit (No automatic saving! Please make sure you save your game before exit)<br>	2. Outside: S-> story<br>	3. Press I to check your status</p>
 
 ###
 
@@ -44,17 +44,17 @@
 
 
 <p align="left">1. Generation of random events: <br>
-<blockquote>In each map (hospital, weaponshop, supermarket etc) there are randomly generated storys that the player could trigger, which lead to different reward/punishments. Each night, a random (and non-repeating) story will be generated. These stories will also have random branches to further enhance the user experience. The possibility of each outcome is affected by game difficulty.</blockquote>
+<blockquote>In each map (hospital, weapon shop, supermarket, etc.), there are randomly generated stories that the player could trigger, which lead to different rewards/punishments. Each night, a random (and non-repeating) story will be generated. These stories will also have random branches to enhance the user experience further. The possibility of each outcome is affected by game difficulty.</blockquote>
 <br>2. Data structures for storing data: <br>
-<blockquote>The team used STL::vector for saving Items that the player owns. Text based graphs are stored in an two dimensional array, and transformed to STL::vector for passing by value through functions. Several strutures are applied for saving content of stories and the player's game status (health, resources, lived days, etc).</blockquote>
+<blockquote>The team used STL::vector for saving Items that the player owns. Text-based graphs are stored in a two-dimensional array and transformed to STL::vector for passing by value through functions. Several structures are applied for saving the content of stories and the player's game status (health, resources, lived days, etc.).</blockquote>
 <br>3. Save and load:
-<blockquote>This game allows the player to save their game status (health, resources, lived days, etc), items they own, and stories they have experienced. The team make sure that the player will retrieve the same game status and will not experience stories they have met, when loading  a gamefile. </blockquote>
+<blockquote>This game allows the player to save their game status (health, resources, lived days, etc), items they own, and stories they have experienced. The team ensures that the player retrieves the same game status and does not encounter stories they have already met when loading a game. </blockquote>
 <br>4. Dynamic memory management:
-<blockquote>Content of stories are in the format of a self-defined structure: struct story. The variables are declared in the form of pointer, and a story is linked to its sequential stories in linked list format, which include dynamic memory management. Those variables are then appended to an integer array. </blockquote>
+<blockquote>Content of stories are in the format of a self-defined structure: struct story. The variables are declared as pointers, and a story is linked to its sequential stories in a linked list format, which includes dynamic memory management. Those variables are then appended to an integer array. </blockquote>
 <br>5. File input/output (e.g., for loading/saving data):
-<blockquote>The game uses file input/output to realise the Save and Load function. </blockquote>
+<blockquote>The game uses file input/output to realize the Save and Load function. </blockquote>
 <br>6. Multiple Difficulty Levels: <br>
-<blockquote>The game has easy, medium, and hard modes, which are achieved by varying the status change after each day, possibility of story outcomes, and the difficulty of the boss fight.
+<blockquote>The game has easy, medium, and hard modes, which are achieved by varying the status change after each day, the possibility of story outcomes, and the difficulty of the boss fight.
 </blockquote></p>
   
 <h2 align="left">Compilation/execution instructions:</h2>
