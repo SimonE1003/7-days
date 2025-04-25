@@ -18,7 +18,7 @@ void init_colors() {
 }
 
 // name output
-void print_title(WINDOW* win, const string& title, const string& title1, const string& title2, const string& title3) {
+void print_title(WINDOW* win, const string& title, const string& title1, const string& title2, const string& title3, const string& title4, const string& title5) {
     wattron(win, COLOR_PAIR(1) | A_BOLD); // yellow with better text
     int width = getmaxx(win);
     int start_x = (width - title.length()) / 2;
@@ -26,6 +26,8 @@ void print_title(WINDOW* win, const string& title, const string& title1, const s
     mvwprintw(win, 2, start_x, "%s", title1.c_str());
     mvwprintw(win, 3, start_x, "%s", title2.c_str());
     mvwprintw(win, 4, start_x, "%s", title3.c_str());
+    mvwprintw(win, 5, start_x, "%s", title4.c_str());
+    mvwprintw(win, 6, start_x, "%s", title5.c_str());
     wattroff(win, COLOR_PAIR(1) | A_BOLD);
     wrefresh(win);
 }
@@ -117,10 +119,12 @@ int gm_start() {
     getmaxyx(stdscr, screen_height, screen_width);
 
     // title
-    string title  = R"( _______ _______ ___ ___ _______ _______      _____  _______ ___ ___ _______ )";
-    string title1 = R"(|     __|    ___|   |   |    ___|    |  |    |     \|   _   |   |   |     __|)";
-    string title2 = R"(|__     |    ___|   |   |    ___|       |    |  --  |       |\     /|__     |)";
-    string title3 = R"(|_______|_______|\_____/|_______|__|____|    |_____/|___|___| |___| |_______|)";
+    string title  = R"(  ______   _____      __     _______ )";
+    string title1 = R"( |____  | |  __ \   /\\ \   / / ____|)";
+    string title2 = R"(     / /  | |  | | /  \\ \_/ / (___  )";
+    string title3 = R"(    / /   | |  | |/ /\ \\   / \___ \ )";
+    string title4 = R"(   / /    | |__| / ____ \| |  ____) |)";
+    string title5 = R"(  /_/     |_____/_/    \_\_| |_____/ )";
 
 
     // Menu options
@@ -130,7 +134,7 @@ int gm_start() {
     int choice = 0;
 
     // board size
-    int title_height = 6;
+    int title_height = 8;
     int menu_height = options.size() + 2;
     int menu_width = 30;
 
@@ -141,7 +145,7 @@ int gm_start() {
     // nameBoard
     WINDOW* title_win = newwin(title_height, screen_width, start_y - title_height, 0);
     wbkgd(title_win, COLOR_PAIR(1));
-    print_title(title_win, title, title1 , title2 , title3);
+    print_title(title_win, title, title1 , title2 , title3, title4, title5);
 
     // menu
     WINDOW* menu_win = newwin(menu_height, menu_width, start_y, start_x);
@@ -253,7 +257,7 @@ int gm_start() {
 
             clear();
             refresh();
-            print_title(title_win, title, title1 , title2 , title3);
+            print_title(title_win, title, title1 , title2 , title3, title4, title5);
             choice = 0;
             continue;
         }
