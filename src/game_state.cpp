@@ -13,8 +13,8 @@ struct GameState {
     vector <string> items;
 };
 */
-GameState gs={0,1,1,1,0,1,1,1,0,0,{}};
-//GameState gs={0,5,5,0,5,5,10,10,0,0,{}};
+//GameState gs={0,1,1,1,0,1,1,1,0,0,{}};
+GameState gs={0,5,5,0,5,5,10,10,0,0,{}};
 
 void display_status(GameState gs)
 {
