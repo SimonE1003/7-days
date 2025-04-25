@@ -12,15 +12,16 @@ void end(int code) {
 	string rewardPrint = "";
     getmaxyx(stdscr, height, width);
 	switch (code){
-		case 1:UI_stories[15]->text = "You starved to death at the end of the wilderness due to lack of food.";break;
-		case 2:UI_stories[15]->text = "You died of thirst, parched in the desolate wilderness.";break;
-		case 3:UI_stories[15]->text = "You lost your mind to madness, consumed by chaos in the end.";break;
-		case 4:UI_stories[15]->text = "You succumbed to illness, fading away in the grip of disease.";break;
-		case 5:UI_stories[15]->text = "You fell in the boss battle, vanquished by an unstoppable foe.";break;
-		case 6:UI_stories[15]->text = "You lie in a pool of blood, and your vision gradually turns black.";break;
-		case 7:UI_stories[15]->text = "You died";break;//not used yet
+		case 1:UI_stories[18]->text = "You starved to death at the end of the wilderness due to lack of food.";break;
+		case 2:UI_stories[18]->text = "You died of thirst, parched in the desolate wilderness.";break;
+		case 3:UI_stories[18]->text = "You lost your mind to madness, consumed by chaos in the end.";break;
+		case 4:UI_stories[18]->text = "You succumbed to illness, fading away in the grip of disease.";break;
+		case 5:UI_stories[18]->text = "You fell in the boss battle, vanquished by an unstoppable foe.";break;
+		case 6:UI_stories[18]->text = "You lie in a pool of blood, and your vision gradually turns black.";break;
+		case 7:UI_stories[18]->text = "You died";break;//not used yet
 	}
-	play_story(UI_stories[15], height, width, rewardPrint);
+	play_story(UI_stories[18], height, width, rewardPrint);
+	endwin();
 	exit(0);
 }
 

@@ -1517,6 +1517,11 @@ void initialize_UI_stories()
     UI_stories[17]->text = "";
     UI_stories[17]->options.push_back("Ok");
     UI_stories[16]->next.push_back(UI_stories[17]);
+
+    UI_stories.push_back(new story );
+    UI_stories[18]->options.push_back("Game over");
+    UI_stories[18]->next.push_back(nullptr);
+
 }
 
 vector<story *> knocking_door;
@@ -1778,7 +1783,7 @@ void initialize_lights_off()
 
     //3: water story
     lights_off[13]->text = "There is heavy rain outside, and the flood destroyed the cable";
-    lights_off[13]->options.push_back("Co out to fix the cable"); //14
+    lights_off[13]->options.push_back("Go out to fix the cable"); //14
     lights_off[13]->options.push_back("Open the window to collect rain water"); //15
     lights_off[13]->options.push_back("Stay inside and keep the door locked"); //2
     lights_off[14]->text = "You got electricuted when you got close to the cable"; 
