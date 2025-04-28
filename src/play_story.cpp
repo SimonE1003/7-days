@@ -320,10 +320,7 @@ void play_story(story* current_story, int height, int width, string& rewardPrint
                         } else if (type == "health" || type == "food" || type == "water" || type == "bullet" || type == "sanity") {
                             if (story_effect(type, stoi(value))) rewardPrint += reward + ", ";
                             else if (type == "health") end(6);
-                            else if (type == "food") end(1);
-                            else if (type == "water") end(2);
                             else if (type == "sanity") end(3);
-                            else if (type == "ill") end(4); 
                         } 
                         else if (type == "death") end(7);
                         else if (type == "startstory"){
