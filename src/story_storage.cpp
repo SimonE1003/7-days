@@ -270,7 +270,7 @@ void initialize_weaponshop_story()
 	//story41 Main story13
 	weaponshop_story[41]->text="You meet a strange merchant.";
         weaponshop_story[41]->options.push_back("Trade with him.");
-        weaponshop_story[41]->reward={"Ignore him."};
+        weaponshop_story[41]->options.push_back("Ignore him.");
         weaponshop_story[41]->next=vector<story*>{weaponshop_story[42],weaponshop_story[43]};
 	//story42 main13 Branch1
 	weaponshop_story[42]->text="Spend 2 food to buy something.";
