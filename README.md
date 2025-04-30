@@ -1,4 +1,4 @@
-<h1 align="center">ENGG1340 group project</h1>
+<h1 align="center">ENGG1340 group project Group 66</h1>
 
 ###
 
