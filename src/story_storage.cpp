@@ -24,7 +24,7 @@ vector<int> weaponshop_head_story = {0,4,9,14,15,18,20,23,33,36,37,38,41,44};
 void initialize_weaponshop_story()
 {
 	srand(time(0));
-	for (int i=0; i<=46;i++)
+	for (int i=0; i<=50;i++)
 	{
 		weaponshop_story.push_back(new story);
 	}
@@ -147,10 +147,10 @@ void initialize_weaponshop_story()
     	weaponshop_story[19]->next.push_back(nullptr);
   	weaponshop_story[19]->reward={"bulletproof_vest effect","inventory- crowbar"};
 	//story46 Main6 Branch2
-	weaponshop_story[19]->text="Here seems to be an abandoned shelter.\nYou noticed a bulletproof vest on the wall.";
-        weaponshop_story[19]->options.push_back("Put on the bulletproof vest.");
-        weaponshop_story[19]->next.push_back(nullptr);
-        weaponshop_story[19]->reward={"bulletproof_vest effect","hunger -2"};
+	weaponshop_story[46]->text="Here seems to be an abandoned shelter.\nYou noticed a bulletproof vest on the wall.";
+        weaponshop_story[46]->options.push_back("Put on the bulletproof vest.");
+        weaponshop_story[46]->next.push_back(nullptr);
+        weaponshop_story[46]->reward={"bulletproof_vest effect","hunger -2"};
 
     	weaponshop_story[18]->next=vector<story*>{weaponshop_story[19],weaponshop_story[46],nullptr};
 
@@ -161,7 +161,7 @@ void initialize_weaponshop_story()
 	//story21 Main7 Branch1
     	weaponshop_story[21]->text="You killed the spider and obtained its eyes.";
     	weaponshop_story[21]->options.push_back("What can spider eyes do?");
-    	weaponshop_story[21]->reward={"bullet -1","inventory spider_eyes"};
+    	weaponshop_story[21]->reward={"bullet -1","inventory spider_eyes","ill -1"};
     	weaponshop_story[21]->next={nullptr};
 	//story22 Main7 Branch2
     	weaponshop_story[22]->text="You escaped, but got hurted.";
@@ -199,9 +199,9 @@ void initialize_weaponshop_story()
         weaponshop_story[28]->reward={"health +1","ill -1"};
         weaponshop_story[28]->next.push_back(nullptr);
 	//story29 Possible4  Good
-	weaponshop_story[29]->text="You find some food and water.";
+	weaponshop_story[29]->text="You find some food, bullets, and water.";
         weaponshop_story[29]->options.push_back("End.");
-        weaponshop_story[29]->reward={"food +1","water +1"};
+        weaponshop_story[29]->reward={"food +1","water +1","bullet +1"};
         weaponshop_story[29]->next.push_back(nullptr);
 	//story30 Possible5  Good
 	weaponshop_story[30]->text="You find some bullets.";
@@ -885,11 +885,11 @@ void initialize_supermarket_story()
 
     // Node 19: Outcome for "Ignore him"
     supermarket_story[19] = new story;
-    supermarket_story[19]->text = "You walk past the crying man. A cold wave of regret hits you.";
+    supermarket_story[19]->text = "You walk past the crying man. You grabbed the supply beside him";
     supermarket_story[19]->options.push_back("Continue");
     // Connect second option of node 15 ("Ignore him") to node 19.
     supermarket_story[15]->next.push_back(supermarket_story[19]);
-    supermarket_story[19]->reward = vector<string>{"sanity -1"};
+    supermarket_story[19]->reward = vector<string>{"food +1", "water +1"};
 
     // --- Branch 2: The Moving Cart ---
     // Node 20
